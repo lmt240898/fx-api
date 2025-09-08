@@ -21,6 +21,10 @@ class Settings:
     APP_VERSION: str = "2.0.0"
     APP_DESCRIPTION: str = "Multi-version FastAPI application with MongoDB and Redis"
     
+    # 3rd Party API settings
+    AI_API_KEY: Optional[str] = os.getenv("AI_API_KEY")
+    AI_API_ENDPOINT: str = os.getenv("AI_API_ENDPOINT", "https://openrouter.ai/api/v1")
+
     # Security
     DEBUG: bool = os.getenv("DEBUG", "false").lower() == "true"
 

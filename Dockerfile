@@ -1,17 +1,22 @@
 # Chọn base image
 FROM python:3.9-slim
 
-# Thiết lập thư mục làm việc trong container
-WORKDIR /app
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Sao chép file requirements.txt và cài đặt dependencies
+# Create a directory for the app code and set it as the working directory
+WORKDIR /code
+
+# Set python path to the code directory so it can find the 'app' package
+ENV PYTHONPATH=/code
+
+# Copy requirements and install dependencies
 COPY requirements.txt .
-
-# Cài đặt FastAPI và các thư viện cần thiết
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Sao chép mã nguồn vào thư mục làm việc
-COPY ./app /app
+# Copy the application code into a subdirectory named 'app'
+COPY ./app ./app
 
 # Mở cổng cần thiết
 EXPOSE 8000

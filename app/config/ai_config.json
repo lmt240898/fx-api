@@ -1,0 +1,58 @@
+{
+    "strategies": {
+        "meta-maverick": {
+            "model": "meta-llama/llama-4-maverick",
+            "provider": {
+                "order": [
+                    "deepinfra/base"
+                ]
+        }
+        },
+        "gpt5-chat": {
+            "model": "openai/gpt-5-chat",
+            "provider": { "sort": "quality" },
+            "capabilities": { "multimodal": true }
+        },
+        "deepseek-r1": {
+            "model": "deepseek/deepseek-r1",
+            "provider": {
+                    "order": [
+                        "deepinfra/base"
+                    ]
+            }
+        },
+        "gemini-2-5-pro": {
+            "model": "google/gemini-2.5-pro",
+            "provider": {
+                "order": [
+                    "google-vertex/global"
+                ]
+        }
+        },
+        "gpt-4-1": {
+            "model": "openai/gpt-4.1",
+            "provider": {
+                "order": [
+                    "openai"
+                ]
+            }
+        },
+        "wizardlm-2-8x22b": {
+            "model": "microsoft/wizardlm-2-8x22b",
+            "provider": {
+                "order": [
+                    "deepinfra/bf16"
+                ]
+            }
+        },
+        "deepseek-r1-0528-qwen3-8b": {
+            "model": "deepseek/deepseek-r1-0528-qwen3-8b",
+            "provider": {
+                "order": [
+                    "novita"
+                ]
+            }
+        }
+    },
+    "use_model": "gemini-2-5-pro"
+}

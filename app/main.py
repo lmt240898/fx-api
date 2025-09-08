@@ -11,6 +11,7 @@ from .core.database import db_manager
 
 # Import routers
 from .routers.v1 import items_router as v1_items, health_router as v1_health
+from .routers.v1 import trading as v1_trading_router
 from .routers.v2 import items_router as v2_items, health_router as v2_health
 
 # Import services for testing
@@ -43,6 +44,11 @@ app.include_router(
 )
 app.include_router(
     v1_health,
+    prefix=settings.API_V1_PREFIX,
+    tags=["API V1"]
+)
+app.include_router(
+    v1_trading_router.router,
     prefix=settings.API_V1_PREFIX,
     tags=["API V1"]
 )
