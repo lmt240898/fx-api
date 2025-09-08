@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  # FastAPI app
+  fastapi:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8001:8000" # Port 8001 external -> 8000 internal cho FastAPI
+    environment:
+      - MONGO_URI=mongodb://mongo:27017
+      - REDIS_URI=redis://redis:6379
+    depends_on:
+      - mongo
+      - redis
+
+  # MongoDB service
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    volumes:
+      - mongo_data:/data/db
+    ports:
+      - "27019:27017" # Port 27019 external -> 27017 internal cho MongoDB
+
+  # Redis service
+  redis:
+    image: redis:latest
+    container_name: redis_cache
+    ports:
+      - "6381:6379" # Port 6381 external -> 6379 internal cho Redis
+
+  # Nginx reverse proxy
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    ports:
+      - "8080:80" # Port 8080 external -> 80 internal cho Nginx
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - fastapi
+
+volumes:
+  mongo_data:

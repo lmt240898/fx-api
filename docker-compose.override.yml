@@ -1,0 +1,27 @@
+# Docker Compose override cho development
+version: "3.8"
+
+services:
+  fastapi:
+    volumes:
+      - ./app:/app
+    environment:
+      - DEBUG=True
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    ports:
+      - "8001:8000" # Consistency với production config
+
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password123
+    volumes:
+      - ./mongo-init:/docker-entrypoint-initdb.d
+
+  redis:
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
