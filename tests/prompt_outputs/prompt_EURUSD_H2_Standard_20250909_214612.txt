@@ -1,4 +1,4 @@
-=== PROMPT SIGNAL ANALYST OUTPUT ===
+e === PROMPT SIGNAL ANALYST OUTPUT ===
 Generated at: 2025-09-09 21:46:12
 Test case: EURUSD_H2_Standard
 Symbol: EURUSD
