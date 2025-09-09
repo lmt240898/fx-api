@@ -1,0 +1,82 @@
+---
+description: MÔ TẢ ỨNG DỤNG
+globs: 
+alwaysApply: true
+---
+# MÔ TẢ ỨNG DỤNG HIỆN TẠI (tạm gọi server-api):
+  - ứng dụng server-api sẽ có 2 api là /signal và /risk_manager
+  1. api /signal sẽ nhận data (mẫu data: app\routers\.cursor\documents\signal.mdc) từ "APP TRADING" request đến và xử lý tạo ra prompt sau đó tiếp tục request đến api openAI để phân tích tín hiệu -> trả về cho "APP TRADING" 
+  2. api /risk_manager sẽ nhận data (mẫu data: app\routers\.cursor\documents\risk_manager.mdc) từ "APP TRADING" request đến và xử lý quản lý rủi ro và trả về cho "APP TRADING"  thực hiện vào lệnh
+
+có nhiệm vụ nhận data được gửi từ "APP TRADING" 
+# MÔ TẢ ỨNG DỤNG APP TRADING:
+    1. app cho phép user chọn tối đa 10 symbols để trading (LƯU Ý: chỉ trade với Currency Pairs)
+    1.1. user có thể chọn các khung trade là H2 hoặc H4, H8, D1
+    2. job thực hiện chạy {tường đương timeframe trade user chọn}/lần (theo múi giờ của từng broker) load 10 symbol mà user đã chọn sau đó loop từng symbol và thực hiện:
+        1. lấy account balance hiện tại (vì mỗi lần vào lệnh balance sẽ thay đổi)
+        2. lấy symbol info hiện tại (ví dụ: EURUSD -> lấy các thông tin giá, .v...v)
+        3. lấy số liệu chỉ báo đã tính toán, gồm các chỉ báo: RSI, MACD, bollinger_bands, ATR, ADX, SMA_100, SMA_200, volume_sma_250
+        4. từ thông tin thu thập ở 1,2,3 => tạo prompt 
+        5. sử dụng prompt và request api openAI cho AI phân tích tín hiệu BUY/SELL (prompt prompt_signal_analyst.py) -> khi tín hiệu của symbol có order_type = MARKET sẽ thực hiện xóa tất cả các lệnh pending (LIMIT/STOP) của lệnh đó, nghĩa là ưu tiên lệnh MARKET
+        6. nhận tín hiệu phân tích từ mục 5 (AI response) -> tiếp tục tạo prompt về quản lý rủi ro request AI phân tích lại lot_size, estimate_profit, estimate_loss (prompt prompt_risk_manager.py)
+        7. từ response mục 6 -> thực hiện vào lệnh
+    3. sẽ có job chạy 1 phút/lần thực hiện 3 tính năng: 
+        - early_profit_taking
+        - review_loss_order
+        - trailing_stop_loss
+    4. sẽ có job chạy 1h/lần thực hiện xóa các lệnh pending theo quy luật:
+        - H2 => chỉ tồn tại trong 4h
+        - H4 => chỉ tồn tại trong 8h
+        - H8 => chỉ tồn tại trong 24h
+        - D1 => chỉ tồn tại trong 3 ngày
+
+  - config mặc định của hệ thống:
+    1. bắt buộc vốn tối thiểu 200$
+    2. hàm config theo ngưỡng tài khoản: 
+    def balance_range_max_position():
+        """
+        Cung cấp một cấu hình quản lý vốn và rủi ro theo từng cấp độ số dư (tier).
+        - Cấu trúc được giữ nguyên theo yêu cầu.
+        - Lộ trình rủi ro được làm cho logic và tăng dần.
+        - Đã bao gồm các kịch bản số dư rất thấp để tăng tính an toàn.
+        """
+        return [
+            {
+                # TIER 1: Khởi đầu (Thận trọng)
+                # --> Bắt đầu với rủi ro thấp nhất và số lệnh ít để bảo toàn vốn.
+                "range": [200, 499.99],
+                "max_position": 3, # số lệnh tối đa được mở
+                "max_risk": 2.0,  # Rủi ro thấp nhất để bảo vệ vốn khi tài khoản còn nhỏ
+                "timeframe": ["H2"],
+                "total_max_risk": 6,
+            },
+            {
+                # TIER 2: Tăng trưởng (Cân bằng)
+                # --> Tăng nhẹ rủi ro và số lệnh khi tài khoản đã có một bộ đệm nhất định.
+                "range": [500, 999.99],
+                "max_position": 4, # số lệnh tối đa được mở
+                "max_risk": 1.5,  # Tăng rủi ro một cách hợp lý
+                "timeframe": ["H2", "H4"],
+                "total_max_risk": 6,
+            },
+            {
+                # TIER 3: Ổn định (Tiêu chuẩn)
+                # --> Tài khoản đã vững, áp dụng mức rủi ro tiêu chuẩn và tăng số lệnh.
+                "range": [1000, 4999.99],
+                "max_position": 5, # số lệnh tối đa được mở
+                "max_risk": 1.75, # Tiếp tục tăng nhẹ rủi ro khi tài khoản đã ổn định
+                "timeframe": ["H2", "H4", "H8", "D1"],
+                "total_max_risk": 8,
+            },
+            {
+                # TIER 4: Vốn lớn (Tối đa)
+                # --> Cho phép mức rủi ro và số lượng vị thế tối đa theo chiến lược.
+                "range": [5000, 1000000],  # Phạm vi rất rộng để bao phủ các tài khoản lớn
+                "max_position": 6,         # Có thể tăng nhẹ số lệnh cho các chiến lược đa dạng hóa
+                "max_risk": 2.0,           # Đạt mức rủi ro tối đa cho phép
+                "timeframe": ["H2", "H4", "H8", "D1", "W1"],
+                "total_max_risk": 8,
+            }
+        ]
+
+@service-template.ts

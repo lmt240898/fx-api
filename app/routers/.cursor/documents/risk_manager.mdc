@@ -1,0 +1,263 @@
+---
+globs: .cursor\description.mdc
+alwaysApply: false
+---
+**MÔ TẢ**
+bên dưới là cấu trúc mẫu input mà api /risk_manager sẽ nhận
+{
+  "proposed_signal_json": {
+    "symbol": "NZDUSD",
+    "signal_type": "SELL",
+    "order_type_proposed": "STOP",
+    "entry_price_proposed": 0.585,
+    "stop_loss_proposed": 0.58736,
+    "take_profit_proposed": 0.58,
+    "estimate_win_probability": 58,
+    "risk_reward_ratio": 2.12,
+    "trailing_stop_loss": 2.56,
+    "pips_to_take_profit": 50.0,
+    "technical_reasoning": "Bearish confluence across D1/H2: Price below key SMAs, ADX >25 shows trend strength. H2 price approaches resistance at 0.58672 with low volume. SELL STOP below 0.5850 targets 0.58 support. SL placed above swing high (0.58672) + 0.5x ATR buffer. R:R 2.12 meets quality standard."
+  },
+  "account_info_json": {
+    "leverage": 500,
+    "limit_orders": 200,
+    "balance": 502.36,
+    "profit": 0.46,
+    "equity": 502.82,
+    "margin_free": 498.15,
+    "margin_level": 10767.023554603855,
+    "margin_so_call": 50.0,
+    "commission_blocked": 0.0,
+    "currency": "USD",
+    "server": "MetaQuotes-Demo",
+    "company": "MetaQuotes Ltd."
+  },
+  "symbol": {
+    "origin_name": "NZDUSD"
+  },
+  "symbol_info": {
+    "ask": 0.58687,
+    "bid": 0.58666,
+    "spread": 21,
+    "swap_long": 2.8,
+    "swap_short": -6.7,
+    "digits": 5,
+    "point": 1e-05,
+    "trade_tick_size": 1e-05,
+    "trade_tick_value": 1.0,
+    "volume_min": 0.01,
+    "volume_max": 500.0,
+    "volume_step": 0.01,
+    "currency_profit": "USD",
+    "currency_base": "NZD",
+    "currency_margin": "NZD",
+    "current_usdjpy_rate": 148.08,
+    "trade_contract_size": 100000.0
+  },
+  "correlation_groups_json": {
+    "JPY_PAIRS": [
+      "USDJPY",
+      "EURJPY",
+      "GBPJPY",
+      "AUDJPY",
+      "NZDJPY",
+      "CADJPY",
+      "CHFJPY"
+    ],
+    "COMMODITY_DOLLARS": [
+      "AUDUSD",
+      "NZDUSD",
+      "USDCAD"
+    ],
+    "EURO_BLOCK": [
+      "EURUSD",
+      "GBPUSD",
+      "EURGBP",
+      "EURCHF"
+    ],
+    "ANTI_USD_MAJORS": [
+      "EURUSD",
+      "GBPUSD",
+      "AUDUSD",
+      "NZDUSD"
+    ]
+  },
+  "balance_config": {
+    "max_position": 4,
+    "max_risk": 1.5,
+    "total_max_risk": 6
+  },
+  "account_type_details": {
+    "name": "STANDARD",
+    "multiplier": 100000,
+    "description": "Standard Account (1 lot = 100,000 units)",
+    "pip_value": 10.0
+  },
+  "portfolio_exposure_json": {
+    "active_positions": [
+      {
+        "symbol": "EURUSD",
+        "type": "BUY",
+        "volume": 0.02,
+        "profit": 0.46,
+        "stop_loss": 1.16392,
+        "potential_loss_usd": 5.16,
+        "margin_used_usd": 4.67
+      }
+    ],
+    "pending_orders": [
+      {
+        "symbol": "USDCAD",
+        "type": "SELL_STOP",
+        "volume": 0.02,
+        "entry_price": 1.3780000000000001,
+        "stop_loss": 1.38018,
+        "potential_loss_usd": 3.16,
+        "margin_used_usd": 4.0
+      },
+      {
+        "symbol": "AUDUSD",
+        "type": "BUY_LIMIT",
+        "volume": 0.01,
+        "entry_price": 0.6505,
+        "stop_loss": 0.64735,
+        "potential_loss_usd": 3.15,
+        "margin_used_usd": 1.3
+      }
+    ],
+    "summary": {
+      "total_active_positions": 1,
+      "total_pending_orders": 2,
+      "total_potential_loss_from_portfolio_usd": 11.47,
+      "total_margin_used_from_portfolio_usd": 9.97
+    }
+  }
+}{
+  "proposed_signal_json": {
+    "symbol": "NZDUSD",
+    "signal_type": "SELL",
+    "order_type_proposed": "STOP",
+    "entry_price_proposed": 0.585,
+    "stop_loss_proposed": 0.58736,
+    "take_profit_proposed": 0.58,
+    "estimate_win_probability": 58,
+    "risk_reward_ratio": 2.12,
+    "trailing_stop_loss": 2.56,
+    "pips_to_take_profit": 50.0,
+    "technical_reasoning": "Bearish confluence across D1/H2: Price below key SMAs, ADX >25 shows trend strength. H2 price approaches resistance at 0.58672 with low volume. SELL STOP below 0.5850 targets 0.58 support. SL placed above swing high (0.58672) + 0.5x ATR buffer. R:R 2.12 meets quality standard."
+  },
+  "account_info_json": {
+    "leverage": 500,
+    "limit_orders": 200,
+    "balance": 502.36,
+    "profit": 0.46,
+    "equity": 502.82,
+    "margin_free": 498.15,
+    "margin_level": 10767.023554603855,
+    "margin_so_call": 50.0,
+    "commission_blocked": 0.0,
+    "currency": "USD",
+    "server": "MetaQuotes-Demo",
+    "company": "MetaQuotes Ltd."
+  },
+  "symbol": {
+    "origin_name": "NZDUSD"
+  },
+  "symbol_info": {
+    "ask": 0.58687,
+    "bid": 0.58666,
+    "spread": 21,
+    "swap_long": 2.8,
+    "swap_short": -6.7,
+    "digits": 5,
+    "point": 1e-05,
+    "trade_tick_size": 1e-05,
+    "trade_tick_value": 1.0,
+    "volume_min": 0.01,
+    "volume_max": 500.0,
+    "volume_step": 0.01,
+    "currency_profit": "USD",
+    "currency_base": "NZD",
+    "currency_margin": "NZD",
+    "current_usdjpy_rate": 148.08,
+    "trade_contract_size": 100000.0
+  },
+  "correlation_groups_json": {
+    "JPY_PAIRS": [
+      "USDJPY",
+      "EURJPY",
+      "GBPJPY",
+      "AUDJPY",
+      "NZDJPY",
+      "CADJPY",
+      "CHFJPY"
+    ],
+    "COMMODITY_DOLLARS": [
+      "AUDUSD",
+      "NZDUSD",
+      "USDCAD"
+    ],
+    "EURO_BLOCK": [
+      "EURUSD",
+      "GBPUSD",
+      "EURGBP",
+      "EURCHF"
+    ],
+    "ANTI_USD_MAJORS": [
+      "EURUSD",
+      "GBPUSD",
+      "AUDUSD",
+      "NZDUSD"
+    ]
+  },
+  "balance_config": {
+    "max_position": 4,
+    "max_risk": 1.5,
+    "total_max_risk": 6
+  },
+  "account_type_details": {
+    "name": "STANDARD",
+    "multiplier": 100000,
+    "description": "Standard Account (1 lot = 100,000 units)",
+    "pip_value": 10.0
+  },
+  "portfolio_exposure_json": {
+    "active_positions": [
+      {
+        "symbol": "EURUSD",
+        "type": "BUY",
+        "volume": 0.02,
+        "profit": 0.46,
+        "stop_loss": 1.16392,
+        "potential_loss_usd": 5.16,
+        "margin_used_usd": 4.67
+      }
+    ],
+    "pending_orders": [
+      {
+        "symbol": "USDCAD",
+        "type": "SELL_STOP",
+        "volume": 0.02,
+        "entry_price": 1.3780000000000001,
+        "stop_loss": 1.38018,
+        "potential_loss_usd": 3.16,
+        "margin_used_usd": 4.0
+      },
+      {
+        "symbol": "AUDUSD",
+        "type": "BUY_LIMIT",
+        "volume": 0.01,
+        "entry_price": 0.6505,
+        "stop_loss": 0.64735,
+        "potential_loss_usd": 3.15,
+        "margin_used_usd": 1.3
+      }
+    ],
+    "summary": {
+      "total_active_positions": 1,
+      "total_pending_orders": 2,
+      "total_potential_loss_from_portfolio_usd": 11.47,
+      "total_margin_used_from_portfolio_usd": 9.97
+    }
+  }
+}

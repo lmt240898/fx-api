@@ -1,0 +1,26 @@
+[
+  {
+    "name": "EURUSD_H2_Standard",
+    "symbol": "EURUSD",
+    "timeframe": "H2",
+    "content_length": 23996,
+    "filepath": "prompt_outputs\\prompt_EURUSD_H2_Standard_20250909_214612.txt",
+    "status": "SUCCESS"
+  },
+  {
+    "name": "GBPUSD_H4_Standard",
+    "symbol": "GBPUSD",
+    "timeframe": "H4",
+    "content_length": 23990,
+    "filepath": "prompt_outputs\\prompt_GBPUSD_H4_Standard_20250909_214612.txt",
+    "status": "SUCCESS"
+  },
+  {
+    "name": "AUDUSD_D1_Standard",
+    "symbol": "AUDUSD",
+    "timeframe": "D1",
+    "content_length": 24011,
+    "filepath": "prompt_outputs\\prompt_AUDUSD_D1_Standard_20250909_214612.txt",
+    "status": "SUCCESS"
+  }
+]

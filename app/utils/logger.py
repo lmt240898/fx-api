@@ -3,6 +3,7 @@ import os
 import logging
 from datetime import datetime
 import sys
+from logging.handlers import TimedRotatingFileHandler
 
 class Logger:
     _loggers = {}
