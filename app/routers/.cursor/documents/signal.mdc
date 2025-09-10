@@ -1,5 +1,5 @@
 ---
-globs: .cursor\description.mdc
+globs: .cursor\rules\description.mdc
 alwaysApply: false
 ---
 **MÔ TẢ**

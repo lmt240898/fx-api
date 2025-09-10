@@ -12,9 +12,11 @@ alwaysApply: true
 - các hàm con đang được sử dụng làm gì ? 
 - các input/params đầu vào đang được lấy từ đâu và có cấu trúc dữ liệu như thế nào và sử dụng như thế nào thì đúng 
 6. tất cả script test đều phải thực thi trong folder /test
+
 **LƯU Ý**: 
 1. trong quá trình phân tích nếu có bất kì sự mơ hồ hay thiếu sót nào thì phải báo cáo ngay
 2. Khi chỉ yêu cầu phân tích thì sau khi phân tích xong chỉ cần trả lời ngắn gọn "ĐÃ XONG" , nếu như yêu cầu phân tích và trả lời thì khi đó mới trả lời đầy đủ
 3. sau khi phân tích xong phải cho tôi biết bạn là model AI nào !!!
-4. khi được yêu cầu phân tích thì khi phân tích xong chỉ cần trả lời ngắn gọn "ĐÃ XONG"
+4. khi tạo dữ liệu để sử dụng trong code thì phải khai báo lên đầu file (như hằng số), để developer có thể dễ bảo trì
+5. khi được yêu cầu phân tích thì khi phân tích xong chỉ cần trả lời ngắn gọn "ĐÃ XONG"
 @service-template.ts
