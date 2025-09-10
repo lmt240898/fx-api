@@ -1,0 +1,44 @@
+"""
+Error codes definitions for FX API
+"""
+
+class ErrorCodes:
+    """Error codes for API responses"""
+    
+    # Success
+    SUCCESS = 0
+    
+    # AI API errors (1000-1999)
+    AI_API_TIMEOUT = 1001
+    AI_API_ERROR = 1002
+    AI_API_INVALID_RESPONSE = 1003
+    AI_API_RATE_LIMIT = 1004
+    
+    # Redis errors (2000-2999)
+    REDIS_CONNECTION_ERROR = 2001
+    REDIS_LOCK_TIMEOUT = 2002
+    REDIS_CACHE_ERROR = 2003
+    REDIS_LOCK_ACQUISITION_FAILED = 2004
+    
+    # Validation errors (3000-3999)
+    INVALID_INPUT = 3001
+    MISSING_REQUIRED_FIELD = 3002
+    INVALID_CACHE_KEY = 3003
+    INVALID_SYMBOL = 3004
+    INVALID_TIMEFRAME = 3005
+    INVALID_TIMEZONE = 3006
+    
+    # Service errors (4000-4999)
+    SIGNAL_SERVICE_ERROR = 4001
+    RISK_MANAGER_SERVICE_ERROR = 4002
+    PROMPT_SERVICE_ERROR = 4003
+    
+    # System errors (5000-5999)
+    INTERNAL_SERVER_ERROR = 5001
+    SERVICE_UNAVAILABLE = 5002
+    DATABASE_ERROR = 5003
+    
+    # Cache errors (6000-6999)
+    CACHE_MISS = 6001
+    CACHE_WRITE_ERROR = 6002
+    CACHE_READ_ERROR = 6003

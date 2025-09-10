@@ -1,0 +1,169 @@
+---
+globs: .cursor\rules\description.mdc
+alwaysApply: false
+---
+# CACHE RESPONSE STRATEGY - API /signal
+
+## **MÔ TẢ YÊU CẦU:**
+- API `/signal` nhận data từ `signal.mdc` → tạo prompt → request AI API phân tích tín hiệu
+- Có thể nhận tới 500 concurrent requests cùng lúc
+- Cần đảm bảo tất cả user nhận cùng 1 kết quả phân tích tín hiệu
+- Sử dụng cache + distributed lock để tránh gọi AI API nhiều lần
+
+## **CACHE STRATEGY:**
+- **Cache Key Format:** `signal:{timezone}:{timeframe}:{symbol}`
+- **Ví dụ:** `signal:GMT+3.0:H2:EURUSD`
+- **Behavior:** Ghi đè response cũ khi có request mới
+- **Timeline:** 6h → 8h → 10h → 12h... (mỗi 2h có response mới)
+
+## **CÁC THẢO LUẬN VÀ XÁC NHẬN:**
+
+### **1. Cache Key Strategy:**
+- **Câu hỏi:** Cache key có cần thêm timestamp không?
+- **Options:** 
+  - Option A: `signal:GMT+3.0:H2:EURUSD` (không có timestamp)
+  - Option B: `signal:GMT+3.0:H2:EURUSD:2025-09-10-08:00` (có timestamp)
+- **✅ XÁC NHẬN:** Không cần timestamp (Option A)
+
+### **2. Cache Invalidation:**
+- **Câu hỏi:** Khi nào cache bị xóa?
+- **Options:**
+  - Option A: Tự động expire sau 5 phút
+  - Option B: Chỉ ghi đè khi có request mới
+  - Option C: Kết hợp cả hai
+- **✅ XÁC NHẬN:** Cache sẽ bị xóa sau 10 phút
+
+### **3. Lock Strategy:**
+- **Câu hỏi:** Lock có cần timeout không?
+- **Scenario:** Request 1 đang xử lý AI API, Request 2-500 đợi bao lâu?
+- **Options:** 30 giây, 60 giây, hay không timeout?
+- **✅ XÁC NHẬN:** Lock timeout: 2 phút
+
+### **4. Error Handling:**
+- **Câu hỏi:** Nếu AI API fail thì sao?
+- **Options:**
+  - Option A: Trả lỗi cho tất cả requests
+  - Option B: Trả response cũ từ cache (nếu có)
+  - Option C: Retry mechanism
+- **✅ XÁC NHẬN:** Option A - Trả lỗi cho tất cả requests
+
+### **5. Performance Monitoring:**
+- **Câu hỏi:** Cần track metrics gì?
+- **Suggestions:**
+  - Cache hit rate
+  - AI API response time
+  - Number of concurrent requests
+  - Lock acquisition time
+- **✅ XÁC NHẬN:** Đồng ý, suggest track tất cả
+
+### **6. Data Structure:**
+- **Câu hỏi:** Cache response format như thế nào?
+- **✅ XÁC NHẬN:** Response format chung cho tất cả APIs
+
+## **RESPONSE FORMAT:**
+
+### **Standard Response Structure:**
+```json
+{
+  "success": true | false,
+  "errorMsg": "",
+  "errorCode": xxx,
+  "data": {}
+}
+```
+
+### **API /signal Response:**
+```json
+{
+  "success": true,
+  "errorMsg": "",
+  "errorCode": 0,
+  "data": {
+    "signal": "BUY",
+    "entry_price": 1.17417,
+    "stop_loss": 1.16917,
+    "take_profit": 1.17917,
+    "confidence": 0.85,
+    "timestamp": "2025-09-10T08:00:00Z",
+    "cache_key": "signal:GMT+3.0:H2:EURUSD"
+  }
+}
+```
+
+### **API /risk_manager Response:**
+```json
+{
+  "success": true,
+  "errorMsg": "",
+  "errorCode": 0,
+  "data": {
+    "status": "CONTINUE",
+    "signal": "BUY",
+    "lot_size": 0.02,
+    "entry_price": 1.17417,
+    "stop_loss": 1.16917,
+    "take_profit": 1.17917,
+    "estimate_profit": 15.0,
+    "estimate_loss": -10.0
+  }
+}
+```
+
+### **Error Response:**
+```json
+{
+  "success": false,
+  "errorMsg": "AI API timeout after 30 seconds",
+  "errorCode": 1001,
+  "data": {}
+}
+```
+
+## **ERROR HANDLING STRATEGY:**
+
+### **Error Codes:**
+- **0:** Success
+- **1001:** AI API timeout
+- **1002:** AI API error
+- **2001:** Redis connection error
+- **2002:** Redis lock timeout
+- **3001:** Invalid input data
+- **3002:** Missing required field
+- **4001:** Signal service error
+- **4002:** Risk manager service error
+
+### **Error Messages:**
+- Human-readable messages cho development
+- Client có thể dùng cả error code và error message
+- Support format strings cho dynamic messages
+
+## **IMPLEMENTATION STRUCTURE:**
+```
+app/
+├── constants/
+│   ├── error_codes.py          # Error code definitions
+│   └── error_messages.py       # Error message mappings
+├── utils/
+│   └── response_handler.py     # Common response handler
+├── services/
+│   ├── signal_service.py       # Signal service with cache
+│   └── risk_manager_service.py # Risk manager service
+└── routers/
+    └── v1/
+        └── trading.py          # API endpoints
+```
+
+## **TÓM TẮT SETTINGS ĐÃ XÁC NHẬN:**
+1. ✅ Cache Key: Không có timestamp
+2. ✅ Cache TTL: 10 phút
+3. ✅ Lock Timeout: 2 phút
+4. ✅ Error Handling: Trả lỗi cho tất cả requests
+5. ✅ Monitoring: Track tất cả metrics
+6. ✅ Response Format: Standard format với error codes + messages
+
+## **NEXT STEPS:**
+- ✅ Implement constants (error_codes.py, error_messages.py)
+- ✅ Implement response_handler.py
+- ✅ Implement signal_service.py với cache logic
+- ✅ Update trading.py API endpoints
+- ✅ Test với 500 concurrent requests
