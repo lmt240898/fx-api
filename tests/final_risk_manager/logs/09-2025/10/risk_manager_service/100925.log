@@ -1,0 +1,1006 @@
+2025-09-10 11:29:20,010 - risk_manager_service - INFO - === BẮT ĐẦU QUÁ TRÌNH QUẢN LÝ RỦI RO ===
+2025-09-10 11:29:20,051 - risk_manager_service - INFO - === PARAMS: {
+  "proposed_signal_json": {
+    "symbol": "EURUSD",
+    "signal_type": "BUY",
+    "order_type_proposed": "MARKET",
+    "entry_price_proposed": 1.1,
+    "stop_loss_proposed": 1.095,
+    "take_profit_proposed": 1.11,
+    "estimate_win_probability": 65,
+    "technical_reasoning": "Test case"
+  },
+  "account_info_json": {
+    "balance": 1000.0,
+    "equity": 1000.0,
+    "profit": 0.0,
+    "leverage": 500
+  },
+  "symbol_info": {
+    "volume_min": 0.01,
+    "volume_max": 100.0,
+    "volume_step": 0.01,
+    "trade_tick_value": 10.0,
+    "trade_tick_size": 0.0001,
+    "trade_contract_size": 100000.0
+  },
+  "portfolio_exposure_json": {
+    "active_positions": [],
+    "pending_orders": [],
+    "summary": {
+      "total_potential_loss_from_portfolio_usd": 0.0,
+      "total_margin_used_from_portfolio_usd": 0.0
+    }
+  },
+  "balance_config": {
+    "max_position": 5,
+    "max_risk": 2.0,
+    "total_max_risk": 8.0
+  },
+  "correlation_groups_json": {
+    "EURO_BLOCK": [
+      "EURUSD",
+      "GBPUSD"
+    ]
+  },
+  "symbol": {
+    "origin_name": "EURUSD"
+  },
+  "lot_size_to_margin_map": {
+    "0.01": 2.2,
+    "0.02": 4.4,
+    "0.03": 6.6,
+    "0.04": 8.8,
+    "0.05": 11.0,
+    "0.06": 13.2,
+    "0.07": 15.4,
+    "0.08": 17.6,
+    "0.09": 19.8,
+    "0.10": 22.0
+  }
+} ===
+2025-09-10 11:29:20,097 - risk_manager_service - INFO - [🔍 BƯỚC A: CHUẨN BỊ VÀ XÁC THỰC DỮ LIỆU]
+2025-09-10 11:29:20,161 - risk_manager_service - INFO - 📊 Symbol đang xử lý: EURUSD
+2025-09-10 11:29:20,175 - risk_manager_service - INFO - 💰 Balance: $1000.00, Equity: $1000.00
+2025-09-10 11:29:20,181 - risk_manager_service - INFO - 📈 Symbol config - Min: 0.01, Max: 100.0, Step: 0.01
+2025-09-10 11:29:20,188 - risk_manager_service - INFO - ⚙️ Risk config - Max Risk: 2.0%, Total Risk Cap: 8.0%, Max Positions: 5
+2025-09-10 11:29:20,193 - risk_manager_service - INFO - [🚀 BƯỚC B: THỰC THI WORKFLOW QUẢN LÝ RỦI RO]
+2025-09-10 11:29:20,196 - risk_manager_service - INFO - [🔍 STEP 1: KIỂM TRA PRE-FLIGHT PORTFOLIO]
+2025-09-10 11:29:20,207 - risk_manager_service - INFO - 🔍 STEP 1a: KIỂM TRA GIỚI HẠN VỊ THẾ ACTIVE
+2025-09-10 11:29:20,209 - risk_manager_service - INFO -    - Vị thế active hiện tại: 0 (Giới hạn: 5)
+2025-09-10 11:29:20,212 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:20,221 - risk_manager_service - INFO - 🔍 STEP 1b: KIỂM TRA LỆNH ACTIVE CÙNG SYMBOL
+2025-09-10 11:29:20,223 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:20,243 - risk_manager_service - INFO - 🔍 STEP 1c: KIỂM TRA XUNG ĐỘT LỆNH PENDING (LOGIC MỚI: THAY THẾ)
+2025-09-10 11:29:20,255 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:20,279 - risk_manager_service - INFO - 🔍 STEP 1d: KIỂM TRA TỔNG RỦI RO PORTFOLIO
+2025-09-10 11:29:20,289 - risk_manager_service - INFO -    - Rủi ro hiện tại: $0.00
+2025-09-10 11:29:20,304 - risk_manager_service - INFO -    - Rủi ro mới (dự kiến): $20.00
+2025-09-10 11:29:20,321 - risk_manager_service - INFO -    - Tổng rủi ro (dự kiến): $20.00 (2.00%)
+2025-09-10 11:29:20,339 - risk_manager_service - INFO -    - Giới hạn rủi ro: 8.0%
+2025-09-10 11:29:20,342 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:20,343 - risk_manager_service - INFO - ✅ Tất cả kiểm tra pre-flight đã pass
+2025-09-10 11:29:20,347 - risk_manager_service - INFO - 📋 Kết quả pre-flight check: CONTINUE - All pre-flight checks passed
+2025-09-10 11:29:20,357 - risk_manager_service - INFO - [🧮 STEP 2 & 3: TÍNH TOÁN LOT SIZE]
+2025-09-10 11:29:20,363 - risk_manager_service - INFO - 🧮 STEP 3a: XÁC ĐỊNH RỦI RO CƠ BẢN
+2025-09-10 11:29:20,367 - risk_manager_service - INFO - 📊 Xác suất thắng: 65%
+2025-09-10 11:29:20,373 - risk_manager_service - INFO - 📊 Rủi ro cơ bản: 1.2%, Rủi ro cuối cùng (sau khi so sánh với vRisk): 1.2%
+2025-09-10 11:29:20,377 - risk_manager_service - INFO - 🧮 STEP 3b: TÍNH TOÁN LOT SIZE BAN ĐẦU
+2025-09-10 11:29:20,379 - risk_manager_service - INFO - 💰 Rủi ro tính bằng USD: $12.00
+2025-09-10 11:29:20,533 - risk_manager_service - INFO -      - Tính toán Loss/Lot: SL distance=0.0050000000000001155, Tick value=10.0, Tick size=0.0001
+2025-09-10 11:29:20,694 - risk_manager_service - INFO -      -> Loss/Lot dự kiến: 500.00 USD
+2025-09-10 11:29:20,772 - risk_manager_service - INFO - 📉 Thua lỗ dự kiến cho 1 lot: $500.00
+2025-09-10 11:29:20,773 - risk_manager_service - INFO - 📊 Lot size ban đầu: 0.0240
+2025-09-10 11:29:20,860 - risk_manager_service - INFO - 🧮 STEP 3c: ÁP DỤNG ĐIỀU CHỈNH PORTFOLIO
+2025-09-10 11:29:20,861 - risk_manager_service - INFO -    - ** Drawdown Control **
+2025-09-10 11:29:20,862 - risk_manager_service - INFO -      - Profit hiện tại: $0.00, Ngưỡng sụt giảm (4%): $-40.00
+2025-09-10 11:29:20,862 - risk_manager_service - INFO -      -> KẾT QUẢ: Pass. Không điều chỉnh.
+2025-09-10 11:29:20,863 - risk_manager_service - INFO -    - ** Correlation Control **
+2025-09-10 11:29:20,872 - risk_manager_service - INFO -      - Symbol 'EURUSD' thuộc nhóm tương quan: EURO_BLOCK
+2025-09-10 11:29:20,908 - risk_manager_service - INFO -      - Số vị thế tương quan đang active: 0 - Symbols: []
+2025-09-10 11:29:20,993 - risk_manager_service - INFO -      -> KẾT QUẢ: Pass. Không điều chỉnh.
+2025-09-10 11:29:21,026 - risk_manager_service - INFO -    - ** Weighted Position Count **
+2025-09-10 11:29:21,041 - risk_manager_service - INFO -      - Vị thế active: 0, Pending: 0 => Vị thế hiệu quả: 0.00
+2025-09-10 11:29:21,041 - risk_manager_service - INFO -      -> KẾT QUẢ: Pass. Không điều chỉnh.
+2025-09-10 11:29:21,045 - risk_manager_service - INFO - 📊 Lot size sau điều chỉnh portfolio: 0.0240
+2025-09-10 11:29:21,045 - risk_manager_service - INFO - 📊 Lot size cuối cùng trước lượng tử hóa: 0.0240
+2025-09-10 11:29:21,054 - risk_manager_service - INFO - ✅ Lot size ban đầu (đã lượng tử hóa): 0.02
+2025-09-10 11:29:21,062 - risk_manager_service - INFO - 🔄 Bắt đầu dò tìm Lot Size thích ứng với Margin
+2025-09-10 11:29:21,070 - risk_manager_service - INFO -    - Đang kiểm tra lot: 0.02...
+2025-09-10 11:29:21,071 - risk_manager_service - INFO - 📊 Margin Safety Analysis:
+2025-09-10 11:29:21,073 - risk_manager_service - INFO -    - Equity: $1000.00
+2025-09-10 11:29:21,077 - risk_manager_service - INFO -    - Existing Margin: $0.00
+2025-09-10 11:29:21,089 - risk_manager_service - INFO -    - New Order Margin: $4.40
+2025-09-10 11:29:21,092 - risk_manager_service - INFO -    - Total Margin Usage (Predicted): $4.40 (0.44%)
+2025-09-10 11:29:21,094 - risk_manager_service - INFO -    - Free Margin (Predicted): $995.60 (99.56%)
+2025-09-10 11:29:21,104 - risk_manager_service - INFO -    - Rule: Free > 50%, Usage < 40%
+2025-09-10 11:29:21,108 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass. An toàn về ký quỹ.
+2025-09-10 11:29:21,110 - risk_manager_service - INFO - ✅ Tìm thấy Lot Size hợp lệ về ký quỹ: 0.02
+2025-09-10 11:29:21,122 - risk_manager_service - INFO - 📊 Kết quả tính lot size: 0.02
+2025-09-10 11:29:21,123 - risk_manager_service - INFO - [✅ STEP 4: VALIDATION CUỐI CÙNG VÀ TÍNH TOÁN LỢI NHUẬN/THUA LỖ]
+2025-09-10 11:29:21,124 - risk_manager_service - INFO - 📊 Điều chỉnh tỷ lệ Risk-to-Reward
+2025-09-10 11:29:21,125 - risk_manager_service - INFO -      - R:R ban đầu: 2.00 (TP=1.11, SL=1.095, Entry=1.1)
+2025-09-10 11:29:21,141 - risk_manager_service - INFO -      - Quy tắc mới: R:R < 1.0 không điều chỉnh, R:R > 1.5 điều chỉnh về 1.5
+2025-09-10 11:29:21,155 - risk_manager_service - INFO -      -> KẾT QUẢ: R:R > 1.5, điều chỉnh TP để R:R = 1.5. TP mới: 1.1075000000000004
+2025-09-10 11:29:21,157 - risk_manager_service - INFO - 🎯 Take Profit sau điều chỉnh: 1.1075000000000004
+2025-09-10 11:29:21,157 - risk_manager_service - INFO - 💰 Tính toán lợi nhuận/thua lỗ dự kiến
+2025-09-10 11:29:21,159 - risk_manager_service - INFO -      - Tính toán Loss/Lot: SL distance=0.0050000000000001155, Tick value=10.0, Tick size=0.0001
+2025-09-10 11:29:21,160 - risk_manager_service - INFO -      -> Loss/Lot dự kiến: 500.00 USD
+2025-09-10 11:29:21,161 - risk_manager_service - INFO - 📉 Thua lỗ dự kiến: $-10.00
+2025-09-10 11:29:21,162 - risk_manager_service - INFO - 📈 Lợi nhuận dự kiến: $15.00
+2025-09-10 11:29:21,176 - risk_manager_service - INFO - [🎯 BƯỚC C: XÂY DỰNG KẾT QUẢ TRẢ VỀ]
+2025-09-10 11:29:21,176 - risk_manager_service - INFO - ✅ Hoàn thành xử lý - STATUS: CONTINUE, Lot Size: 0.02
+2025-09-10 11:29:21,177 - risk_manager_service - INFO - === KẾT THÚC QUÁ TRÌNH QUẢN LÝ RỦI RO - STATUS: CONTINUE ===
+2025-09-10 11:29:21,239 - risk_manager_service - INFO - === BẮT ĐẦU QUÁ TRÌNH QUẢN LÝ RỦI RO ===
+2025-09-10 11:29:21,241 - risk_manager_service - INFO - === PARAMS: {
+  "proposed_signal_json": {
+    "symbol": "EURUSD",
+    "signal_type": "BUY",
+    "order_type_proposed": "MARKET",
+    "entry_price_proposed": 1.1,
+    "stop_loss_proposed": 1.099,
+    "take_profit_proposed": 1.102,
+    "estimate_win_probability": 65
+  },
+  "account_info_json": {
+    "equity": 1000.0,
+    "balance": 1000.0,
+    "profit": 0.0,
+    "currency": "USD"
+  },
+  "symbol_info": {
+    "name": "EURUSD",
+    "volume_min": 0.01,
+    "volume_max": 100.0,
+    "volume_step": 0.01,
+    "trade_tick_value": 1.0,
+    "trade_tick_size": 1e-05
+  },
+  "portfolio_exposure_json": {
+    "active_positions": [
+      {},
+      {},
+      {},
+      {},
+      {}
+    ],
+    "pending_orders": [],
+    "summary": {
+      "total_potential_loss_from_portfolio_usd": 0.0
+    }
+  },
+  "balance_config": {
+    "max_risk": 2.0,
+    "total_max_risk": 6.0,
+    "max_position": 5
+  },
+  "correlation_groups_json": {},
+  "symbol": {
+    "origin_name": "EURUSD"
+  },
+  "lot_size_to_margin_map": {
+    "0.01": 2.2,
+    "0.02": 4.4,
+    "0.03": 6.6,
+    "0.04": 8.8,
+    "0.05": 11.0,
+    "0.06": 13.2,
+    "0.07": 15.4,
+    "0.08": 17.6,
+    "0.09": 19.8,
+    "0.10": 22.0,
+    "0.11": 24.2,
+    "0.12": 26.4,
+    "0.13": 28.6,
+    "0.14": 30.8,
+    "0.15": 33.0,
+    "0.16": 35.2,
+    "0.17": 37.4,
+    "0.18": 39.6,
+    "0.19": 41.8,
+    "0.20": 44.0,
+    "0.21": 46.2,
+    "0.22": 48.4,
+    "0.23": 50.6,
+    "0.24": 52.8,
+    "0.25": 55.0,
+    "0.26": 57.2,
+    "0.27": 59.4,
+    "0.28": 61.6,
+    "0.29": 63.8,
+    "0.30": 66.0,
+    "0.31": 68.2,
+    "0.32": 70.4,
+    "0.33": 72.6,
+    "0.34": 74.8,
+    "0.35": 77.0,
+    "0.36": 79.2,
+    "0.37": 81.4,
+    "0.38": 83.6,
+    "0.39": 85.8,
+    "0.40": 88.0,
+    "0.41": 90.2,
+    "0.42": 92.4,
+    "0.43": 94.6,
+    "0.44": 96.8,
+    "0.45": 99.0,
+    "0.46": 101.2,
+    "0.47": 103.4,
+    "0.48": 105.6,
+    "0.49": 107.8,
+    "0.50": 110.0,
+    "0.51": 112.2,
+    "0.52": 114.4,
+    "0.53": 116.6,
+    "0.54": 118.8,
+    "0.55": 121.0,
+    "0.56": 123.2,
+    "0.57": 125.4,
+    "0.58": 127.6,
+    "0.59": 129.8,
+    "0.60": 132.0,
+    "0.61": 134.2,
+    "0.62": 136.4,
+    "0.63": 138.6,
+    "0.64": 140.8,
+    "0.65": 143.0,
+    "0.66": 145.2,
+    "0.67": 147.4,
+    "0.68": 149.6,
+    "0.69": 151.8,
+    "0.70": 154.0,
+    "0.71": 156.2,
+    "0.72": 158.4,
+    "0.73": 160.6,
+    "0.74": 162.8,
+    "0.75": 165.0,
+    "0.76": 167.2,
+    "0.77": 169.4,
+    "0.78": 171.6,
+    "0.79": 173.8,
+    "0.80": 176.0,
+    "0.81": 178.2,
+    "0.82": 180.4,
+    "0.83": 182.6,
+    "0.84": 184.8,
+    "0.85": 187.0,
+    "0.86": 189.2,
+    "0.87": 191.4,
+    "0.88": 193.6,
+    "0.89": 195.8,
+    "0.90": 198.0
+  }
+} ===
+2025-09-10 11:29:21,246 - risk_manager_service - INFO - [🔍 BƯỚC A: CHUẨN BỊ VÀ XÁC THỰC DỮ LIỆU]
+2025-09-10 11:29:21,251 - risk_manager_service - INFO - 📊 Symbol đang xử lý: EURUSD
+2025-09-10 11:29:21,254 - risk_manager_service - INFO - 💰 Balance: $1000.00, Equity: $1000.00
+2025-09-10 11:29:21,254 - risk_manager_service - INFO - 📈 Symbol config - Min: 0.01, Max: 100.0, Step: 0.01
+2025-09-10 11:29:21,256 - risk_manager_service - INFO - ⚙️ Risk config - Max Risk: 2.0%, Total Risk Cap: 6.0%, Max Positions: 5
+2025-09-10 11:29:21,257 - risk_manager_service - INFO - [🚀 BƯỚC B: THỰC THI WORKFLOW QUẢN LÝ RỦI RO]
+2025-09-10 11:29:21,258 - risk_manager_service - INFO - [🔍 STEP 1: KIỂM TRA PRE-FLIGHT PORTFOLIO]
+2025-09-10 11:29:21,259 - risk_manager_service - INFO - 🔍 STEP 1a: KIỂM TRA GIỚI HẠN VỊ THẾ ACTIVE
+2025-09-10 11:29:21,259 - risk_manager_service - INFO -    - Vị thế active hiện tại: 5 (Giới hạn: 5)
+2025-09-10 11:29:21,260 - risk_manager_service - WARNING -    -> ❌ KẾT QUẢ: Thất bại. Đã đạt giới hạn vị thế tối đa.
+2025-09-10 11:29:21,260 - risk_manager_service - INFO - 📋 Kết quả pre-flight check: STOP_TRADE - Max position limit reached
+2025-09-10 11:29:21,261 - risk_manager_service - WARNING - ❌ Dừng xử lý do pre-flight check: STOP_TRADE
+2025-09-10 11:29:21,265 - risk_manager_service - INFO - === KẾT THÚC QUÁ TRÌNH QUẢN LÝ RỦI RO - STATUS: STOP_TRADE ===
+2025-09-10 11:29:21,272 - risk_manager_service - INFO - === BẮT ĐẦU QUÁ TRÌNH QUẢN LÝ RỦI RO ===
+2025-09-10 11:29:21,273 - risk_manager_service - INFO - === PARAMS: {
+  "proposed_signal_json": {
+    "symbol": "EURUSD",
+    "signal_type": "BUY",
+    "order_type_proposed": "MARKET",
+    "entry_price_proposed": 1.1,
+    "stop_loss_proposed": 1.099,
+    "take_profit_proposed": 1.102,
+    "estimate_win_probability": 65
+  },
+  "account_info_json": {
+    "equity": 1000.0,
+    "balance": 1000.0,
+    "profit": 0.0,
+    "currency": "USD"
+  },
+  "symbol_info": {
+    "name": "EURUSD",
+    "volume_min": 0.01,
+    "volume_max": 100.0,
+    "volume_step": 0.01,
+    "trade_tick_value": 1.0,
+    "trade_tick_size": 1e-05
+  },
+  "portfolio_exposure_json": {
+    "active_positions": [
+      {
+        "symbol": "EURUSD",
+        "profit": -10.0
+      }
+    ],
+    "pending_orders": [],
+    "summary": {
+      "total_potential_loss_from_portfolio_usd": 0.0
+    }
+  },
+  "balance_config": {
+    "max_risk": 2.0,
+    "total_max_risk": 6.0,
+    "max_position": 5
+  },
+  "correlation_groups_json": {},
+  "symbol": {
+    "origin_name": "EURUSD"
+  },
+  "lot_size_to_margin_map": {
+    "0.01": 2.2,
+    "0.02": 4.4,
+    "0.03": 6.6,
+    "0.04": 8.8,
+    "0.05": 11.0,
+    "0.06": 13.2,
+    "0.07": 15.4,
+    "0.08": 17.6,
+    "0.09": 19.8,
+    "0.10": 22.0,
+    "0.11": 24.2,
+    "0.12": 26.4,
+    "0.13": 28.6,
+    "0.14": 30.8,
+    "0.15": 33.0,
+    "0.16": 35.2,
+    "0.17": 37.4,
+    "0.18": 39.6,
+    "0.19": 41.8,
+    "0.20": 44.0,
+    "0.21": 46.2,
+    "0.22": 48.4,
+    "0.23": 50.6,
+    "0.24": 52.8,
+    "0.25": 55.0,
+    "0.26": 57.2,
+    "0.27": 59.4,
+    "0.28": 61.6,
+    "0.29": 63.8,
+    "0.30": 66.0,
+    "0.31": 68.2,
+    "0.32": 70.4,
+    "0.33": 72.6,
+    "0.34": 74.8,
+    "0.35": 77.0,
+    "0.36": 79.2,
+    "0.37": 81.4,
+    "0.38": 83.6,
+    "0.39": 85.8,
+    "0.40": 88.0,
+    "0.41": 90.2,
+    "0.42": 92.4,
+    "0.43": 94.6,
+    "0.44": 96.8,
+    "0.45": 99.0,
+    "0.46": 101.2,
+    "0.47": 103.4,
+    "0.48": 105.6,
+    "0.49": 107.8,
+    "0.50": 110.0,
+    "0.51": 112.2,
+    "0.52": 114.4,
+    "0.53": 116.6,
+    "0.54": 118.8,
+    "0.55": 121.0,
+    "0.56": 123.2,
+    "0.57": 125.4,
+    "0.58": 127.6,
+    "0.59": 129.8,
+    "0.60": 132.0,
+    "0.61": 134.2,
+    "0.62": 136.4,
+    "0.63": 138.6,
+    "0.64": 140.8,
+    "0.65": 143.0,
+    "0.66": 145.2,
+    "0.67": 147.4,
+    "0.68": 149.6,
+    "0.69": 151.8,
+    "0.70": 154.0,
+    "0.71": 156.2,
+    "0.72": 158.4,
+    "0.73": 160.6,
+    "0.74": 162.8,
+    "0.75": 165.0,
+    "0.76": 167.2,
+    "0.77": 169.4,
+    "0.78": 171.6,
+    "0.79": 173.8,
+    "0.80": 176.0,
+    "0.81": 178.2,
+    "0.82": 180.4,
+    "0.83": 182.6,
+    "0.84": 184.8,
+    "0.85": 187.0,
+    "0.86": 189.2,
+    "0.87": 191.4,
+    "0.88": 193.6,
+    "0.89": 195.8,
+    "0.90": 198.0
+  }
+} ===
+2025-09-10 11:29:21,277 - risk_manager_service - INFO - [🔍 BƯỚC A: CHUẨN BỊ VÀ XÁC THỰC DỮ LIỆU]
+2025-09-10 11:29:21,278 - risk_manager_service - INFO - 📊 Symbol đang xử lý: EURUSD
+2025-09-10 11:29:21,279 - risk_manager_service - INFO - 💰 Balance: $1000.00, Equity: $1000.00
+2025-09-10 11:29:21,280 - risk_manager_service - INFO - 📈 Symbol config - Min: 0.01, Max: 100.0, Step: 0.01
+2025-09-10 11:29:21,282 - risk_manager_service - INFO - ⚙️ Risk config - Max Risk: 2.0%, Total Risk Cap: 6.0%, Max Positions: 5
+2025-09-10 11:29:21,286 - risk_manager_service - INFO - [🚀 BƯỚC B: THỰC THI WORKFLOW QUẢN LÝ RỦI RO]
+2025-09-10 11:29:21,290 - risk_manager_service - INFO - [🔍 STEP 1: KIỂM TRA PRE-FLIGHT PORTFOLIO]
+2025-09-10 11:29:21,292 - risk_manager_service - INFO - 🔍 STEP 1a: KIỂM TRA GIỚI HẠN VỊ THẾ ACTIVE
+2025-09-10 11:29:21,307 - risk_manager_service - INFO -    - Vị thế active hiện tại: 1 (Giới hạn: 5)
+2025-09-10 11:29:21,312 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,313 - risk_manager_service - INFO - 🔍 STEP 1b: KIỂM TRA LỆNH ACTIVE CÙNG SYMBOL
+2025-09-10 11:29:21,326 - risk_manager_service - INFO -    - Tìm thấy lệnh active cùng symbol: EURUSD
+2025-09-10 11:29:21,329 - risk_manager_service - WARNING -    -> ❌ KẾT QUẢ: Thất bại. Lệnh active đang thua lỗ: $-10.00
+2025-09-10 11:29:21,331 - risk_manager_service - INFO - 📋 Kết quả pre-flight check: SKIP - An active trade on the same symbol is losing
+2025-09-10 11:29:21,337 - risk_manager_service - WARNING - ❌ Dừng xử lý do pre-flight check: SKIP
+2025-09-10 11:29:21,338 - risk_manager_service - INFO - === KẾT THÚC QUÁ TRÌNH QUẢN LÝ RỦI RO - STATUS: SKIP ===
+2025-09-10 11:29:21,340 - risk_manager_service - INFO - === BẮT ĐẦU QUÁ TRÌNH QUẢN LÝ RỦI RO ===
+2025-09-10 11:29:21,342 - risk_manager_service - INFO - === PARAMS: {
+  "proposed_signal_json": {
+    "symbol": "EURUSD",
+    "signal_type": "BUY",
+    "order_type_proposed": "MARKET",
+    "entry_price_proposed": 1.1,
+    "stop_loss_proposed": 1.099,
+    "take_profit_proposed": 1.102,
+    "estimate_win_probability": 65
+  },
+  "account_info_json": {
+    "equity": 1000,
+    "balance": 1000.0,
+    "profit": 0.0,
+    "currency": "USD"
+  },
+  "symbol_info": {
+    "name": "EURUSD",
+    "volume_min": 0.01,
+    "volume_max": 100.0,
+    "volume_step": 0.01,
+    "trade_tick_value": 1.0,
+    "trade_tick_size": 1e-05
+  },
+  "portfolio_exposure_json": {
+    "active_positions": [],
+    "pending_orders": [],
+    "summary": {
+      "total_potential_loss_from_portfolio_usd": 50.0
+    }
+  },
+  "balance_config": {
+    "max_risk": 2.0,
+    "total_max_risk": 6.0,
+    "max_position": 5
+  },
+  "correlation_groups_json": {},
+  "symbol": {
+    "origin_name": "EURUSD"
+  },
+  "lot_size_to_margin_map": {
+    "0.01": 2.2,
+    "0.02": 4.4,
+    "0.03": 6.6,
+    "0.04": 8.8,
+    "0.05": 11.0,
+    "0.06": 13.2,
+    "0.07": 15.4,
+    "0.08": 17.6,
+    "0.09": 19.8,
+    "0.10": 22.0,
+    "0.11": 24.2,
+    "0.12": 26.4,
+    "0.13": 28.6,
+    "0.14": 30.8,
+    "0.15": 33.0,
+    "0.16": 35.2,
+    "0.17": 37.4,
+    "0.18": 39.6,
+    "0.19": 41.8,
+    "0.20": 44.0,
+    "0.21": 46.2,
+    "0.22": 48.4,
+    "0.23": 50.6,
+    "0.24": 52.8,
+    "0.25": 55.0,
+    "0.26": 57.2,
+    "0.27": 59.4,
+    "0.28": 61.6,
+    "0.29": 63.8,
+    "0.30": 66.0,
+    "0.31": 68.2,
+    "0.32": 70.4,
+    "0.33": 72.6,
+    "0.34": 74.8,
+    "0.35": 77.0,
+    "0.36": 79.2,
+    "0.37": 81.4,
+    "0.38": 83.6,
+    "0.39": 85.8,
+    "0.40": 88.0,
+    "0.41": 90.2,
+    "0.42": 92.4,
+    "0.43": 94.6,
+    "0.44": 96.8,
+    "0.45": 99.0,
+    "0.46": 101.2,
+    "0.47": 103.4,
+    "0.48": 105.6,
+    "0.49": 107.8,
+    "0.50": 110.0,
+    "0.51": 112.2,
+    "0.52": 114.4,
+    "0.53": 116.6,
+    "0.54": 118.8,
+    "0.55": 121.0,
+    "0.56": 123.2,
+    "0.57": 125.4,
+    "0.58": 127.6,
+    "0.59": 129.8,
+    "0.60": 132.0,
+    "0.61": 134.2,
+    "0.62": 136.4,
+    "0.63": 138.6,
+    "0.64": 140.8,
+    "0.65": 143.0,
+    "0.66": 145.2,
+    "0.67": 147.4,
+    "0.68": 149.6,
+    "0.69": 151.8,
+    "0.70": 154.0,
+    "0.71": 156.2,
+    "0.72": 158.4,
+    "0.73": 160.6,
+    "0.74": 162.8,
+    "0.75": 165.0,
+    "0.76": 167.2,
+    "0.77": 169.4,
+    "0.78": 171.6,
+    "0.79": 173.8,
+    "0.80": 176.0,
+    "0.81": 178.2,
+    "0.82": 180.4,
+    "0.83": 182.6,
+    "0.84": 184.8,
+    "0.85": 187.0,
+    "0.86": 189.2,
+    "0.87": 191.4,
+    "0.88": 193.6,
+    "0.89": 195.8,
+    "0.90": 198.0
+  }
+} ===
+2025-09-10 11:29:21,346 - risk_manager_service - INFO - [🔍 BƯỚC A: CHUẨN BỊ VÀ XÁC THỰC DỮ LIỆU]
+2025-09-10 11:29:21,351 - risk_manager_service - INFO - 📊 Symbol đang xử lý: EURUSD
+2025-09-10 11:29:21,353 - risk_manager_service - INFO - 💰 Balance: $1000.00, Equity: $1000.00
+2025-09-10 11:29:21,354 - risk_manager_service - INFO - 📈 Symbol config - Min: 0.01, Max: 100.0, Step: 0.01
+2025-09-10 11:29:21,355 - risk_manager_service - INFO - ⚙️ Risk config - Max Risk: 2.0%, Total Risk Cap: 6.0%, Max Positions: 5
+2025-09-10 11:29:21,356 - risk_manager_service - INFO - [🚀 BƯỚC B: THỰC THI WORKFLOW QUẢN LÝ RỦI RO]
+2025-09-10 11:29:21,357 - risk_manager_service - INFO - [🔍 STEP 1: KIỂM TRA PRE-FLIGHT PORTFOLIO]
+2025-09-10 11:29:21,360 - risk_manager_service - INFO - 🔍 STEP 1a: KIỂM TRA GIỚI HẠN VỊ THẾ ACTIVE
+2025-09-10 11:29:21,363 - risk_manager_service - INFO -    - Vị thế active hiện tại: 0 (Giới hạn: 5)
+2025-09-10 11:29:21,371 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,372 - risk_manager_service - INFO - 🔍 STEP 1b: KIỂM TRA LỆNH ACTIVE CÙNG SYMBOL
+2025-09-10 11:29:21,376 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,378 - risk_manager_service - INFO - 🔍 STEP 1c: KIỂM TRA XUNG ĐỘT LỆNH PENDING (LOGIC MỚI: THAY THẾ)
+2025-09-10 11:29:21,379 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,392 - risk_manager_service - INFO - 🔍 STEP 1d: KIỂM TRA TỔNG RỦI RO PORTFOLIO
+2025-09-10 11:29:21,403 - risk_manager_service - INFO -    - Rủi ro hiện tại: $50.00
+2025-09-10 11:29:21,410 - risk_manager_service - INFO -    - Rủi ro mới (dự kiến): $20.00
+2025-09-10 11:29:21,411 - risk_manager_service - INFO -    - Tổng rủi ro (dự kiến): $70.00 (7.00%)
+2025-09-10 11:29:21,439 - risk_manager_service - INFO -    - Giới hạn rủi ro: 6.0%
+2025-09-10 11:29:21,457 - risk_manager_service - WARNING -    -> ❌ KẾT QUẢ: Thất bại. Tổng rủi ro vượt quá giới hạn: 7.00% > 6.0%
+2025-09-10 11:29:21,523 - risk_manager_service - INFO - 📋 Kết quả pre-flight check: STOP_TRADE - Total portfolio risk exceeds cap
+2025-09-10 11:29:21,546 - risk_manager_service - WARNING - ❌ Dừng xử lý do pre-flight check: STOP_TRADE
+2025-09-10 11:29:21,555 - risk_manager_service - INFO - === KẾT THÚC QUÁ TRÌNH QUẢN LÝ RỦI RO - STATUS: STOP_TRADE ===
+2025-09-10 11:29:21,581 - risk_manager_service - INFO - === BẮT ĐẦU QUÁ TRÌNH QUẢN LÝ RỦI RO ===
+2025-09-10 11:29:21,589 - risk_manager_service - INFO - === PARAMS: {
+  "proposed_signal_json": {
+    "symbol": "EURUSD",
+    "signal_type": "BUY",
+    "order_type_proposed": "MARKET",
+    "entry_price_proposed": 1.1,
+    "stop_loss_proposed": 1.099,
+    "take_profit_proposed": 1.102,
+    "estimate_win_probability": 75
+  },
+  "account_info_json": {
+    "equity": 1000.0,
+    "balance": 1000.0,
+    "profit": 0.0,
+    "currency": "USD"
+  },
+  "symbol_info": {
+    "name": "EURUSD",
+    "volume_min": 0.01,
+    "volume_max": 100.0,
+    "volume_step": 0.01,
+    "trade_tick_value": 1.0,
+    "trade_tick_size": 1e-05
+  },
+  "portfolio_exposure_json": {
+    "active_positions": [],
+    "pending_orders": [],
+    "summary": {
+      "total_potential_loss_from_portfolio_usd": 0.0
+    }
+  },
+  "balance_config": {
+    "max_risk": 2.0,
+    "total_max_risk": 6.0,
+    "max_position": 5
+  },
+  "correlation_groups_json": {},
+  "symbol": {
+    "origin_name": "EURUSD"
+  },
+  "lot_size_to_margin_map": {
+    "0.01": 2.2,
+    "0.02": 4.4,
+    "0.03": 6.6,
+    "0.04": 8.8,
+    "0.05": 11.0,
+    "0.06": 13.2,
+    "0.07": 15.4,
+    "0.08": 17.6,
+    "0.09": 19.8,
+    "0.10": 22.0,
+    "0.11": 24.2,
+    "0.12": 26.4,
+    "0.13": 28.6,
+    "0.14": 30.8,
+    "0.15": 33.0,
+    "0.16": 35.2,
+    "0.17": 37.4,
+    "0.18": 39.6,
+    "0.19": 41.8,
+    "0.20": 44.0,
+    "0.21": 46.2,
+    "0.22": 48.4,
+    "0.23": 50.6,
+    "0.24": 52.8,
+    "0.25": 55.0,
+    "0.26": 57.2,
+    "0.27": 59.4,
+    "0.28": 61.6,
+    "0.29": 63.8,
+    "0.30": 66.0,
+    "0.31": 68.2,
+    "0.32": 70.4,
+    "0.33": 72.6,
+    "0.34": 74.8,
+    "0.35": 77.0,
+    "0.36": 79.2,
+    "0.37": 81.4,
+    "0.38": 83.6,
+    "0.39": 85.8,
+    "0.40": 88.0,
+    "0.41": 90.2,
+    "0.42": 92.4,
+    "0.43": 94.6,
+    "0.44": 96.8,
+    "0.45": 99.0,
+    "0.46": 101.2,
+    "0.47": 103.4,
+    "0.48": 105.6,
+    "0.49": 107.8,
+    "0.50": 110.0,
+    "0.51": 112.2,
+    "0.52": 114.4,
+    "0.53": 116.6,
+    "0.54": 118.8,
+    "0.55": 121.0,
+    "0.56": 123.2,
+    "0.57": 125.4,
+    "0.58": 127.6,
+    "0.59": 129.8,
+    "0.60": 132.0,
+    "0.61": 134.2,
+    "0.62": 136.4,
+    "0.63": 138.6,
+    "0.64": 140.8,
+    "0.65": 143.0,
+    "0.66": 145.2,
+    "0.67": 147.4,
+    "0.68": 149.6,
+    "0.69": 151.8,
+    "0.70": 154.0,
+    "0.71": 156.2,
+    "0.72": 158.4,
+    "0.73": 160.6,
+    "0.74": 162.8,
+    "0.75": 165.0,
+    "0.76": 167.2,
+    "0.77": 169.4,
+    "0.78": 171.6,
+    "0.79": 173.8,
+    "0.80": 176.0,
+    "0.81": 178.2,
+    "0.82": 180.4,
+    "0.83": 182.6,
+    "0.84": 184.8,
+    "0.85": 187.0,
+    "0.86": 189.2,
+    "0.87": 191.4,
+    "0.88": 193.6,
+    "0.89": 195.8,
+    "0.90": 198.0
+  }
+} ===
+2025-09-10 11:29:21,606 - risk_manager_service - INFO - [🔍 BƯỚC A: CHUẨN BỊ VÀ XÁC THỰC DỮ LIỆU]
+2025-09-10 11:29:21,608 - risk_manager_service - INFO - 📊 Symbol đang xử lý: EURUSD
+2025-09-10 11:29:21,623 - risk_manager_service - INFO - 💰 Balance: $1000.00, Equity: $1000.00
+2025-09-10 11:29:21,627 - risk_manager_service - INFO - 📈 Symbol config - Min: 0.01, Max: 100.0, Step: 0.01
+2025-09-10 11:29:21,637 - risk_manager_service - INFO - ⚙️ Risk config - Max Risk: 2.0%, Total Risk Cap: 6.0%, Max Positions: 5
+2025-09-10 11:29:21,643 - risk_manager_service - INFO - [🚀 BƯỚC B: THỰC THI WORKFLOW QUẢN LÝ RỦI RO]
+2025-09-10 11:29:21,655 - risk_manager_service - INFO - [🔍 STEP 1: KIỂM TRA PRE-FLIGHT PORTFOLIO]
+2025-09-10 11:29:21,659 - risk_manager_service - INFO - 🔍 STEP 1a: KIỂM TRA GIỚI HẠN VỊ THẾ ACTIVE
+2025-09-10 11:29:21,663 - risk_manager_service - INFO -    - Vị thế active hiện tại: 0 (Giới hạn: 5)
+2025-09-10 11:29:21,672 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,673 - risk_manager_service - INFO - 🔍 STEP 1b: KIỂM TRA LỆNH ACTIVE CÙNG SYMBOL
+2025-09-10 11:29:21,674 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,674 - risk_manager_service - INFO - 🔍 STEP 1c: KIỂM TRA XUNG ĐỘT LỆNH PENDING (LOGIC MỚI: THAY THẾ)
+2025-09-10 11:29:21,675 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,686 - risk_manager_service - INFO - 🔍 STEP 1d: KIỂM TRA TỔNG RỦI RO PORTFOLIO
+2025-09-10 11:29:21,690 - risk_manager_service - INFO -    - Rủi ro hiện tại: $0.00
+2025-09-10 11:29:21,694 - risk_manager_service - INFO -    - Rủi ro mới (dự kiến): $20.00
+2025-09-10 11:29:21,711 - risk_manager_service - INFO -    - Tổng rủi ro (dự kiến): $20.00 (2.00%)
+2025-09-10 11:29:21,721 - risk_manager_service - INFO -    - Giới hạn rủi ro: 6.0%
+2025-09-10 11:29:21,759 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,762 - risk_manager_service - INFO - ✅ Tất cả kiểm tra pre-flight đã pass
+2025-09-10 11:29:21,770 - risk_manager_service - INFO - 📋 Kết quả pre-flight check: CONTINUE - All pre-flight checks passed
+2025-09-10 11:29:21,773 - risk_manager_service - INFO - [🧮 STEP 2 & 3: TÍNH TOÁN LOT SIZE]
+2025-09-10 11:29:21,775 - risk_manager_service - INFO - 🧮 STEP 3a: XÁC ĐỊNH RỦI RO CƠ BẢN
+2025-09-10 11:29:21,775 - risk_manager_service - INFO - 📊 Xác suất thắng: 75%
+2025-09-10 11:29:21,776 - risk_manager_service - INFO - 📊 Rủi ro cơ bản: 1.2%, Rủi ro cuối cùng (sau khi so sánh với vRisk): 1.2%
+2025-09-10 11:29:21,777 - risk_manager_service - INFO - 🧮 STEP 3b: TÍNH TOÁN LOT SIZE BAN ĐẦU
+2025-09-10 11:29:21,778 - risk_manager_service - INFO - 💰 Rủi ro tính bằng USD: $12.00
+2025-09-10 11:29:21,779 - risk_manager_service - INFO -      - Tính toán Loss/Lot: SL distance=0.001000000000000112, Tick value=1.0, Tick size=1e-05
+2025-09-10 11:29:21,786 - risk_manager_service - INFO -      -> Loss/Lot dự kiến: 100.00 USD
+2025-09-10 11:29:21,789 - risk_manager_service - INFO - 📉 Thua lỗ dự kiến cho 1 lot: $100.00
+2025-09-10 11:29:21,791 - risk_manager_service - INFO - 📊 Lot size ban đầu: 0.1200
+2025-09-10 11:29:21,792 - risk_manager_service - INFO - 🧮 STEP 3c: ÁP DỤNG ĐIỀU CHỈNH PORTFOLIO
+2025-09-10 11:29:21,792 - risk_manager_service - INFO -    - ** Drawdown Control **
+2025-09-10 11:29:21,794 - risk_manager_service - INFO -      - Profit hiện tại: $0.00, Ngưỡng sụt giảm (4%): $-40.00
+2025-09-10 11:29:21,803 - risk_manager_service - INFO -      -> KẾT QUẢ: Pass. Không điều chỉnh.
+2025-09-10 11:29:21,809 - risk_manager_service - INFO -    - ** Correlation Control **
+2025-09-10 11:29:21,810 - risk_manager_service - INFO -      - Symbol 'EURUSD' không thuộc nhóm tương quan nào. Bỏ qua kiểm tra.
+2025-09-10 11:29:21,811 - risk_manager_service - INFO -    - ** Weighted Position Count **
+2025-09-10 11:29:21,812 - risk_manager_service - INFO -      - Vị thế active: 0, Pending: 0 => Vị thế hiệu quả: 0.00
+2025-09-10 11:29:21,822 - risk_manager_service - INFO -      -> KẾT QUẢ: Pass. Không điều chỉnh.
+2025-09-10 11:29:21,824 - risk_manager_service - INFO - 📊 Lot size sau điều chỉnh portfolio: 0.1200
+2025-09-10 11:29:21,827 - risk_manager_service - INFO - 📊 Lot size cuối cùng trước lượng tử hóa: 0.1200
+2025-09-10 11:29:21,838 - risk_manager_service - INFO - ✅ Lot size ban đầu (đã lượng tử hóa): 0.12
+2025-09-10 11:29:21,840 - risk_manager_service - INFO - 🔄 Bắt đầu dò tìm Lot Size thích ứng với Margin
+2025-09-10 11:29:21,842 - risk_manager_service - INFO -    - Đang kiểm tra lot: 0.12...
+2025-09-10 11:29:21,846 - risk_manager_service - INFO - 📊 Margin Safety Analysis:
+2025-09-10 11:29:21,856 - risk_manager_service - INFO -    - Equity: $1000.00
+2025-09-10 11:29:21,860 - risk_manager_service - INFO -    - Existing Margin: $0.00
+2025-09-10 11:29:21,864 - risk_manager_service - INFO -    - New Order Margin: $26.40
+2025-09-10 11:29:21,871 - risk_manager_service - INFO -    - Total Margin Usage (Predicted): $26.40 (2.64%)
+2025-09-10 11:29:21,871 - risk_manager_service - INFO -    - Free Margin (Predicted): $973.60 (97.36%)
+2025-09-10 11:29:21,872 - risk_manager_service - INFO -    - Rule: Free > 50%, Usage < 40%
+2025-09-10 11:29:21,875 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass. An toàn về ký quỹ.
+2025-09-10 11:29:21,877 - risk_manager_service - INFO - ✅ Tìm thấy Lot Size hợp lệ về ký quỹ: 0.12
+2025-09-10 11:29:21,888 - risk_manager_service - INFO - 📊 Kết quả tính lot size: 0.12
+2025-09-10 11:29:21,892 - risk_manager_service - INFO - [✅ STEP 4: VALIDATION CUỐI CÙNG VÀ TÍNH TOÁN LỢI NHUẬN/THUA LỖ]
+2025-09-10 11:29:21,895 - risk_manager_service - INFO - 📊 Điều chỉnh tỷ lệ Risk-to-Reward
+2025-09-10 11:29:21,900 - risk_manager_service - INFO -      - R:R ban đầu: 2.00 (TP=1.102, SL=1.099, Entry=1.1)
+2025-09-10 11:29:21,904 - risk_manager_service - INFO -      - Quy tắc mới: R:R < 1.0 không điều chỉnh, R:R > 1.5 điều chỉnh về 1.5
+2025-09-10 11:29:21,905 - risk_manager_service - INFO -      -> KẾT QUẢ: R:R > 1.5, điều chỉnh TP để R:R = 1.5. TP mới: 1.1015000000000001
+2025-09-10 11:29:21,906 - risk_manager_service - INFO - 🎯 Take Profit sau điều chỉnh: 1.1015000000000001
+2025-09-10 11:29:21,907 - risk_manager_service - INFO - 💰 Tính toán lợi nhuận/thua lỗ dự kiến
+2025-09-10 11:29:21,909 - risk_manager_service - INFO -      - Tính toán Loss/Lot: SL distance=0.001000000000000112, Tick value=1.0, Tick size=1e-05
+2025-09-10 11:29:21,910 - risk_manager_service - INFO -      -> Loss/Lot dự kiến: 100.00 USD
+2025-09-10 11:29:21,912 - risk_manager_service - INFO - 📉 Thua lỗ dự kiến: $-12.00
+2025-09-10 11:29:21,912 - risk_manager_service - INFO - 📈 Lợi nhuận dự kiến: $18.00
+2025-09-10 11:29:21,919 - risk_manager_service - INFO - [🎯 BƯỚC C: XÂY DỰNG KẾT QUẢ TRẢ VỀ]
+2025-09-10 11:29:21,921 - risk_manager_service - INFO - ✅ Hoàn thành xử lý - STATUS: CONTINUE, Lot Size: 0.12
+2025-09-10 11:29:21,921 - risk_manager_service - INFO - === KẾT THÚC QUÁ TRÌNH QUẢN LÝ RỦI RO - STATUS: CONTINUE ===
+2025-09-10 11:29:21,926 - risk_manager_service - INFO - === BẮT ĐẦU QUÁ TRÌNH QUẢN LÝ RỦI RO ===
+2025-09-10 11:29:21,929 - risk_manager_service - INFO - === PARAMS: {
+  "proposed_signal_json": {
+    "symbol": "EURUSD",
+    "signal_type": "BUY",
+    "order_type_proposed": "MARKET",
+    "entry_price_proposed": 1.1,
+    "stop_loss_proposed": 1.099,
+    "take_profit_proposed": 1.102,
+    "estimate_win_probability": 80
+  },
+  "account_info_json": {
+    "equity": 1000.0,
+    "balance": 1000.0,
+    "profit": 0.0,
+    "currency": "USD"
+  },
+  "symbol_info": {
+    "name": "EURUSD",
+    "volume_min": 0.01,
+    "volume_max": 100.0,
+    "volume_step": 0.01,
+    "trade_tick_value": 1.0,
+    "trade_tick_size": 1e-05
+  },
+  "portfolio_exposure_json": {
+    "active_positions": [],
+    "pending_orders": [],
+    "summary": {
+      "total_potential_loss_from_portfolio_usd": 0.0
+    }
+  },
+  "balance_config": {
+    "max_risk": 1.0,
+    "total_max_risk": 6.0,
+    "max_position": 5
+  },
+  "correlation_groups_json": {},
+  "symbol": {
+    "origin_name": "EURUSD"
+  },
+  "lot_size_to_margin_map": {
+    "0.01": 2.2,
+    "0.02": 4.4,
+    "0.03": 6.6,
+    "0.04": 8.8,
+    "0.05": 11.0,
+    "0.06": 13.2,
+    "0.07": 15.4,
+    "0.08": 17.6,
+    "0.09": 19.8,
+    "0.10": 22.0,
+    "0.11": 24.2,
+    "0.12": 26.4,
+    "0.13": 28.6,
+    "0.14": 30.8,
+    "0.15": 33.0,
+    "0.16": 35.2,
+    "0.17": 37.4,
+    "0.18": 39.6,
+    "0.19": 41.8,
+    "0.20": 44.0,
+    "0.21": 46.2,
+    "0.22": 48.4,
+    "0.23": 50.6,
+    "0.24": 52.8,
+    "0.25": 55.0,
+    "0.26": 57.2,
+    "0.27": 59.4,
+    "0.28": 61.6,
+    "0.29": 63.8,
+    "0.30": 66.0,
+    "0.31": 68.2,
+    "0.32": 70.4,
+    "0.33": 72.6,
+    "0.34": 74.8,
+    "0.35": 77.0,
+    "0.36": 79.2,
+    "0.37": 81.4,
+    "0.38": 83.6,
+    "0.39": 85.8,
+    "0.40": 88.0,
+    "0.41": 90.2,
+    "0.42": 92.4,
+    "0.43": 94.6,
+    "0.44": 96.8,
+    "0.45": 99.0,
+    "0.46": 101.2,
+    "0.47": 103.4,
+    "0.48": 105.6,
+    "0.49": 107.8,
+    "0.50": 110.0,
+    "0.51": 112.2,
+    "0.52": 114.4,
+    "0.53": 116.6,
+    "0.54": 118.8,
+    "0.55": 121.0,
+    "0.56": 123.2,
+    "0.57": 125.4,
+    "0.58": 127.6,
+    "0.59": 129.8,
+    "0.60": 132.0,
+    "0.61": 134.2,
+    "0.62": 136.4,
+    "0.63": 138.6,
+    "0.64": 140.8,
+    "0.65": 143.0,
+    "0.66": 145.2,
+    "0.67": 147.4,
+    "0.68": 149.6,
+    "0.69": 151.8,
+    "0.70": 154.0,
+    "0.71": 156.2,
+    "0.72": 158.4,
+    "0.73": 160.6,
+    "0.74": 162.8,
+    "0.75": 165.0,
+    "0.76": 167.2,
+    "0.77": 169.4,
+    "0.78": 171.6,
+    "0.79": 173.8,
+    "0.80": 176.0,
+    "0.81": 178.2,
+    "0.82": 180.4,
+    "0.83": 182.6,
+    "0.84": 184.8,
+    "0.85": 187.0,
+    "0.86": 189.2,
+    "0.87": 191.4,
+    "0.88": 193.6,
+    "0.89": 195.8,
+    "0.90": 198.0
+  }
+} ===
+2025-09-10 11:29:21,936 - risk_manager_service - INFO - [🔍 BƯỚC A: CHUẨN BỊ VÀ XÁC THỰC DỮ LIỆU]
+2025-09-10 11:29:21,937 - risk_manager_service - INFO - 📊 Symbol đang xử lý: EURUSD
+2025-09-10 11:29:21,938 - risk_manager_service - INFO - 💰 Balance: $1000.00, Equity: $1000.00
+2025-09-10 11:29:21,939 - risk_manager_service - INFO - 📈 Symbol config - Min: 0.01, Max: 100.0, Step: 0.01
+2025-09-10 11:29:21,939 - risk_manager_service - INFO - ⚙️ Risk config - Max Risk: 1.0%, Total Risk Cap: 6.0%, Max Positions: 5
+2025-09-10 11:29:21,940 - risk_manager_service - INFO - [🚀 BƯỚC B: THỰC THI WORKFLOW QUẢN LÝ RỦI RO]
+2025-09-10 11:29:21,941 - risk_manager_service - INFO - [🔍 STEP 1: KIỂM TRA PRE-FLIGHT PORTFOLIO]
+2025-09-10 11:29:21,941 - risk_manager_service - INFO - 🔍 STEP 1a: KIỂM TRA GIỚI HẠN VỊ THẾ ACTIVE
+2025-09-10 11:29:21,943 - risk_manager_service - INFO -    - Vị thế active hiện tại: 0 (Giới hạn: 5)
+2025-09-10 11:29:21,944 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,944 - risk_manager_service - INFO - 🔍 STEP 1b: KIỂM TRA LỆNH ACTIVE CÙNG SYMBOL
+2025-09-10 11:29:21,945 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,945 - risk_manager_service - INFO - 🔍 STEP 1c: KIỂM TRA XUNG ĐỘT LỆNH PENDING (LOGIC MỚI: THAY THẾ)
+2025-09-10 11:29:21,946 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,949 - risk_manager_service - INFO - 🔍 STEP 1d: KIỂM TRA TỔNG RỦI RO PORTFOLIO
+2025-09-10 11:29:21,954 - risk_manager_service - INFO -    - Rủi ro hiện tại: $0.00
+2025-09-10 11:29:21,955 - risk_manager_service - INFO -    - Rủi ro mới (dự kiến): $10.00
+2025-09-10 11:29:21,959 - risk_manager_service - INFO -    - Tổng rủi ro (dự kiến): $10.00 (1.00%)
+2025-09-10 11:29:21,960 - risk_manager_service - INFO -    - Giới hạn rủi ro: 6.0%
+2025-09-10 11:29:21,962 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass.
+2025-09-10 11:29:21,963 - risk_manager_service - INFO - ✅ Tất cả kiểm tra pre-flight đã pass
+2025-09-10 11:29:21,964 - risk_manager_service - INFO - 📋 Kết quả pre-flight check: CONTINUE - All pre-flight checks passed
+2025-09-10 11:29:21,971 - risk_manager_service - INFO - [🧮 STEP 2 & 3: TÍNH TOÁN LOT SIZE]
+2025-09-10 11:29:21,971 - risk_manager_service - INFO - 🧮 STEP 3a: XÁC ĐỊNH RỦI RO CƠ BẢN
+2025-09-10 11:29:21,972 - risk_manager_service - INFO - 📊 Xác suất thắng: 80%
+2025-09-10 11:29:21,973 - risk_manager_service - INFO - 📊 Rủi ro cơ bản: 1.5%, Rủi ro cuối cùng (sau khi so sánh với vRisk): 1.0%
+2025-09-10 11:29:21,973 - risk_manager_service - INFO - 🧮 STEP 3b: TÍNH TOÁN LOT SIZE BAN ĐẦU
+2025-09-10 11:29:21,974 - risk_manager_service - INFO - 💰 Rủi ro tính bằng USD: $10.00
+2025-09-10 11:29:21,975 - risk_manager_service - INFO -      - Tính toán Loss/Lot: SL distance=0.001000000000000112, Tick value=1.0, Tick size=1e-05
+2025-09-10 11:29:21,976 - risk_manager_service - INFO -      -> Loss/Lot dự kiến: 100.00 USD
+2025-09-10 11:29:21,976 - risk_manager_service - INFO - 📉 Thua lỗ dự kiến cho 1 lot: $100.00
+2025-09-10 11:29:21,977 - risk_manager_service - INFO - 📊 Lot size ban đầu: 0.1000
+2025-09-10 11:29:21,977 - risk_manager_service - INFO - 🧮 STEP 3c: ÁP DỤNG ĐIỀU CHỈNH PORTFOLIO
+2025-09-10 11:29:21,978 - risk_manager_service - INFO -    - ** Drawdown Control **
+2025-09-10 11:29:21,982 - risk_manager_service - INFO -      - Profit hiện tại: $0.00, Ngưỡng sụt giảm (4%): $-40.00
+2025-09-10 11:29:21,986 - risk_manager_service - INFO -      -> KẾT QUẢ: Pass. Không điều chỉnh.
+2025-09-10 11:29:21,988 - risk_manager_service - INFO -    - ** Correlation Control **
+2025-09-10 11:29:21,992 - risk_manager_service - INFO -      - Symbol 'EURUSD' không thuộc nhóm tương quan nào. Bỏ qua kiểm tra.
+2025-09-10 11:29:21,993 - risk_manager_service - INFO -    - ** Weighted Position Count **
+2025-09-10 11:29:21,994 - risk_manager_service - INFO -      - Vị thế active: 0, Pending: 0 => Vị thế hiệu quả: 0.00
+2025-09-10 11:29:21,995 - risk_manager_service - INFO -      -> KẾT QUẢ: Pass. Không điều chỉnh.
+2025-09-10 11:29:22,005 - risk_manager_service - INFO - 📊 Lot size sau điều chỉnh portfolio: 0.1000
+2025-09-10 11:29:22,012 - risk_manager_service - INFO - 📊 Lot size cuối cùng trước lượng tử hóa: 0.1000
+2025-09-10 11:29:22,022 - risk_manager_service - INFO - ✅ Lot size ban đầu (đã lượng tử hóa): 0.1
+2025-09-10 11:29:22,023 - risk_manager_service - INFO - 🔄 Bắt đầu dò tìm Lot Size thích ứng với Margin
+2025-09-10 11:29:22,024 - risk_manager_service - INFO -    - Đang kiểm tra lot: 0.10...
+2025-09-10 11:29:22,024 - risk_manager_service - INFO - 📊 Margin Safety Analysis:
+2025-09-10 11:29:22,025 - risk_manager_service - INFO -    - Equity: $1000.00
+2025-09-10 11:29:22,025 - risk_manager_service - INFO -    - Existing Margin: $0.00
+2025-09-10 11:29:22,026 - risk_manager_service - INFO -    - New Order Margin: $22.00
+2025-09-10 11:29:22,026 - risk_manager_service - INFO -    - Total Margin Usage (Predicted): $22.00 (2.20%)
+2025-09-10 11:29:22,028 - risk_manager_service - INFO -    - Free Margin (Predicted): $978.00 (97.80%)
+2025-09-10 11:29:22,029 - risk_manager_service - INFO -    - Rule: Free > 50%, Usage < 40%
+2025-09-10 11:29:22,035 - risk_manager_service - INFO -    -> ✅ KẾT QUẢ: Pass. An toàn về ký quỹ.
+2025-09-10 11:29:22,037 - risk_manager_service - INFO - ✅ Tìm thấy Lot Size hợp lệ về ký quỹ: 0.10
+2025-09-10 11:29:22,039 - risk_manager_service - INFO - 📊 Kết quả tính lot size: 0.1
+2025-09-10 11:29:22,039 - risk_manager_service - INFO - [✅ STEP 4: VALIDATION CUỐI CÙNG VÀ TÍNH TOÁN LỢI NHUẬN/THUA LỖ]
+2025-09-10 11:29:22,040 - risk_manager_service - INFO - 📊 Điều chỉnh tỷ lệ Risk-to-Reward
+2025-09-10 11:29:22,041 - risk_manager_service - INFO -      - R:R ban đầu: 2.00 (TP=1.102, SL=1.099, Entry=1.1)
+2025-09-10 11:29:22,042 - risk_manager_service - INFO -      - Quy tắc mới: R:R < 1.0 không điều chỉnh, R:R > 1.5 điều chỉnh về 1.5
+2025-09-10 11:29:22,043 - risk_manager_service - INFO -      -> KẾT QUẢ: R:R > 1.5, điều chỉnh TP để R:R = 1.5. TP mới: 1.1015000000000001
+2025-09-10 11:29:22,045 - risk_manager_service - INFO - 🎯 Take Profit sau điều chỉnh: 1.1015000000000001
+2025-09-10 11:29:22,054 - risk_manager_service - INFO - 💰 Tính toán lợi nhuận/thua lỗ dự kiến
+2025-09-10 11:29:22,056 - risk_manager_service - INFO -      - Tính toán Loss/Lot: SL distance=0.001000000000000112, Tick value=1.0, Tick size=1e-05
+2025-09-10 11:29:22,057 - risk_manager_service - INFO -      -> Loss/Lot dự kiến: 100.00 USD
+2025-09-10 11:29:22,059 - risk_manager_service - INFO - 📉 Thua lỗ dự kiến: $-10.00
+2025-09-10 11:29:22,060 - risk_manager_service - INFO - 📈 Lợi nhuận dự kiến: $15.00
+2025-09-10 11:29:22,071 - risk_manager_service - INFO - [🎯 BƯỚC C: XÂY DỰNG KẾT QUẢ TRẢ VỀ]
+2025-09-10 11:29:22,072 - risk_manager_service - INFO - ✅ Hoàn thành xử lý - STATUS: CONTINUE, Lot Size: 0.1
+2025-09-10 11:29:22,072 - risk_manager_service - INFO - === KẾT THÚC QUÁ TRÌNH QUẢN LÝ RỦI RO - STATUS: CONTINUE ===

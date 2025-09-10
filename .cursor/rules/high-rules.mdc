@@ -14,6 +14,7 @@ alwaysApply: true
 6. tất cả script test đều phải thực thi trong folder /test
 **LƯU Ý**: 
 1. trong quá trình phân tích nếu có bất kì sự mơ hồ hay thiếu sót nào thì phải báo cáo ngay
-6. Khi chỉ yêu cầu phân tích thì sau khi phân tích xong chỉ cần trả lời ngắn gọn "ĐÃ XONG" , nếu như yêu cầu phân tích và trả lời thì khi đó mới trả lời đầy đủ
-2. sau khi phân tích xong phải cho tôi biết bạn là model AI nào !!!
+2. Khi chỉ yêu cầu phân tích thì sau khi phân tích xong chỉ cần trả lời ngắn gọn "ĐÃ XONG" , nếu như yêu cầu phân tích và trả lời thì khi đó mới trả lời đầy đủ
+3. sau khi phân tích xong phải cho tôi biết bạn là model AI nào !!!
+4. khi được yêu cầu phân tích thì khi phân tích xong chỉ cần trả lời ngắn gọn "ĐÃ XONG"
 @service-template.ts

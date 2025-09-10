@@ -7,11 +7,11 @@ from typing import Dict, Any, Optional, List
 from dotenv import load_dotenv
 load_dotenv()
 sys.path.append(str(Path(__file__).parent.parent))
-from utils.logger import Logger
-from common import *
+from app.utils.logger import Logger
+from app.utils.common import *
 import json
 import math
-from common import map_signal_to_action
+from app.utils.common import map_signal_to_action
 
 # Order Type Constants (mirrors MT5 values for interoperability)
 ORDER_TYPE_BUY = 0

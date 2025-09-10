@@ -1,0 +1,2114 @@
+[
+  {
+    "test_name": "preflight_stop_trade_max_positions",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1000.0,
+        "balance": 1000.0,
+        "profit": 0.0,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "STOP_TRADE",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "preflight_skip_losing_active_trade",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1000.0,
+        "balance": 1000.0,
+        "profit": 0.0,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {
+            "symbol": "EURUSD",
+            "profit": -10.0
+          }
+        ],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "SKIP",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "preflight_stop_trade_total_risk_exceeded",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1000,
+        "balance": 1000.0,
+        "profit": 0.0,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 50.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "STOP_TRADE",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "lotsize_risk_tier_75_percent",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 75
+      },
+      "account_info_json": {
+        "equity": 1000.0,
+        "balance": 1000.0,
+        "profit": 0.0,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "lot_size": 0.18,
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "lotsize_capped_by_vRisk",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 80
+      },
+      "account_info_json": {
+        "equity": 1000.0,
+        "balance": 1000.0,
+        "profit": 0.0,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 1.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "lot_size": 0.1,
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "lotsize_adj_drawdown",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1000.0,
+        "balance": 1000,
+        "profit": -50,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "lot_size": 0.08,
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "lotsize_adj_multiple_factors",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1000.0,
+        "balance": 1000,
+        "profit": -50,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "lot_size": 0.06,
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "final_validation_hold_lot_too_small",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.09,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 100,
+        "balance": 1000.0,
+        "profit": 0.0,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 0.5,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "final_validation_hold_margin_safety",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1000.0,
+        "balance": 1000.0,
+        "profit": 0.0,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "final_validation_rr_adjust_high",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.103,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1000.0,
+        "balance": 1000.0,
+        "profit": 0.0,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 0.0
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_1",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1399.6566556181242,
+        "balance": 1309.7574705596357,
+        "profit": 89.89918505848851,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {}
+        ],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 13.996566556181243
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_2",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 3702.2700095189653,
+        "balance": 3659.862674877627,
+        "profit": 42.40733464133836,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 111.06810028556896
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_3",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 3316.549174422226,
+        "balance": 3336.074354215675,
+        "profit": -19.525179793449233,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 16.58274587211113
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_4",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 4484.280751042298,
+        "balance": 4674.6090990693765,
+        "profit": -190.3283480270787,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 112.10701877605744
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_5",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 4153.0219356657235,
+        "balance": 3956.5657655645973,
+        "profit": 196.45617010112602,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 124.59065806997171
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_6",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1734.5575283294077,
+        "balance": 1797.4657830746132,
+        "profit": -62.90825474520547,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 26.018362924941115
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_7",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1908.24622951106,
+        "balance": 1739.1472193146112,
+        "profit": 169.09901019644872,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 47.7061557377765
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_8",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 631.4838749160775,
+        "balance": 687.7110598456131,
+        "profit": -56.22718492953563,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 9.472258123741163
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_9",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 4279.220534910779,
+        "balance": 4183.6257658573695,
+        "profit": 95.59476905340979,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 85.58441069821558
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_10",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 3001.7130088001027,
+        "balance": 2721.584872888378,
+        "profit": 280.12813591172477,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 75.04282522000257
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_11",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 967.462648848511,
+        "balance": 975.3275838942312,
+        "profit": -7.864935045720215,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 19.34925297697022
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_12",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 4097.547175319842,
+        "balance": 4499.752898113899,
+        "profit": -402.20572279405803,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 122.92641525959526
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_13",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 736.8002979080334,
+        "balance": 682.2124790679954,
+        "profit": 54.58781884003794,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 3.684001489540167
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_14",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 3155.084443795066,
+        "balance": 2911.241274228603,
+        "profit": 243.84316956646313,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 78.87711109487665
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_15",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 2810.4844037035855,
+        "balance": 2915.193265113969,
+        "profit": -104.70886141038366,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {}
+        ],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 28.104844037035857
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_16",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1576.723175421223,
+        "balance": 1574.890365408934,
+        "profit": 1.8328100122889248,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 7.8836158771061156
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_17",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1648.647308841984,
+        "balance": 1574.6189147676425,
+        "profit": 74.02839407434159,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 49.45941926525952
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_18",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 4084.9011445198403,
+        "balance": 4218.003917670139,
+        "profit": -133.10277315029927,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {}
+        ],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 40.84901144519841
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_19",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1775.878494537643,
+        "balance": 1672.5347724759572,
+        "profit": 103.34372206168594,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 44.396962363441084
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_20",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 3627.2219116070405,
+        "balance": 3604.0281626011006,
+        "profit": 23.19374900594011,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 108.81665734821121
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_21",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 3758.6737710311227,
+        "balance": 4084.3582735257255,
+        "profit": -325.6845024946028,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 93.96684427577806
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_22",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 3635.168261946807,
+        "balance": 3957.4970912553486,
+        "profit": -322.3288293085417,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 109.05504785840422
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_23",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 1342.918776235893,
+        "balance": 1238.2990032117664,
+        "profit": 104.6197730241264,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 33.57296940589732
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_24",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 2473.155677620958,
+        "balance": 2548.9173442384676,
+        "profit": -75.76166661750968,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 74.19467032862875
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_25",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 984.1417446861318,
+        "balance": 991.7643227284001,
+        "profit": -7.622578042268331,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 19.682834893722635
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_26",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 892.328812934368,
+        "balance": 862.4671678103311,
+        "profit": 29.861645124036837,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 13.38493219401552
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_27",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 2052.025613158532,
+        "balance": 1947.978454692707,
+        "profit": 104.04715846582505,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [],
+        "pending_orders": [
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 20.52025613158532
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_28",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 2713.2261520420234,
+        "balance": 2780.4194808988454,
+        "profit": -67.19332885682205,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 108.52904608168093
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "CONTINUE",
+      "signal": "BUY"
+    }
+  },
+  {
+    "test_name": "random_case_29",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 3260.770383910687,
+        "balance": 3475.225988949735,
+        "profit": -214.45560503904773,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {}
+        ],
+        "pending_orders": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 81.51925959776717
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  },
+  {
+    "test_name": "random_case_30",
+    "params": {
+      "proposed_signal_json": {
+        "symbol": "EURUSD",
+        "signal_type": "BUY",
+        "order_type_proposed": "MARKET",
+        "entry_price_proposed": 1.1,
+        "stop_loss_proposed": 1.099,
+        "take_profit_proposed": 1.102,
+        "estimate_win_probability": 65
+      },
+      "account_info_json": {
+        "equity": 2646.1900715776283,
+        "balance": 2494.5218434250805,
+        "profit": 151.66822815254758,
+        "currency": "USD"
+      },
+      "symbol_info": {
+        "name": "EURUSD",
+        "volume_min": 0.01,
+        "volume_max": 100.0,
+        "volume_step": 0.01,
+        "trade_tick_value": 1.0,
+        "trade_tick_size": 1e-05
+      },
+      "portfolio_exposure_json": {
+        "active_positions": [
+          {}
+        ],
+        "pending_orders": [
+          {}
+        ],
+        "summary": {
+          "total_potential_loss_from_portfolio_usd": 26.461900715776284
+        }
+      },
+      "balance_config": {
+        "max_risk": 2.0,
+        "total_max_risk": 6.0,
+        "max_position": 5
+      },
+      "correlation_groups_json": {},
+      "symbol": {
+        "origin_name": "EURUSD"
+      }
+    },
+    "expected_result": {
+      "status": "HOLD",
+      "signal": "HOLD"
+    }
+  }
+]
