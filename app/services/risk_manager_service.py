@@ -9,6 +9,7 @@ load_dotenv()
 sys.path.append(str(Path(__file__).parent.parent))
 from app.utils.logger import Logger
 from app.utils.common import *
+from app.utils.response_logger import response_logger
 import json
 import math
 from app.utils.common import map_signal_to_action
@@ -72,6 +73,17 @@ class RiskManagerService:
         result = self._analyze_risk_enhanced(params, logger)
         
         logger.info(f"=== KẾT THÚC QUÁ TRÌNH QUẢN LÝ RỦI RO - STATUS: {result.get('status', 'UNKNOWN')} ===")
+        
+        # Log response
+        try:
+            symbol = params.get('symbol', {}).get('origin_name', 'UNKNOWN')
+            response_logger.log_risk_manager_response(
+                symbol=symbol,
+                response_data=result,
+                request_data=params_to_log
+            )
+        except Exception as log_error:
+            logger.warning(f"Failed to log risk manager response: {log_error}")
         
         # Return result directly (no need to call AI API)
         return result

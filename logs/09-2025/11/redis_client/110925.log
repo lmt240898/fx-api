@@ -1,0 +1,1 @@
+2025-09-11 05:44:18,048 - redis_client - ERROR - Redis connection failed: Error 11001 connecting to redis:6379. getaddrinfo failed.

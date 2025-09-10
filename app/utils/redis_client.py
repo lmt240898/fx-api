@@ -6,6 +6,7 @@ import redis
 import json
 import time
 import uuid
+import os
 from typing import Optional, Dict, Any
 from app.utils.logger import Logger
 
@@ -22,6 +23,16 @@ class RedisClient:
             port: Redis port
             db: Redis database number
         """
+        # Parse Redis URI if provided
+        redis_uri = os.getenv("REDIS_URI")
+        if redis_uri:
+            # Parse redis://localhost:9979 format
+            if redis_uri.startswith("redis://"):
+                uri_parts = redis_uri[8:].split(":")
+                if len(uri_parts) >= 2:
+                    host = uri_parts[0]
+                    port = int(uri_parts[1])
+        
         self.redis_client = redis.Redis(host=host, port=port, db=db, decode_responses=True)
         self.logger = Logger("redis_client")
     

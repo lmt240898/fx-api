@@ -25,8 +25,8 @@ class OpenRouterProvider(AIProviderStrategy):
         if not api_key:
             raise ValueError("AI_API_KEY environment variable not set.")
 
-        # Construct the full URL for the chat completions endpoint
-        api_url = f"{settings.AI_API_ENDPOINT.rstrip('/')}/chat/completions"
+        # Use the endpoint directly (already includes /chat/completions)
+        api_url = settings.AI_API_ENDPOINT
 
         headers = {
             "Authorization": f"Bearer {api_key}",

@@ -8,12 +8,7 @@ services:
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
     volumes:
       - ./app:/code/app
-    environment:
-      - MONGO_URI=${MONGO_URI}
-      - REDIS_URI=${REDIS_URI}
-      - AI_API_KEY=${AI_API_KEY}
-      - AI_API_ENDPOINT=${AI_API_ENDPOINT}
-      - DEBUG=${DEBUG:-false}
+      - ./.env:/code/.env
     depends_on:
       - mongo
       - redis

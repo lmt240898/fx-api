@@ -12,6 +12,7 @@ alwaysApply: true
 - các hàm con đang được sử dụng làm gì ? 
 - các input/params đầu vào đang được lấy từ đâu và có cấu trúc dữ liệu như thế nào và sử dụng như thế nào thì đúng 
 6. tất cả script test đều phải thực thi trong folder /test
+7. khi chạy test thì phải làm sao chứng mình được cho tôi thấy là tính năng đó đã hoạt động đúng !! ví dụ tracking các step -> lưu kết quả gì đó ....hãy làm tất cả những gì có thể để cho chính mắt tôi có thể xác định được là nó đang hoạt động chính xác
 
 **LƯU Ý**: 
 1. trong quá trình phân tích nếu có bất kì sự mơ hồ hay thiếu sót nào thì phải báo cáo ngay

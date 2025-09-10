@@ -7,6 +7,7 @@ from typing import Dict, Any, Optional
 from app.utils.logger import Logger
 from app.utils.redis_client import RedisClient
 from app.utils.response_handler import ResponseHandler
+from app.utils.response_logger import response_logger
 from app.constants import ErrorCodes
 from app.services.prompt_service import PromptService
 from app.services.ai_service import AIService
@@ -150,12 +151,12 @@ class SignalService:
         """
         try:
             # Generate prompt
-            prompt = await self.prompt_service.generate_signal_prompt(request_data)
+            prompt = self.prompt_service.create_prompt_for_signal_analyst(request_data)
             if not prompt:
                 return ResponseHandler.error(ErrorCodes.PROMPT_SERVICE_ERROR, details="Failed to generate prompt")
             
             # Call AI service
-            ai_response = await self.ai_service.analyze_signal(prompt)
+            ai_response = await self.ai_service.generate_response(prompt)
             if not ai_response:
                 return ResponseHandler.ai_error("AI service returned empty response")
             
@@ -164,11 +165,42 @@ class SignalService:
             if not signal_data:
                 return ResponseHandler.ai_error("Failed to parse AI response")
             
-            return ResponseHandler.success(signal_data)
+            # Create success response
+            success_response = ResponseHandler.success(signal_data)
+            
+            # Log response
+            try:
+                symbol = request_data.get('symbol', 'UNKNOWN')
+                timeframe = request_data.get('timeframe', 'UNKNOWN')
+                response_logger.log_signal_response(
+                    symbol=symbol,
+                    timeframe=timeframe,
+                    response_data=success_response,
+                    request_data=request_data
+                )
+            except Exception as log_error:
+                self.logger.warning(f"Failed to log response: {log_error}")
+            
+            return success_response
             
         except Exception as e:
             self.logger.error(f"Direct signal processing error: {str(e)}")
-            return ResponseHandler.signal_service_error(str(e))
+            error_response = ResponseHandler.signal_service_error(str(e))
+            
+            # Log error response
+            try:
+                symbol = request_data.get('symbol', 'UNKNOWN')
+                timeframe = request_data.get('timeframe', 'UNKNOWN')
+                response_logger.log_signal_response(
+                    symbol=symbol,
+                    timeframe=timeframe,
+                    response_data=error_response,
+                    request_data=request_data
+                )
+            except Exception as log_error:
+                self.logger.warning(f"Failed to log error response: {log_error}")
+            
+            return error_response
     
     def _parse_ai_response(self, ai_response: str) -> Optional[Dict[str, Any]]:
         """

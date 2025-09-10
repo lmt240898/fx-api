@@ -3,14 +3,40 @@ Core configuration settings
 """
 import os
 from typing import Optional
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 class Settings:
-    # Database settings
-    MONGO_URI: str = os.getenv("MONGO_URI", "mongodb://mongo:27017")
+    # Database settings - Auto-detect environment
+    def _get_mongo_uri():
+        if os.getenv("MONGO_URI"):
+            return os.getenv("MONGO_URI")
+        # Check if running in Docker (container name exists)
+        try:
+            import socket
+            socket.gethostbyname("mongo")
+            return "mongodb://mongo:27017"  # Docker environment
+        except:
+            return "mongodb://localhost:9917"  # Local development
+    
+    def _get_redis_uri():
+        if os.getenv("REDIS_URI"):
+            return os.getenv("REDIS_URI")
+        # Check if running in Docker (container name exists)
+        try:
+            import socket
+            socket.gethostbyname("redis")
+            return "redis://redis:6379"  # Docker environment
+        except:
+            return "redis://localhost:9979"  # Local development
+    
+    MONGO_URI: str = _get_mongo_uri()
     MONGO_DATABASE: str = os.getenv("MONGO_DATABASE", "fx_api_db")
     
     # Redis settings
-    REDIS_URI: str = os.getenv("REDIS_URI", "redis://redis:6379")
+    REDIS_URI: str = _get_redis_uri()
     
     # API settings
     API_V1_PREFIX: str = "/api/v1"
