@@ -13,7 +13,7 @@ def prompt_signal_analyst(params):
     market_context = get_market_context()
 
     fmessage = f"""
-            You are an expert AI specializing in forex trading signal analysis. The current analysis is for the trading symbol {symbol}. The account type is a standard account.
+            You are an expert AI specializing in forex trading signal analysis. The current analysis is for the trading symbol {symbol}.
             Main trading timeframe: {tf_config['main_timeframe']}
 
             **CURRENT MARKET CONTEXT & TIMING:**

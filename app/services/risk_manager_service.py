@@ -21,7 +21,6 @@ ORDER_TYPE_SELL_LIMIT = 3
 ORDER_TYPE_BUY_STOP = 4
 ORDER_TYPE_SELL_STOP = 5
 
-
 class RiskManagerService:
     """
     Risk Manager Service - Handles comprehensive risk management for trading signals.
