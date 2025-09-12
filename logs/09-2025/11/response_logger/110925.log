@@ -1,0 +1,10 @@
+2025-09-11 17:19:09,926 - response_logger - INFO - Created response folder: logs/09-2025/11/EURUSD_110925171909
+2025-09-11 17:19:09,933 - response_logger - INFO - Signal response logged to: logs/09-2025/11/EURUSD_110925171909/result.log
+2025-09-11 17:21:37,975 - response_logger - INFO - Created response folder: logs/09-2025/11/EURUSD_110925172137
+2025-09-11 17:21:37,981 - response_logger - INFO - Signal response logged to: logs/09-2025/11/EURUSD_110925172137/result.log
+2025-09-11 23:46:03,186 - response_logger - INFO - Created response folder: logs/09-2025/11/EURUSD_110925234603
+2025-09-11 23:46:03,190 - response_logger - INFO - Signal response logged to: logs/09-2025/11/EURUSD_110925234603/result.log
+2025-09-12 12:10:32,648 - response_logger - INFO - Created response folder: logs/09-2025/12/EURUSD_120925121032
+2025-09-12 12:10:32,654 - response_logger - INFO - Signal response logged to: logs/09-2025/12/EURUSD_120925121032/result.log
+2025-09-12 12:11:39,980 - response_logger - INFO - Created response folder: logs/09-2025/12/EURUSD_120925121139
+2025-09-12 12:11:39,985 - response_logger - INFO - Signal response logged to: logs/09-2025/12/EURUSD_120925121139/result.log

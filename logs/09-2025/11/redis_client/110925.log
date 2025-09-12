@@ -1,1 +1,10 @@
-2025-09-11 05:44:18,048 - redis_client - ERROR - Redis connection failed: Error 11001 connecting to redis:6379. getaddrinfo failed.
+2025-09-11 17:18:51,648 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:EURUSD
+2025-09-11 17:19:09,934 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:EURUSD
+2025-09-11 17:21:09,828 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H4:EURUSD
+2025-09-11 17:21:37,983 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H4:EURUSD
+2025-09-11 23:45:26,906 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H4:EURUSD
+2025-09-11 23:46:03,193 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H4:EURUSD
+2025-09-12 12:09:57,443 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H4:EURUSD
+2025-09-12 12:10:32,655 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H4:EURUSD
+2025-09-12 12:11:00,223 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:EURUSD
+2025-09-12 12:11:39,987 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:EURUSD

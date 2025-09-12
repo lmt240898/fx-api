@@ -9,6 +9,7 @@ services:
     volumes:
       - ./app:/code/app
       - ./.env:/code/.env
+      - ./logs:/code/logs
     depends_on:
       - mongo
       - redis

@@ -33,10 +33,11 @@ class OpenRouterProvider(AIProviderStrategy):
             "Content-Type": "application/json"
         }
 
+        print(f"headers: {headers}")
+
         system_prompt = (
             "You are a genius in technical analysis for forex trading, a risk management expert, "
             "and a master of probability and statistics. Always provide insightful, data-driven, "
-            "and probabilistic answers."
         )
 
         body = {
@@ -59,16 +60,20 @@ class OpenRouterProvider(AIProviderStrategy):
                 response.raise_for_status()
                 
                 data = response.json()
+                print(f"Response: {data}")
                 if data.get("choices") and len(data["choices"]) > 0:
                     return data["choices"][0]["message"]["content"].strip()
                 raise ValueError("API response did not contain any choices.")
 
         except httpx.HTTPStatusError as e:
+            print(f"===> FAILED TO GET RESPONSE FROM THE AI PROVIDER 1")
             print(f"HTTP error occurred: {e.response.status_code} - {e.response.text}")
             raise
         except RetryError:
+            print(f"===> FAILED TO GET RESPONSE FROM THE AI PROVIDER 2")
             print(f"Failed to get response from the AI provider after multiple retries.")
             raise
         except Exception as e:
+            print(f"===> FAILED TO GET RESPONSE FROM THE AI PROVIDER 3")
             print(f"An unexpected error occurred: {e}")
             raise

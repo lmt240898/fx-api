@@ -107,8 +107,11 @@ def make_request(request_id, data):
             
             if response_data.get('success') and 'data' in response_data:
                 data = response_data['data']
-                print(f"   Signal: {data.get('signal', 'N/A')}")
-                print(f"   Entry Price: {data.get('entry_price', 'N/A')}")
+                print(f"   Signal: {data.get('signal_type', 'N/A')}")
+                print(f"   Entry Price: {data.get('entry_price_proposed', 'N/A')}")
+                print(f"   Order Type: {data.get('order_type_proposed', 'N/A')}")
+                print(f"   Win Probability: {data.get('estimate_win_probability', 'N/A')}%")
+                print(f"   Risk/Reward: {data.get('risk_reward_ratio', 'N/A')}")
                 print(f"   Cache Key: {data.get('cache_key', 'N/A')}")
             
             return {

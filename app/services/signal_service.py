@@ -204,27 +204,96 @@ class SignalService:
     
     def _parse_ai_response(self, ai_response: str) -> Optional[Dict[str, Any]]:
         """
-        Parse AI response into signal data
+        Parse AI response into signal data according to prompt_signal_analyst.py format
+        
+        Expected JSON format:
+        {
+            "symbol": "EURUSD",
+            "signal_type": "BUY/SELL/HOLD",
+            "order_type_proposed": "MARKET/LIMIT/STOP" or null,
+            "entry_price_proposed": float or null,
+            "stop_loss_proposed": float or null,
+            "take_profit_proposed": float or null,
+            "estimate_win_probability": integer (20-85) or null,
+            "risk_reward_ratio": float or null,
+            "trailing_stop_loss": float or null,
+            "pips_to_take_profit": float or null,
+            "technical_reasoning": "string"
+        }
         
         Args:
-            ai_response: Raw AI response
+            ai_response: Raw AI response string
             
         Returns:
             Parsed signal data or None
         """
         try:
-            # This is a placeholder - implement based on actual AI response format
-            # For now, return a mock response
-            return {
-                "signal": "BUY",
-                "entry_price": 1.17417,
-                "stop_loss": 1.16917,
-                "take_profit": 1.17917,
-                "confidence": 0.85,
-                "reasoning": "AI analysis result"
-            }
+            import json
+            import re
+            
+            # Clean the response - remove any markdown formatting
+            cleaned_response = ai_response.strip()
+            
+            # Remove markdown code blocks if present
+            if cleaned_response.startswith('```json'):
+                cleaned_response = cleaned_response[7:]
+            if cleaned_response.startswith('```'):
+                cleaned_response = cleaned_response[3:]
+            if cleaned_response.endswith('```'):
+                cleaned_response = cleaned_response[:-3]
+            
+            cleaned_response = cleaned_response.strip()
+            
+            # Try to extract JSON from the response
+            # Look for JSON object between { and }
+            json_match = re.search(r'\{.*\}', cleaned_response, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(0)
+            else:
+                json_str = cleaned_response
+            
+            # Parse JSON
+            signal_data = json.loads(json_str)
+            
+            # Validate required fields
+            required_fields = ["symbol", "signal_type", "technical_reasoning"]
+            for field in required_fields:
+                if field not in signal_data:
+                    self.logger.error(f"Missing required field: {field}")
+                    return None
+            
+            # Validate signal_type
+            valid_signals = ["BUY", "SELL", "HOLD"]
+            if signal_data["signal_type"] not in valid_signals:
+                self.logger.error(f"Invalid signal_type: {signal_data['signal_type']}")
+                return None
+            
+            # Validate order_type_proposed if present
+            if signal_data.get("order_type_proposed"):
+                valid_order_types = ["MARKET", "LIMIT", "STOP"]
+                if signal_data["order_type_proposed"] not in valid_order_types:
+                    self.logger.error(f"Invalid order_type_proposed: {signal_data['order_type_proposed']}")
+                    return None
+            
+            # Validate estimate_win_probability if present
+            if signal_data.get("estimate_win_probability") is not None:
+                prob = signal_data["estimate_win_probability"]
+                if not isinstance(prob, int) or prob < 20 or prob > 85:
+                    self.logger.error(f"Invalid estimate_win_probability: {prob}")
+                    return None
+            
+            # Log successful parsing
+            self.logger.info(f"Successfully parsed AI response: {signal_data['signal_type']} for {signal_data['symbol']}")
+            
+            return signal_data
+            
+        except json.JSONDecodeError as e:
+            self.logger.error(f"JSON parsing error: {str(e)}")
+            self.logger.error(f"Raw AI response: {ai_response[:500]}...")
+            return None
         except Exception as e:
             self.logger.error(f"AI response parsing error: {str(e)}")
+            self.logger.error(f"Raw AI response: {ai_response[:500]}...")
             return None
     
     def _get_current_timestamp(self) -> str:
