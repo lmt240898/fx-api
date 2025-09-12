@@ -1,0 +1,228 @@
+---
+description: API Response Format Documentation for /signal endpoint
+globs: app/routers/v1/trading.py
+alwaysApply: true
+---
+
+# API /signal - Response Format Documentation
+
+## Tổng quan
+API `/signal` nhận dữ liệu từ APP TRADING, tạo prompt và gọi AI API để phân tích tín hiệu trading. API sử dụng Redis cache với distributed locking để đảm bảo tất cả user nhận cùng kết quả phân tích.
+
+## Response Format Structure
+
+### Standard Response Format
+Tất cả response đều tuân theo format chuẩn:
+
+```json
+{
+  "success": boolean,
+  "errorMsg": string,
+  "errorCode": integer,
+  "data": object
+}
+```
+
+## Success Response (success: true)
+
+### Response Structure
+```json
+{
+  "success": true,
+  "errorMsg": "",
+  "errorCode": 0,
+  "data": {
+    "symbol": "EURUSD",
+    "signal_type": "BUY|SELL|HOLD",
+    "order_type_proposed": "MARKET|LIMIT|STOP|null",
+    "entry_price_proposed": 1.17417,
+    "stop_loss_proposed": 1.16917,
+    "take_profit_proposed": 1.17917,
+    "estimate_win_probability": 75,
+    "risk_reward_ratio": 2.12,
+    "trailing_stop_loss": 2.56,
+    "pips_to_take_profit": 50.0,
+    "technical_reasoning": "Bearish confluence across D1/H2: Price below key SMAs, ADX >25 shows trend strength...",
+    "cache_key": "signal:GMT+3.0:H2:EURUSD",
+    "timestamp": "2025-09-10T08:00:00Z"
+  }
+}
+```
+
+### Data Fields Description
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `symbol` | string | ✅ | Symbol được phân tích (VD: EURUSD, GBPUSD) |
+| `signal_type` | string | ✅ | Loại tín hiệu: BUY, SELL, hoặc HOLD |
+| `order_type_proposed` | string | ❌ | Loại lệnh đề xuất: MARKET, LIMIT, STOP, hoặc null |
+| `entry_price_proposed` | float | ❌ | Giá vào lệnh đề xuất |
+| `stop_loss_proposed` | float | ❌ | Giá cắt lỗ đề xuất |
+| `take_profit_proposed` | float | ❌ | Giá chốt lời đề xuất |
+| `estimate_win_probability` | integer | ❌ | Xác suất thắng (20-85%) |
+| `risk_reward_ratio` | float | ❌ | Tỷ lệ rủi ro/lợi nhuận |
+| `trailing_stop_loss` | float | ❌ | Trailing stop loss (pips) |
+| `pips_to_take_profit` | float | ❌ | Số pips đến take profit |
+| `technical_reasoning` | string | ✅ | Lý do kỹ thuật cho tín hiệu |
+| `cache_key` | string | ✅ | Cache key được sử dụng |
+| `timestamp` | string | ✅ | Thời gian phân tích (ISO format) |
+
+### Signal Type Values
+- **BUY**: Tín hiệu mua
+- **SELL**: Tín hiệu bán  
+- **HOLD**: Không có tín hiệu rõ ràng
+
+### Order Type Values
+- **MARKET**: Lệnh thị trường (ưu tiên cao nhất)
+- **LIMIT**: Lệnh giới hạn
+- **STOP**: Lệnh dừng
+- **null**: Không có loại lệnh cụ thể
+
+## Error Response (success: false)
+
+### Common Error Response Structure
+```json
+{
+  "success": false,
+  "errorMsg": "Error description",
+  "errorCode": 1001,
+  "data": {}
+}
+```
+
+### Error Codes và Messages
+
+#### AI API Errors (1000-1999)
+| Code | Message | Description |
+|------|---------|-------------|
+| 1001 | "AI API timeout after 30 seconds" | AI API không phản hồi trong 30 giây |
+| 1002 | "AI API returned error: {details}" | AI API trả về lỗi |
+| 1003 | "AI API returned invalid response format" | Format response từ AI không hợp lệ |
+| 1004 | "AI API rate limit exceeded" | Vượt quá giới hạn rate limit |
+
+#### Redis Errors (2000-2999)
+| Code | Message | Description |
+|------|---------|-------------|
+| 2001 | "Redis connection failed" | Không thể kết nối Redis |
+| 2002 | "Redis lock timeout after 2 minutes" | Timeout khi chờ lock Redis |
+| 2003 | "Redis cache operation failed: {details}" | Lỗi thao tác cache Redis |
+| 2004 | "Failed to acquire Redis lock" | Không thể acquire lock Redis |
+
+#### Validation Errors (3000-3999)
+| Code | Message | Description |
+|------|---------|-------------|
+| 3001 | "Invalid input data" | Dữ liệu input không hợp lệ |
+| 3002 | "Missing required field: {field}" | Thiếu field bắt buộc |
+| 3003 | "Invalid cache key format" | Format cache key không hợp lệ |
+| 3004 | "Invalid symbol: {symbol}" | Symbol không hợp lệ |
+| 3005 | "Invalid timeframe: {timeframe}" | Timeframe không hợp lệ |
+| 3006 | "Invalid timezone: {timezone}" | Timezone không hợp lệ |
+
+#### Service Errors (4000-4999)
+| Code | Message | Description |
+|------|---------|-------------|
+| 4001 | "Signal service error: {details}" | Lỗi trong signal service |
+| 4003 | "Prompt service error: {details}" | Lỗi trong prompt service |
+
+#### System Errors (5000-5999)
+| Code | Message | Description |
+|------|---------|-------------|
+| 5001 | "Internal server error" | Lỗi server nội bộ |
+
+## Cache Strategy
+
+### Cache Key Format
+```
+signal:{timezone}:{timeframe}:{symbol}
+```
+**Ví dụ**: `signal:GMT+3.0:H2:EURUSD`
+
+### Cache Behavior
+- **TTL**: 10 phút
+- **Lock Timeout**: 2 phút
+- **Strategy**: Ghi đè response cũ khi có request mới
+- **Concurrent Requests**: Hỗ trợ tối đa 500 requests đồng thời
+
+### Cache Flow
+1. **Cache Hit**: Trả về kết quả từ cache
+2. **Cache Miss**: 
+   - Acquire lock
+   - Gọi AI API
+   - Cache kết quả
+   - Release lock
+   - Trả về kết quả
+3. **Lock Failed**: Chờ kết quả từ process khác
+
+## Performance Metrics
+API track các metrics sau:
+- Cache hit rate
+- AI API response time  
+- Number of concurrent requests
+- Lock acquisition time
+
+## Integration Notes
+
+### Request Format
+API nhận request theo format được định nghĩa trong `SignalRequest` model:
+- `cache_key`: Thông tin timezone, timeframe, symbol
+- `symbol`: Symbol cần phân tích
+- `timeframe`: Khung thời gian (H2, H4, H8, D1)
+- `account_info`: Thông tin tài khoản
+- `balance_config`: Cấu hình rủi ro
+- `symbol_info`: Thông tin chi tiết symbol
+- `multi_timeframes`: Dữ liệu chỉ báo kỹ thuật
+
+### Response Handling
+- Luôn kiểm tra `success` field trước khi xử lý `data`
+- Sử dụng `errorCode` để xử lý lỗi cụ thể
+- `errorMsg` chứa thông tin chi tiết về lỗi
+- `data` chỉ có giá trị khi `success: true`
+
+### Error Handling Best Practices
+1. **Timeout Handling**: Implement retry logic cho AI API timeout
+2. **Cache Fallback**: Xử lý trường hợp Redis không available
+3. **Validation**: Validate input data trước khi gọi API
+4. **Logging**: Log tất cả requests và responses để debug
+
+## Example Usage
+
+### Success Case
+```javascript
+const response = await fetch('/api/v1/signal', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(signalRequest)
+});
+
+const result = await response.json();
+
+if (result.success) {
+  const signal = result.data;
+  console.log(`Signal: ${signal.signal_type} for ${signal.symbol}`);
+  console.log(`Entry: ${signal.entry_price_proposed}`);
+  console.log(`Stop Loss: ${signal.stop_loss_proposed}`);
+  console.log(`Take Profit: ${signal.take_profit_proposed}`);
+} else {
+  console.error(`Error ${result.errorCode}: ${result.errorMsg}`);
+}
+```
+
+### Error Handling
+```javascript
+if (!result.success) {
+  switch (result.errorCode) {
+    case 1001: // AI API timeout
+      // Retry logic
+      break;
+    case 2001: // Redis connection error
+      // Fallback to direct processing
+      break;
+    case 3002: // Missing required field
+      // Fix input data
+      break;
+    default:
+      // Generic error handling
+      break;
+  }
+}
+```

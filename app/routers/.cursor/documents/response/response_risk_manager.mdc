@@ -1,0 +1,313 @@
+---
+description: API Response Format Documentation for /risk_manager endpoint
+globs: app/routers/v1/trading.py
+alwaysApply: true
+---
+
+# API /risk_manager - Response Format Documentation
+
+## Tổng quan
+API `/risk_manager` nhận dữ liệu từ APP TRADING (bao gồm tín hiệu từ API /signal), thực hiện phân tích quản lý rủi ro và trả về quyết định cuối cùng về việc thực hiện lệnh trading.
+
+## Response Format Structure
+
+### Standard Response Format
+Tất cả response đều tuân theo format chuẩn:
+
+```json
+{
+  "success": boolean,
+  "errorMsg": string,
+  "errorCode": integer,
+  "data": object
+}
+```
+
+## Success Response (success: true)
+
+### Response Structure
+```json
+{
+  "success": true,
+  "errorMsg": "",
+  "errorCode": 0,
+  "data": {
+    "signal": "BUY|SELL|HOLD",
+    "status": "CONTINUE|HOLD|SKIP|STOP_TRADE",
+    "lot_size": 0.02,
+    "entry_price": 1.17417,
+    "stop_loss": 1.16917,
+    "take_profit": 1.17917,
+    "trailing_stop_loss": 2.56,
+    "order_type": "MARKET|LIMIT|STOP",
+    "estimate_win_probability": 75,
+    "symbol": "EURUSD",
+    "estimate_profit": 15.0,
+    "estimate_loss": -10.0,
+    "technical_reasoning": "Bearish confluence across D1/H2: Price below key SMAs...",
+    "risk_reward_before": 2.12,
+    "risk_reward_after": 1.5,
+    "correlated_symbols": ["GBPUSD", "AUDUSD"],
+    "delete_pending_orders": [12345, 67890]
+  }
+}
+```
+
+### Data Fields Description
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `signal` | string | ✅ | Tín hiệu cuối cùng: BUY, SELL, hoặc HOLD |
+| `status` | string | ✅ | Trạng thái quyết định: CONTINUE, HOLD, SKIP, STOP_TRADE |
+| `lot_size` | float | ❌ | Kích thước lot được tính toán (null nếu status ≠ CONTINUE) |
+| `entry_price` | float | ❌ | Giá vào lệnh (null nếu status ≠ CONTINUE) |
+| `stop_loss` | float | ❌ | Giá cắt lỗ (null nếu status ≠ CONTINUE) |
+| `take_profit` | float | ❌ | Giá chốt lời (có thể được điều chỉnh) |
+| `trailing_stop_loss` | float | ❌ | Trailing stop loss (pips) |
+| `order_type` | string | ❌ | Loại lệnh: MARKET, LIMIT, STOP |
+| `estimate_win_probability` | integer | ❌ | Xác suất thắng (20-85%) |
+| `symbol` | string | ✅ | Symbol được xử lý |
+| `estimate_profit` | float | ❌ | Lợi nhuận dự kiến (USD) |
+| `estimate_loss` | float | ❌ | Thua lỗ dự kiến (USD) |
+| `technical_reasoning` | string | ❌ | Lý do kỹ thuật từ tín hiệu gốc |
+| `risk_reward_before` | float | ❌ | Tỷ lệ R:R trước khi điều chỉnh |
+| `risk_reward_after` | float | ❌ | Tỷ lệ R:R sau khi điều chỉnh |
+| `correlated_symbols` | array | ❌ | Danh sách symbols tương quan đang active |
+| `delete_pending_orders` | array | ❌ | Danh sách ticket cần xóa (pending orders) |
+
+### Status Values
+
+#### CONTINUE
+- **Ý nghĩa**: Tiếp tục thực hiện lệnh
+- **Điều kiện**: Tất cả kiểm tra rủi ro đều pass
+- **Fields có giá trị**: Tất cả fields (trừ null values)
+- **Hành động**: Thực hiện lệnh với thông số được cung cấp
+
+#### HOLD  
+- **Ý nghĩa**: Tạm dừng, không thực hiện lệnh
+- **Điều kiện**: Lot size quá nhỏ hoặc không đủ margin
+- **Fields có giá trị**: `signal`, `status`, `symbol`, `technical_reasoning`
+- **Hành động**: Không thực hiện lệnh
+
+#### SKIP
+- **Ý nghĩa**: Bỏ qua lệnh này
+- **Điều kiện**: Có lệnh active cùng symbol đang thua lỗ hoặc ngược hướng
+- **Fields có giá trị**: `signal`, `status`, `symbol`, `technical_reasoning`
+- **Hành động**: Không thực hiện lệnh
+
+#### STOP_TRADE
+- **Ý nghĩa**: Dừng toàn bộ trading
+- **Điều kiện**: Đạt giới hạn vị thế tối đa hoặc vượt quá rủi ro tổng
+- **Fields có giá trị**: `signal`, `status`, `symbol`, `technical_reasoning`
+- **Hành động**: Dừng tất cả hoạt động trading
+
+### Signal Values
+- **BUY**: Tín hiệu mua (từ tín hiệu gốc)
+- **SELL**: Tín hiệu bán (từ tín hiệu gốc)
+- **HOLD**: Không có tín hiệu (khi status ≠ CONTINUE)
+
+## Error Response (success: false)
+
+### Common Error Response Structure
+```json
+{
+  "success": false,
+  "errorMsg": "Error description",
+  "errorCode": 4002,
+  "data": {}
+}
+```
+
+### Error Codes và Messages
+
+#### Service Errors (4000-4999)
+| Code | Message | Description |
+|------|---------|-------------|
+| 4002 | "Risk manager service error: {details}" | Lỗi trong risk manager service |
+
+#### Validation Errors (3000-3999)
+| Code | Message | Description |
+|------|---------|-------------|
+| 3001 | "Invalid input data" | Dữ liệu input không hợp lệ |
+| 3002 | "Missing required field: {field}" | Thiếu field bắt buộc |
+
+#### System Errors (5000-5999)
+| Code | Message | Description |
+|------|---------|-------------|
+| 5001 | "Internal server error" | Lỗi server nội bộ |
+
+## Risk Management Logic
+
+### Pre-flight Checks (STEP 1)
+1. **Active Position Limit**: Kiểm tra số vị thế active < max_positions
+2. **Same Symbol Active Trade**: Kiểm tra không có lệnh active cùng symbol đang thua lỗ
+3. **Pending Order Conflict**: Xác định lệnh pending cần xóa nếu có xung đột
+4. **Total Portfolio Risk**: Kiểm tra tổng rủi ro portfolio < total_max_risk
+
+### Lot Size Calculation (STEP 2 & 3)
+1. **Base Risk Calculation**: Tính rủi ro cơ bản dựa trên win probability
+2. **Portfolio Adjustments**:
+   - **Drawdown Control**: Giảm 30% nếu profit < -4% balance
+   - **Correlation Control**: Giảm 50% nếu có ≥2 vị thế tương quan
+   - **Weighted Position Count**: Giảm dựa trên số vị thế hiệu quả
+3. **Margin Safety Check**: Đảm bảo free margin > 50% equity và margin usage < 40%
+
+### Risk-Reward Adjustment (STEP 4)
+- **R:R < 1.0**: Không điều chỉnh
+- **1.0 ≤ R:R ≤ 1.5**: Giữ nguyên
+- **R:R > 1.5**: Điều chỉnh về R:R = 1.5
+
+## Balance Configuration Tiers
+
+### TIER 1: Khởi đầu (200-499.99$)
+- Max positions: 3
+- Max risk: 2.0%
+- Total max risk: 6%
+- Timeframes: H2
+
+### TIER 2: Tăng trưởng (500-999.99$)
+- Max positions: 4  
+- Max risk: 1.5%
+- Total max risk: 6%
+- Timeframes: H2, H4
+
+### TIER 3: Ổn định (1000-4999.99$)
+- Max positions: 5
+- Max risk: 1.75%
+- Total max risk: 8%
+- Timeframes: H2, H4, H8, D1
+
+### TIER 4: Vốn lớn (5000$+)
+- Max positions: 6
+- Max risk: 2.0%
+- Total max risk: 8%
+- Timeframes: H2, H4, H8, D1, W1
+
+## Integration Notes
+
+### Request Format
+API nhận request theo format được định nghĩa trong `RiskManagerRequest` model:
+- `proposed_signal_json`: Tín hiệu từ API /signal
+- `account_info_json`: Thông tin tài khoản
+- `symbol_info`: Thông tin chi tiết symbol
+- `portfolio_exposure_json`: Thông tin portfolio hiện tại
+- `balance_config`: Cấu hình rủi ro theo tier
+- `correlation_groups_json`: Nhóm symbols tương quan
+- `lot_size_to_margin_map`: Map lot size -> margin requirement
+
+### Response Handling
+- Luôn kiểm tra `success` field trước khi xử lý `data`
+- Kiểm tra `status` để xác định hành động tiếp theo
+- Chỉ thực hiện lệnh khi `status = "CONTINUE"`
+- Xử lý `delete_pending_orders` trước khi tạo lệnh mới
+
+### Error Handling Best Practices
+1. **Service Errors**: Log chi tiết và retry nếu cần
+2. **Validation Errors**: Kiểm tra input data trước khi gọi API
+3. **Status Handling**: Implement logic xử lý cho từng status
+4. **Order Management**: Xử lý delete_pending_orders trước khi tạo lệnh mới
+
+## Example Usage
+
+### Success Case - CONTINUE
+```javascript
+const response = await fetch('/api/v1/risk_manager', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(riskManagerRequest)
+});
+
+const result = await response.json();
+
+if (result.success && result.data.status === 'CONTINUE') {
+  const signal = result.data;
+  
+  // Xóa pending orders nếu có
+  if (signal.delete_pending_orders && signal.delete_pending_orders.length > 0) {
+    await deletePendingOrders(signal.delete_pending_orders);
+  }
+  
+  // Thực hiện lệnh
+  await executeOrder({
+    symbol: signal.symbol,
+    type: signal.signal,
+    lotSize: signal.lot_size,
+    entryPrice: signal.entry_price,
+    stopLoss: signal.stop_loss,
+    takeProfit: signal.take_profit,
+    orderType: signal.order_type
+  });
+  
+  console.log(`Order executed: ${signal.signal} ${signal.symbol} ${signal.lot_size} lots`);
+  console.log(`Expected profit: $${signal.estimate_profit}`);
+  console.log(`Expected loss: $${signal.estimate_loss}`);
+}
+```
+
+### Status Handling
+```javascript
+if (result.success) {
+  const signal = result.data;
+  
+  switch (signal.status) {
+    case 'CONTINUE':
+      // Thực hiện lệnh
+      await executeOrder(signal);
+      break;
+      
+    case 'HOLD':
+      console.log('Holding - lot size too small or insufficient margin');
+      break;
+      
+    case 'SKIP':
+      console.log('Skipping - conflicting active trade');
+      break;
+      
+    case 'STOP_TRADE':
+      console.log('Stopping all trading - risk limits exceeded');
+      await stopAllTrading();
+      break;
+  }
+} else {
+  console.error(`Error ${result.errorCode}: ${result.errorMsg}`);
+}
+```
+
+### Error Handling
+```javascript
+if (!result.success) {
+  switch (result.errorCode) {
+    case 4002: // Risk manager service error
+      // Log error and retry
+      console.error('Risk manager error:', result.errorMsg);
+      break;
+      
+    case 3002: // Missing required field
+      // Fix input data
+      console.error('Missing field:', result.errorMsg);
+      break;
+      
+    default:
+      // Generic error handling
+      console.error('Unexpected error:', result.errorMsg);
+      break;
+  }
+}
+```
+
+## Performance Considerations
+
+### Response Time
+- Typical response time: 100-500ms
+- Complex portfolio analysis: up to 1s
+- Margin calculations: real-time
+
+### Caching
+- No caching (real-time risk analysis required)
+- Each request processed independently
+- Portfolio state changes frequently
+
+### Scalability
+- Stateless service design
+- No shared state between requests
+- Horizontal scaling supported
