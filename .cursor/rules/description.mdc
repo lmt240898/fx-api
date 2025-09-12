@@ -3,32 +3,30 @@ description: MÔ TẢ ỨNG DỤNG
 globs: 
 alwaysApply: true
 ---
-# MÔ TẢ ỨNG DỤNG HIỆN TẠI (tạm gọi server-api):
+# MÔ TẢ ỨNG DỤNG API HIỆN TẠI (tạm gọi server-api):
   - ứng dụng server-api sẽ có 2 api là /signal và /risk_manager
-  1. api /signal sẽ nhận data (mẫu data: app\routers\.cursor\documents\signal.mdc) từ "APP TRADING" request đến và xử lý tạo ra prompt sau đó tiếp tục request đến api openAI để phân tích tín hiệu -> trả về cho "APP TRADING" 
-  2. api /risk_manager sẽ nhận data (mẫu data: app\routers\.cursor\documents\risk_manager.mdc) từ "APP TRADING" request đến và xử lý quản lý rủi ro và trả về cho "APP TRADING"  thực hiện vào lệnh
+  1. api /signal sẽ nhận data (mẫu data: app\routers\.cursor\documents\inputs\signal_sample_data_receive.mdc) từ "APP TRADING" request đến và xử lý tạo ra prompt sau đó tiếp tục request đến api openAI để phân tích tín hiệu -> trả về cho "APP TRADING" 
+  2. api /risk_manager sẽ nhận data (mẫu data: app\routers\.cursor\documents\inputs\risk_manager_sample_data_receive.mdc) từ "APP TRADING" request đến và xử lý quản lý rủi ro và trả về cho "APP TRADING"  thực hiện vào lệnh
 
 có nhiệm vụ nhận data được gửi từ "APP TRADING" 
-# MÔ TẢ ỨNG DỤNG APP TRADING:
+# MÔ TẢ ỨNG DỤNG PHÍA APP TRADING:
     1. app cho phép user chọn tối đa 10 symbols để trading (LƯU Ý: chỉ trade với Currency Pairs)
-    1.1. user có thể chọn các khung trade là H2 hoặc H4, H8, D1
+    1.1. user chỉ có thể chọn 1 trong các khung trade là H2 hoặc H4, H8, D1
     2. job thực hiện chạy {tường đương timeframe trade user chọn}/lần (theo múi giờ của từng broker) load 10 symbol mà user đã chọn sau đó loop từng symbol và thực hiện:
         1. lấy account balance hiện tại (vì mỗi lần vào lệnh balance sẽ thay đổi)
         2. lấy symbol info hiện tại (ví dụ: EURUSD -> lấy các thông tin giá, .v...v)
         3. lấy số liệu chỉ báo đã tính toán, gồm các chỉ báo: RSI, MACD, bollinger_bands, ATR, ADX, SMA_100, SMA_200, volume_sma_250
         4. từ thông tin thu thập ở 1,2,3 => tạo prompt 
         5. sử dụng prompt và request api openAI cho AI phân tích tín hiệu BUY/SELL (prompt prompt_signal_analyst.py) -> khi tín hiệu của symbol có order_type = MARKET sẽ thực hiện xóa tất cả các lệnh pending (LIMIT/STOP) của lệnh đó, nghĩa là ưu tiên lệnh MARKET
-        6. nhận tín hiệu phân tích từ mục 5 (AI response) -> tiếp tục tạo prompt về quản lý rủi ro request AI phân tích lại lot_size, estimate_profit, estimate_loss (prompt prompt_risk_manager.py)
+        6. nhận tín hiệu phân tích từ mục 5 (AI response) -> thực hiện tính toán quản lý rủi ro -> return kết quả
         7. từ response mục 6 -> thực hiện vào lệnh
     3. sẽ có job chạy 1 phút/lần thực hiện 3 tính năng: 
         - early_profit_taking
         - review_loss_order
         - trailing_stop_loss
-    4. sẽ có job chạy 1h/lần thực hiện xóa các lệnh pending theo quy luật:
+    4. sẽ có job chạy Xh/lần (theo timeframe setting, ví dụ chọn trade trên H2 => chạy job 2h/lần) thực hiện xóa các lệnh pending theo quy luật:
         - H2 => chỉ tồn tại trong 4h
         - H4 => chỉ tồn tại trong 8h
-        - H8 => chỉ tồn tại trong 24h
-        - D1 => chỉ tồn tại trong 3 ngày
 
   - config mặc định của hệ thống:
     1. bắt buộc vốn tối thiểu 200$
