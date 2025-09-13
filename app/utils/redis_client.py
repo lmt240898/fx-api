@@ -101,7 +101,7 @@ class RedisClient:
             self.logger.error(f"Redis delete error for key {key}: {str(e)}")
             return False
     
-    def acquire_lock(self, lock_key: str, timeout: int = 120, blocking_timeout: int = 0.1) -> Optional[str]:
+    def acquire_lock(self, lock_key: str, timeout: int = 300, blocking_timeout: int = 0.1) -> Optional[str]:
         """
         Acquire distributed lock
         
@@ -178,7 +178,7 @@ class RedisClient:
             self.logger.error(f"Lock release error for {lock_key}: {str(e)}")
             return False
     
-    def wait_for_cache(self, cache_key: str, timeout: int = 120) -> Optional[Dict[str, Any]]:
+    def wait_for_cache(self, cache_key: str, timeout: int = 300) -> Optional[Dict[str, Any]]:
         """
         Wait for cache to be populated by another process
         

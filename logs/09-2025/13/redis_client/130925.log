@@ -1,0 +1,6 @@
+2025-09-13 04:19:38,853 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:EURUSD
+2025-09-13 04:20:46,153 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:EURUSD
+2025-09-13 04:21:40,761 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H4:EURUSD
+2025-09-13 04:22:01,639 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H4:EURUSD
+2025-09-13 04:29:03,947 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H1:EURUSD
+2025-09-13 04:30:22,413 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H1:EURUSD

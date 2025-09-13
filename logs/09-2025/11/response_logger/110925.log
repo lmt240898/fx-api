@@ -8,3 +8,27 @@
 2025-09-12 12:10:32,654 - response_logger - INFO - Signal response logged to: logs/09-2025/12/EURUSD_120925121032/result.log
 2025-09-12 12:11:39,980 - response_logger - INFO - Created response folder: logs/09-2025/12/EURUSD_120925121139
 2025-09-12 12:11:39,985 - response_logger - INFO - Signal response logged to: logs/09-2025/12/EURUSD_120925121139/result.log
+2025-09-12 12:35:51,926 - response_logger - INFO - Created response folder: logs/09-2025/12/NZDUSD_120925123551
+2025-09-12 12:35:51,929 - response_logger - INFO - Risk manager response logged to: logs/09-2025/12/NZDUSD_120925123551/result.log
+2025-09-12 12:36:18,071 - response_logger - INFO - Created response folder: logs/09-2025/12/NZDUSD_120925123618
+2025-09-12 12:36:18,075 - response_logger - INFO - Risk manager response logged to: logs/09-2025/12/NZDUSD_120925123618/result.log
+2025-09-12 12:36:32,553 - response_logger - INFO - Created response folder: logs/09-2025/12/NZDUSD_120925123632
+2025-09-12 12:36:32,557 - response_logger - INFO - Risk manager response logged to: logs/09-2025/12/NZDUSD_120925123632/result.log
+2025-09-12 12:37:03,562 - response_logger - INFO - Created response folder: logs/09-2025/12/NZDUSD_120925123703
+2025-09-12 12:37:03,566 - response_logger - INFO - Risk manager response logged to: logs/09-2025/12/NZDUSD_120925123703/result.log
+2025-09-12 13:34:07,313 - response_logger - INFO - Created response folder: logs/09-2025/12/EURUSD_120925133407
+2025-09-12 13:34:07,321 - response_logger - INFO - Signal response logged to: logs/09-2025/12/EURUSD_120925133407/result.log
+2025-09-12 13:34:27,736 - response_logger - INFO - Created response folder: logs/09-2025/12/GBPUSD_120925133427
+2025-09-12 13:34:27,741 - response_logger - INFO - Signal response logged to: logs/09-2025/12/GBPUSD_120925133427/result.log
+2025-09-12 13:34:52,064 - response_logger - INFO - Created response folder: logs/09-2025/12/USDJPY_120925133452
+2025-09-12 13:34:52,070 - response_logger - INFO - Signal response logged to: logs/09-2025/12/USDJPY_120925133452/result.log
+2025-09-12 13:35:11,695 - response_logger - INFO - Created response folder: logs/09-2025/12/USDCHF_120925133511
+2025-09-12 13:35:11,704 - response_logger - INFO - Signal response logged to: logs/09-2025/12/USDCHF_120925133511/result.log
+2025-09-12 13:35:32,308 - response_logger - INFO - Created response folder: logs/09-2025/12/USDCAD_120925133532
+2025-09-12 13:35:32,314 - response_logger - INFO - Signal response logged to: logs/09-2025/12/USDCAD_120925133532/result.log
+2025-09-12 13:38:21,340 - response_logger - INFO - Created response folder: logs/09-2025/12/NZDUSD_120925133821
+2025-09-12 13:38:21,345 - response_logger - INFO - Signal response logged to: logs/09-2025/12/NZDUSD_120925133821/result.log
+2025-09-12 13:38:26,231 - response_logger - INFO - Created response folder: logs/09-2025/12/AUDUSD_120925133826
+2025-09-12 13:38:26,237 - response_logger - INFO - Signal response logged to: logs/09-2025/12/AUDUSD_120925133826/result.log
+2025-09-12 13:38:26,265 - response_logger - INFO - Created response folder: logs/09-2025/12/AUDUSD_120925133826
+2025-09-12 13:38:26,271 - response_logger - INFO - Signal response logged to: logs/09-2025/12/AUDUSD_120925133826/result.log

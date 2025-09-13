@@ -8,3 +8,20 @@
 2025-09-12 12:10:32,655 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H4:EURUSD
 2025-09-12 12:11:00,223 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:EURUSD
 2025-09-12 12:11:39,987 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:EURUSD
+2025-09-12 13:33:55,117 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:EURUSD
+2025-09-12 13:34:07,326 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:EURUSD
+2025-09-12 13:34:07,841 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:GBPUSD
+2025-09-12 13:34:27,743 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:GBPUSD
+2025-09-12 13:34:28,196 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:USDJPY
+2025-09-12 13:34:52,071 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:USDJPY
+2025-09-12 13:34:52,513 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:USDCHF
+2025-09-12 13:35:11,707 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:USDCHF
+2025-09-12 13:35:12,245 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:USDCAD
+2025-09-12 13:35:32,316 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:USDCAD
+2025-09-12 13:35:32,938 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:AUDUSD
+2025-09-12 13:38:04,120 - redis_client - WARNING - Cache wait timeout: signal:GMT+3.0:H2:AUDUSD
+2025-09-12 13:38:04,126 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:AUDUSD
+2025-09-12 13:38:04,141 - redis_client - INFO - Lock acquired: lock:signal:GMT+3.0:H2:NZDUSD
+2025-09-12 13:38:21,346 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:NZDUSD
+2025-09-12 13:38:26,238 - redis_client - INFO - Lock released: lock:signal:GMT+3.0:H2:AUDUSD
+2025-09-12 13:38:26,272 - redis_client - WARNING - Lock release failed (not owner): lock:signal:GMT+3.0:H2:AUDUSD

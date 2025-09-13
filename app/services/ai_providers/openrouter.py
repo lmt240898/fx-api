@@ -55,7 +55,7 @@ class OpenRouterProvider(AIProviderStrategy):
             # Add other provider-specific logic here as needed
 
         try:
-            async with httpx.AsyncClient(timeout=60.0) as client:
+            async with httpx.AsyncClient(timeout=300.0) as client:
                 response = await client.post(api_url, headers=headers, json=body)
                 response.raise_for_status()
                 

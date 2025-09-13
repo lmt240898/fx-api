@@ -1,0 +1,19 @@
+2025-09-13 04:19:38,850 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:EURUSD
+2025-09-13 04:19:38,852 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:EURUSD
+2025-09-13 04:19:38,853 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:EURUSD
+2025-09-13 04:20:46,146 - signal_service - INFO - Successfully parsed AI response: HOLD for EURUSD
+2025-09-13 04:20:46,152 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:EURUSD
+2025-09-13 04:21:21,663 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:EURUSD
+2025-09-13 04:21:21,664 - signal_service - INFO - Cache hit: signal:GMT+3.0:H2:EURUSD
+2025-09-13 04:21:40,759 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H4:EURUSD
+2025-09-13 04:21:40,760 - signal_service - INFO - Cache miss: signal:GMT+3.0:H4:EURUSD
+2025-09-13 04:21:40,762 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H4:EURUSD
+2025-09-13 04:22:01,627 - signal_service - INFO - Successfully parsed AI response: HOLD for EURUSD
+2025-09-13 04:22:01,638 - signal_service - INFO - Result cached: signal:GMT+3.0:H4:EURUSD
+2025-09-13 04:28:53,515 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H4:EURUSD
+2025-09-13 04:28:53,516 - signal_service - INFO - Cache hit: signal:GMT+3.0:H4:EURUSD
+2025-09-13 04:29:03,945 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H1:EURUSD
+2025-09-13 04:29:03,946 - signal_service - INFO - Cache miss: signal:GMT+3.0:H1:EURUSD
+2025-09-13 04:29:03,947 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H1:EURUSD
+2025-09-13 04:30:22,391 - signal_service - INFO - Successfully parsed AI response: HOLD for EURUSD
+2025-09-13 04:30:22,412 - signal_service - INFO - Result cached: signal:GMT+3.0:H1:EURUSD

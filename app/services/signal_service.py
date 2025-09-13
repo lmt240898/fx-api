@@ -28,10 +28,10 @@ class SignalService:
         self.prompt_service = PromptService()
         self.ai_service = AIService()
         
-        # Cache settings
+        # Cache settings - Tăng timeout lên 5 phút để xử lý AI processing
         self.cache_ttl = 600  # 10 minutes
-        self.lock_timeout = 120  # 2 minutes
-        self.cache_wait_timeout = 120  # 2 minutes
+        self.lock_timeout = 300  # 5 minutes
+        self.cache_wait_timeout = 300  # 5 minutes
     
     def _generate_cache_key(self, timezone: str, timeframe: str, symbol: str) -> str:
         """

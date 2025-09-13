@@ -9,14 +9,14 @@ ERROR_MESSAGES = {
     ErrorCodes.SUCCESS: "Success",
     
     # AI API errors
-    ErrorCodes.AI_API_TIMEOUT: "AI API timeout after 30 seconds",
+    ErrorCodes.AI_API_TIMEOUT: "AI API timeout after 5 minutes",
     ErrorCodes.AI_API_ERROR: "AI API returned error: {details}",
     ErrorCodes.AI_API_INVALID_RESPONSE: "AI API returned invalid response format",
     ErrorCodes.AI_API_RATE_LIMIT: "AI API rate limit exceeded",
     
     # Redis errors
     ErrorCodes.REDIS_CONNECTION_ERROR: "Redis connection failed",
-    ErrorCodes.REDIS_LOCK_TIMEOUT: "Redis lock timeout after 2 minutes",
+    ErrorCodes.REDIS_LOCK_TIMEOUT: "Redis lock timeout after 5 minutes",
     ErrorCodes.REDIS_CACHE_ERROR: "Redis cache operation failed: {details}",
     ErrorCodes.REDIS_LOCK_ACQUISITION_FAILED: "Failed to acquire Redis lock",
     
