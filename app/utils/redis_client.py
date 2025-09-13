@@ -9,6 +9,7 @@ import uuid
 import os
 from typing import Optional, Dict, Any
 from app.utils.logger import Logger
+from app.core.config import settings
 
 
 class RedisClient:
@@ -101,18 +102,22 @@ class RedisClient:
             self.logger.error(f"Redis delete error for key {key}: {str(e)}")
             return False
     
-    def acquire_lock(self, lock_key: str, timeout: int = 300, blocking_timeout: int = 0.1) -> Optional[str]:
+    def acquire_lock(self, lock_key: str, timeout: int = None, blocking_timeout: float = None) -> Optional[str]:
         """
         Acquire distributed lock
         
         Args:
             lock_key: Lock key
-            timeout: Lock timeout in seconds
-            blocking_timeout: Blocking timeout for lock acquisition
+            timeout: Lock timeout in seconds (defaults to config)
+            blocking_timeout: Blocking timeout for lock acquisition (defaults to config)
             
         Returns:
             Lock identifier if successful, None otherwise
         """
+        # Use config defaults if not provided
+        timeout = timeout or settings.REDIS_LOCK_TIMEOUT
+        blocking_timeout = blocking_timeout or settings.REDIS_BLOCKING_TIMEOUT
+        
         lock_identifier = str(uuid.uuid4())
         
         try:
@@ -178,17 +183,20 @@ class RedisClient:
             self.logger.error(f"Lock release error for {lock_key}: {str(e)}")
             return False
     
-    def wait_for_cache(self, cache_key: str, timeout: int = 300) -> Optional[Dict[str, Any]]:
+    def wait_for_cache(self, cache_key: str, timeout: int = None) -> Optional[Dict[str, Any]]:
         """
         Wait for cache to be populated by another process
         
         Args:
             cache_key: Cache key to wait for
-            timeout: Maximum wait time in seconds
+            timeout: Maximum wait time in seconds (defaults to config)
             
         Returns:
             Cached data or None if timeout
         """
+        # Use config default if not provided
+        timeout = timeout or settings.REDIS_CACHE_WAIT_TIMEOUT
+        
         start_time = time.time()
         
         while time.time() - start_time < timeout:

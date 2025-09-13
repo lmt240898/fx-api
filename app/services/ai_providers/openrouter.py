@@ -11,8 +11,8 @@ class OpenRouterProvider(AIProviderStrategy):
     """Strategy for interacting with a generic AI provider API like OpenRouter."""
 
     @retry(
-        stop=stop_after_attempt(3),
-        wait=wait_exponential(multiplier=1, min=2, max=10),
+        stop=stop_after_attempt(settings.AI_PROVIDER_RETRY_ATTEMPTS),
+        wait=wait_exponential(multiplier=1, min=settings.AI_PROVIDER_RETRY_MIN_WAIT, max=settings.AI_PROVIDER_RETRY_MAX_WAIT),
         reraise=True
     )
     async def generate(
@@ -55,7 +55,7 @@ class OpenRouterProvider(AIProviderStrategy):
             # Add other provider-specific logic here as needed
 
         try:
-            async with httpx.AsyncClient(timeout=300.0) as client:
+            async with httpx.AsyncClient(timeout=settings.AI_PROVIDER_TIMEOUT) as client:
                 response = await client.post(api_url, headers=headers, json=body)
                 response.raise_for_status()
                 

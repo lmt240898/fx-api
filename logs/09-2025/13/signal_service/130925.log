@@ -17,3 +17,8 @@
 2025-09-13 04:29:03,947 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H1:EURUSD
 2025-09-13 04:30:22,391 - signal_service - INFO - Successfully parsed AI response: HOLD for EURUSD
 2025-09-13 04:30:22,412 - signal_service - INFO - Result cached: signal:GMT+3.0:H1:EURUSD
+2025-09-13 06:52:51,232 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H8:EURUSD
+2025-09-13 06:52:51,234 - signal_service - INFO - Cache miss: signal:GMT+3.0:H8:EURUSD
+2025-09-13 06:52:51,234 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H8:EURUSD
+2025-09-13 06:53:54,137 - signal_service - INFO - Successfully parsed AI response: HOLD for EURUSD
+2025-09-13 06:53:54,163 - signal_service - INFO - Result cached: signal:GMT+3.0:H8:EURUSD

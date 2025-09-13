@@ -11,10 +11,10 @@ http {
         listen 80;
         server_name localhost;
 
-        # Thiết lập timeout - Tăng lên 5 phút để xử lý AI processing
-        proxy_connect_timeout 300s;
-        proxy_send_timeout 300s;
-        proxy_read_timeout 300s;
+        # Thiết lập timeout - Sử dụng environment variables
+        proxy_connect_timeout ${NGINX_PROXY_CONNECT_TIMEOUT}s;
+        proxy_send_timeout ${NGINX_PROXY_SEND_TIMEOUT}s;
+        proxy_read_timeout ${NGINX_PROXY_READ_TIMEOUT}s;
 
         location / {
             proxy_pass http://fastapi_backend;

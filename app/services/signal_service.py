@@ -11,6 +11,7 @@ from app.utils.response_logger import response_logger
 from app.constants import ErrorCodes
 from app.services.prompt_service import PromptService
 from app.services.ai_service import AIService
+from app.core.config import settings
 
 
 class SignalService:
@@ -28,10 +29,10 @@ class SignalService:
         self.prompt_service = PromptService()
         self.ai_service = AIService()
         
-        # Cache settings - Tăng timeout lên 5 phút để xử lý AI processing
-        self.cache_ttl = 600  # 10 minutes
-        self.lock_timeout = 300  # 5 minutes
-        self.cache_wait_timeout = 300  # 5 minutes
+        # Cache settings - Sử dụng config từ settings
+        self.cache_ttl = settings.SIGNAL_SERVICE_CACHE_TTL
+        self.lock_timeout = settings.SIGNAL_SERVICE_LOCK_TIMEOUT
+        self.cache_wait_timeout = settings.SIGNAL_SERVICE_CACHE_WAIT_TIMEOUT
     
     def _generate_cache_key(self, timezone: str, timeframe: str, symbol: str) -> str:
         """
