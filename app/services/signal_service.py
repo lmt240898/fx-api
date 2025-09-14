@@ -169,15 +169,21 @@ class SignalService:
             # Create success response
             success_response = ResponseHandler.success(signal_data)
             
-            # Log response
+            # Log response với prompt content
             try:
-                symbol = request_data.get('symbol', 'UNKNOWN')
-                timeframe = request_data.get('timeframe', 'UNKNOWN')
+                # Extract cache key components
+                cache_key_data = request_data.get("cache_key", {})
+                timezone = cache_key_data.get("timezone", "UNKNOWN")
+                timeframe = cache_key_data.get("timeframe", "UNKNOWN")
+                symbol = cache_key_data.get("symbol", "UNKNOWN")
+                
                 response_logger.log_signal_response(
-                    symbol=symbol,
+                    timezone=timezone,
                     timeframe=timeframe,
+                    symbol=symbol,
                     response_data=success_response,
-                    request_data=request_data
+                    request_data=request_data,
+                    prompt_content=prompt  # Thêm prompt content để lưu vào prompt.log
                 )
             except Exception as log_error:
                 self.logger.warning(f"Failed to log response: {log_error}")
@@ -188,15 +194,21 @@ class SignalService:
             self.logger.error(f"Direct signal processing error: {str(e)}")
             error_response = ResponseHandler.signal_service_error(str(e))
             
-            # Log error response
+            # Log error response (không có prompt content vì đã lỗi trước đó)
             try:
-                symbol = request_data.get('symbol', 'UNKNOWN')
-                timeframe = request_data.get('timeframe', 'UNKNOWN')
+                # Extract cache key components
+                cache_key_data = request_data.get("cache_key", {})
+                timezone = cache_key_data.get("timezone", "UNKNOWN")
+                timeframe = cache_key_data.get("timeframe", "UNKNOWN")
+                symbol = cache_key_data.get("symbol", "UNKNOWN")
+                
                 response_logger.log_signal_response(
-                    symbol=symbol,
+                    timezone=timezone,
                     timeframe=timeframe,
+                    symbol=symbol,
                     response_data=error_response,
                     request_data=request_data
+                    # Không có prompt_content vì đã lỗi trước khi tạo prompt
                 )
             except Exception as log_error:
                 self.logger.warning(f"Failed to log error response: {log_error}")

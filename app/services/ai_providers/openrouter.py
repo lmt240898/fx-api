@@ -49,6 +49,8 @@ class OpenRouterProvider(AIProviderStrategy):
             "temperature": 0
         }
 
+        print(f"provider_config: {provider_config.order}")
+
         if provider_config:
             if provider_config.order:
                 body["provider"] = {"order": provider_config.order}

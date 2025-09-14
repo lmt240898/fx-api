@@ -54,5 +54,5 @@
             }
         }
     },
-    "use_model": "deepseek-r1"
+    "use_model": "meta-maverick"
 }
