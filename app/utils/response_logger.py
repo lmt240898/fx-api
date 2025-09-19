@@ -96,6 +96,45 @@ class ResponseLogger:
             self.logger.error(f"Error getting next folder number: {e}")
             return 1
     
+    def _create_symbol_folder(self, symbol: str) -> str:
+        """
+        Tạo folder theo format symbol_ddmmyyhhmmss (cho risk manager)
+        
+        Args:
+            symbol: Tên symbol (ví dụ: EURUSD)
+            
+        Returns:
+            str: Đường dẫn folder đã tạo
+        """
+        try:
+            # Tạo timestamp theo format ddmmyyhhmmss
+            now = datetime.now()
+            timestamp = now.strftime("%d%m%y%H%M%S")
+            
+            # Tạo tên folder: symbol_ddmmyyhhmmss
+            folder_name = f"{symbol}_{timestamp}"
+            
+            # Tạo đường dẫn theo cấu trúc logs/tháng-năm/ngày/
+            month_year = now.strftime("%m-%Y")
+            day = now.strftime("%d")
+            
+            folder_path = os.path.join(
+                self.base_logs_dir,
+                month_year,
+                day,
+                folder_name
+            )
+            
+            # Tạo folder nếu chưa tồn tại
+            os.makedirs(folder_path, exist_ok=True)
+            
+            self.logger.info(f"Created symbol folder: {folder_path}")
+            return folder_path
+            
+        except Exception as e:
+            self.logger.error(f"Error creating symbol folder: {e}")
+            raise
+    
     def log_response(self, timezone: str, timeframe: str, symbol: str, 
                     response_data: Dict[str, Any], request_data: Dict[str, Any] = None) -> str:
         """
@@ -190,15 +229,13 @@ class ResponseLogger:
             self.logger.error(f"Error logging signal response: {e}")
             raise
     
-    def log_risk_manager_response(self, timezone: str, timeframe: str, symbol: str,
+    def log_risk_manager_response(self, symbol: str,
                                 response_data: Dict[str, Any], 
                                 request_data: Dict[str, Any] = None) -> str:
         """
-        Lưu risk manager response
+        Lưu risk manager response (không cần timezone/timeframe)
         
         Args:
-            timezone: Timezone (ví dụ: GMT+3.0)
-            timeframe: Timeframe (ví dụ: H2, H4)
             symbol: Tên symbol
             response_data: Dữ liệu response
             request_data: Dữ liệu request
@@ -207,14 +244,12 @@ class ResponseLogger:
             str: Đường dẫn file log đã tạo
         """
         try:
-            # Tạo folder
-            folder_path = self._create_cache_key_folder(timezone, timeframe, symbol)
+            # Tạo folder theo format cũ (symbol_timestamp) cho risk manager
+            folder_path = self._create_symbol_folder(symbol)
             
             # Tạo nội dung log
             log_content = {
                 "timestamp": datetime.now().isoformat(),
-                "timezone": timezone,
-                "timeframe": timeframe,
                 "symbol": symbol,
                 "request_data": request_data,
                 "response_data": response_data,
