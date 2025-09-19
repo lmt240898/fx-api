@@ -1,4 +1,5 @@
 import httpx
+import json
 from typing import Optional
 
 from tenacity import retry, stop_after_attempt, wait_exponential, RetryError
@@ -6,9 +7,13 @@ from tenacity import retry, stop_after_attempt, wait_exponential, RetryError
 from .base import AIProviderStrategy
 from app.models.ai_config import AIProviderConfig
 from app.core.config import settings
+from app.utils.logger import Logger
 
 class OpenRouterProvider(AIProviderStrategy):
     """Strategy for interacting with a generic AI provider API like OpenRouter."""
+    
+    def __init__(self):
+        self.logger = Logger("openrouter_provider")
 
     @retry(
         stop=stop_after_attempt(settings.AI_PROVIDER_RETRY_ATTEMPTS),
@@ -33,11 +38,8 @@ class OpenRouterProvider(AIProviderStrategy):
             "Content-Type": "application/json"
         }
 
-        print(f"headers: {headers}")
-
         system_prompt = (
-            "You are a genius in technical analysis for forex trading, a risk management expert, "
-            "and a master of probability and statistics. Always provide insightful, data-driven, "
+            "You are a genius in technical analysis for forex trading, a risk management expert"
         )
 
         body = {
@@ -46,15 +48,17 @@ class OpenRouterProvider(AIProviderStrategy):
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": prompt}
             ],
-            "temperature": 0
+            "temperature": 0,
+            # "max_tokens": 10000
         }
-
-        print(f"provider_config: {provider_config.order}")
 
         if provider_config:
             if provider_config.order:
                 body["provider"] = {"order": provider_config.order}
             # Add other provider-specific logic here as needed
+
+        # Log request body
+        self._log_request_body(body, model_name)
 
         try:
             async with httpx.AsyncClient(timeout=settings.AI_PROVIDER_TIMEOUT) as client:
@@ -79,3 +83,26 @@ class OpenRouterProvider(AIProviderStrategy):
             print(f"===> FAILED TO GET RESPONSE FROM THE AI PROVIDER 3")
             print(f"An unexpected error occurred: {e}")
             raise
+
+    def _log_request_body(self, body: dict, model_name: str):
+        """
+        Log request body vào log file với cấu trúc hiện tại
+        
+        Args:
+            body: Request body dictionary
+            model_name: AI model name
+        """
+        try:
+            # Log request details
+            self.logger.info(f"OpenRouter API Request - Model: {model_name}")
+            self.logger.info(f"Request Body: {json.dumps(body, indent=2, ensure_ascii=False)}")
+            
+            # Log prompt length for monitoring
+            if "messages" in body:
+                total_prompt_length = sum(len(msg.get("content", "")) for msg in body["messages"])
+                self.logger.info(f"Total prompt length: {total_prompt_length} characters")
+                
+        except Exception as e:
+            self.logger.error(f"Error logging request body: {e}")
+            # Don't raise exception to avoid breaking the main flow
+

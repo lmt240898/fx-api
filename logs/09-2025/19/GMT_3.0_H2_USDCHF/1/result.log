@@ -1,0 +1,1009 @@
+{
+  "timestamp": "2025-09-19T14:24:49.626674",
+  "timezone": "GMT+3.0",
+  "timeframe": "H2",
+  "symbol": "USDCHF",
+  "request_data": {
+    "cache_key": {
+      "timezone": "GMT+3.0",
+      "timeframe": "H2",
+      "symbol": "USDCHF"
+    },
+    "symbol": "USDCHF",
+    "timeframe": "H2",
+    "account_info": {
+      "login": 96502956,
+      "leverage": 500,
+      "limit_orders": 200,
+      "balance": 485.05,
+      "profit": 0.0,
+      "equity": 485.05,
+      "margin_free": 485.05,
+      "margin_level": 0.0,
+      "margin_so_call": 50.0,
+      "commission_blocked": 0.0,
+      "currency": "USD",
+      "server": "MetaQuotes-Demo",
+      "company": "MetaQuotes Ltd."
+    },
+    "balance_config": {
+      "max_position": 3,
+      "max_risk": 2.0,
+      "total_max_risk": 6
+    },
+    "max_positions": 3,
+    "active_orders_summary": "total_active_orders: 0",
+    "pending_orders_summary": "total_pending_orders: 0",
+    "portfolio_exposure": {
+      "active_positions": [],
+      "pending_orders": [],
+      "summary": {
+        "total_active_positions": 0,
+        "total_pending_orders": 0,
+        "total_potential_loss_from_portfolio_usd": 0.0,
+        "total_margin_used_from_portfolio_usd": 0.0
+      }
+    },
+    "account_type_details": {
+      "name": "STANDARD",
+      "multiplier": 100000,
+      "description": "Standard Account (1 lot = 100,000 units)",
+      "pip_value": 10.0
+    },
+    "symbol_info": {
+      "ask": 0.79452,
+      "bid": 0.79441,
+      "spread": 11,
+      "swap_long": 0.1,
+      "swap_short": -1.0,
+      "digits": 5,
+      "point": 1e-05,
+      "trade_tick_size": 1e-05,
+      "trade_tick_value": 1.2586215576700397,
+      "volume_min": 0.01,
+      "volume_max": 500.0,
+      "volume_step": 0.01,
+      "currency_profit": "CHF",
+      "currency_base": "USD",
+      "currency_margin": "USD",
+      "current_usdjpy_rate": 147.821,
+      "trade_contract_size": 100000.0
+    },
+    "multi_timeframes": {
+      "D1": {
+        "indicators": {
+          "rsi": 44.413586840418645,
+          "macd": [
+            -0.0032871485317048643,
+            -0.00266874528259736,
+            -0.0006184032491075042
+          ],
+          "bollinger_bands": [
+            0.7978259999999999,
+            0.8087573347767155,
+            0.7868946652232843
+          ],
+          "atr": 0.006013571428571404,
+          "adx": [
+            35.5956177950867,
+            18.52951656966387,
+            27.15286851169983
+          ],
+          "sma_100": 0.8086257,
+          "sma_200": 0.8456848499999999,
+          "volume_sma_250": 48211.72
+        },
+        "analyze_price_action": {
+          "time_context": {
+            "start_time": "2024-10-04 00:00:00 UTC",
+            "end_time": "2025-09-19 00:00:00 UTC",
+            "total_candles": 250
+          },
+          "key_levels": {
+            "period_high": {
+              "price": 0.92006,
+              "time": "2025-01-13 00:00:00"
+            },
+            "period_low": {
+              "price": 0.78289,
+              "time": "2025-09-17 00:00:00"
+            },
+            "resistance": [
+              {
+                "price": 0.795,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.8,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.805,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.80628,
+                "type": "swing_high",
+                "time": "2025-07-17 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.80716,
+                "type": "swing_high",
+                "time": "2025-09-04 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.81,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.81028,
+                "type": "swing_high",
+                "time": "2025-08-22 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.81308,
+                "type": "swing_high",
+                "time": "2025-08-11 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.81702,
+                "type": "swing_high",
+                "time": "2025-08-01 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.82143,
+                "type": "swing_high",
+                "time": "2025-06-19 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.83336,
+                "type": "swing_high",
+                "time": "2025-04-25 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.83466,
+                "type": "swing_high",
+                "time": "2025-05-29 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.84749,
+                "type": "swing_high",
+                "time": "2025-05-12 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.88542,
+                "type": "swing_high",
+                "time": "2025-03-31 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.88635,
+                "type": "swing_high",
+                "time": "2025-03-14 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.8917,
+                "type": "swing_high",
+                "time": "2024-11-14 00:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.89567,
+                "type": "swing_high",
+                "time": "2024-11-22 00:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.90212,
+                "type": "swing_high",
+                "time": "2024-12-19 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.90356,
+                "type": "swing_high",
+                "time": "2025-02-28 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.91367,
+                "type": "swing_high",
+                "time": "2025-01-02 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.9155,
+                "type": "swing_high",
+                "time": "2025-02-12 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.91963,
+                "type": "swing_high",
+                "time": "2025-02-03 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.92006,
+                "type": "swing_high",
+                "time": "2025-01-13 00:00:00",
+                "recency": "intermediate"
+              }
+            ],
+            "support": [
+              {
+                "price": 0.89993,
+                "type": "swing_low",
+                "time": "2025-02-05 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.89647,
+                "type": "swing_low",
+                "time": "2025-01-27 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.87576,
+                "type": "swing_low",
+                "time": "2025-03-10 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.87551,
+                "type": "swing_low",
+                "time": "2025-03-20 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.87357,
+                "type": "swing_low",
+                "time": "2024-12-06 00:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.86143,
+                "type": "swing_low",
+                "time": "2024-11-04 00:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.81844,
+                "type": "swing_low",
+                "time": "2025-05-07 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.81558,
+                "type": "swing_low",
+                "time": "2025-06-02 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80982,
+                "type": "swing_low",
+                "time": "2025-04-11 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80548,
+                "type": "swing_low",
+                "time": "2025-06-13 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80384,
+                "type": "swing_low",
+                "time": "2025-04-21 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80211,
+                "type": "swing_low",
+                "time": "2025-08-13 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.79092,
+                "type": "swing_low",
+                "time": "2025-07-24 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.79,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.78711,
+                "type": "swing_low",
+                "time": "2025-07-01 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.785,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.78,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              }
+            ]
+          },
+          "price_patterns": {
+            "all_detected_on_last": [],
+            "last_single_candle_pattern": "N/A",
+            "last_multi_candle_pattern": "N/A"
+          },
+          "volume_context": {
+            "status": "Below Average",
+            "interpretation": "Low volume suggests lack of interest or conviction."
+          },
+          "current_price_context": {
+            "price": 0.79441,
+            "position_relative_to_levels": "Price is approaching resistance at 0.795.",
+            "nearest_resistance": {
+              "price": 0.795,
+              "type": "round_number",
+              "time": null,
+              "recency": "historic"
+            },
+            "nearest_support": {
+              "price": 0.79092,
+              "type": "swing_low",
+              "time": "2025-07-24 00:00:00",
+              "recency": "recent"
+            }
+          }
+        }
+      },
+      "H2": {
+        "indicators": {
+          "rsi": 80.6482364156333,
+          "macd": [
+            0.0013981305115110532,
+            0.0010043204021527457,
+            0.00039381010935830743
+          ],
+          "bollinger_bands": [
+            0.7921205,
+            0.7966375809158157,
+            0.7876034190841843
+          ],
+          "atr": 0.0016550000000000095,
+          "adx": [
+            20.621966957261566,
+            37.936987483816345,
+            12.38670694864058
+          ],
+          "sma_100": 0.7938441,
+          "sma_200": 0.7974599499999999,
+          "volume_sma_250": 3145.596
+        },
+        "analyze_price_action": {
+          "time_context": {
+            "start_time": "2025-08-21 22:00:00 UTC",
+            "end_time": "2025-09-19 16:00:00 UTC",
+            "total_candles": 250
+          },
+          "key_levels": {
+            "period_high": {
+              "price": 0.81028,
+              "time": "2025-08-22 06:00:00"
+            },
+            "period_low": {
+              "price": 0.78289,
+              "time": "2025-09-17 20:00:00"
+            },
+            "resistance": [
+              {
+                "price": 0.79373,
+                "type": "swing_high",
+                "time": "2025-09-18 16:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.795,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.79724,
+                "type": "swing_high",
+                "time": "2025-09-15 08:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79861,
+                "type": "swing_high",
+                "time": "2025-09-12 14:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.8,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.80068,
+                "type": "swing_high",
+                "time": "2025-09-11 14:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.8016,
+                "type": "swing_high",
+                "time": "2025-09-01 18:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80295,
+                "type": "swing_high",
+                "time": "2025-08-28 16:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.8034,
+                "type": "swing_high",
+                "time": "2025-08-29 14:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80342,
+                "type": "swing_high",
+                "time": "2025-08-25 04:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.805,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.80597,
+                "type": "swing_high",
+                "time": "2025-09-02 14:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80669,
+                "type": "swing_high",
+                "time": "2025-09-03 10:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.807,
+                "type": "swing_high",
+                "time": "2025-08-25 22:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.80713,
+                "type": "swing_high",
+                "time": "2025-08-26 10:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.80716,
+                "type": "swing_high",
+                "time": "2025-09-04 20:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80752,
+                "type": "swing_high",
+                "time": "2025-08-27 10:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.81,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.81028,
+                "type": "swing_high",
+                "time": "2025-08-22 08:00:00",
+                "recency": "historic"
+              }
+            ],
+            "support": [
+              {
+                "price": 0.80248,
+                "type": "swing_low",
+                "time": "2025-09-04 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.80202,
+                "type": "swing_low",
+                "time": "2025-08-27 00:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79966,
+                "type": "swing_low",
+                "time": "2025-08-25 00:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.7993,
+                "type": "swing_low",
+                "time": "2025-08-28 14:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79804,
+                "type": "swing_low",
+                "time": "2025-09-01 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79609,
+                "type": "swing_low",
+                "time": "2025-09-10 14:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79556,
+                "type": "swing_low",
+                "time": "2025-09-05 18:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79511,
+                "type": "swing_low",
+                "time": "2025-09-15 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79467,
+                "type": "swing_low",
+                "time": "2025-09-12 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79359,
+                "type": "swing_low",
+                "time": "2025-09-15 18:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.79151,
+                "type": "swing_low",
+                "time": "2025-09-09 08:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.78711,
+                "type": "swing_low",
+                "time": "2025-09-18 12:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.785,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.78498,
+                "type": "swing_low",
+                "time": "2025-09-17 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.78289,
+                "type": "swing_low",
+                "time": "2025-09-17 20:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.78,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              }
+            ]
+          },
+          "price_patterns": {
+            "all_detected_on_last": [
+              "Bearish BELTHOLD",
+              "Bearish LONGLINE"
+            ],
+            "last_single_candle_pattern": "N/A",
+            "last_multi_candle_pattern": "Bearish BELTHOLD"
+          },
+          "volume_context": {
+            "status": "Normal",
+            "interpretation": "Volume is at an average level."
+          },
+          "current_price_context": {
+            "price": 0.79441,
+            "position_relative_to_levels": "Price is approaching resistance at 0.795.",
+            "nearest_resistance": {
+              "price": 0.795,
+              "type": "round_number",
+              "time": null,
+              "recency": "historic"
+            },
+            "nearest_support": {
+              "price": 0.79359,
+              "type": "swing_low",
+              "time": "2025-09-15 18:00:00",
+              "recency": "recent"
+            }
+          }
+        }
+      },
+      "M30": {
+        "indicators": {
+          "rsi": 55.326460481100064,
+          "macd": [
+            0.0006186201736797514,
+            0.000745463114530412,
+            -0.00012684294085066057
+          ],
+          "bollinger_bands": [
+            0.7945575,
+            0.7965298656648335,
+            0.7925851343351665
+          ],
+          "atr": 0.0008728571428571276,
+          "adx": [
+            51.86015770562541,
+            22.013093289690083,
+            17.103109656300834
+          ],
+          "sma_100": 0.7909145,
+          "sma_200": 0.7906591500000001,
+          "volume_sma_250": 598.16
+        },
+        "analyze_price_action": {
+          "time_context": {
+            "start_time": "2025-09-11 11:30:00 UTC",
+            "end_time": "2025-09-19 17:00:00 UTC",
+            "total_candles": 300
+          },
+          "key_levels": {
+            "period_high": {
+              "price": 0.80068,
+              "time": "2025-09-11 15:30:00"
+            },
+            "period_low": {
+              "price": 0.78289,
+              "time": "2025-09-17 21:00:00"
+            },
+            "resistance": [
+              {
+                "price": 0.78659,
+                "type": "swing_high",
+                "time": "2025-09-16 22:30:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78762,
+                "type": "swing_high",
+                "time": "2025-09-17 15:30:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78783,
+                "type": "swing_high",
+                "time": "2025-09-17 11:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78932,
+                "type": "swing_high",
+                "time": "2025-09-17 21:30:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.7915,
+                "type": "swing_high",
+                "time": "2025-09-18 09:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79216,
+                "type": "swing_high",
+                "time": "2025-09-16 15:30:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79339,
+                "type": "swing_high",
+                "time": "2025-09-19 05:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.79373,
+                "type": "swing_high",
+                "time": "2025-09-18 16:30:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.79476,
+                "type": "swing_high",
+                "time": "2025-09-16 04:30:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.795,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.79555,
+                "type": "swing_high",
+                "time": "2025-09-15 16:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79626,
+                "type": "swing_high",
+                "time": "2025-09-12 00:30:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79635,
+                "type": "swing_high",
+                "time": "2025-09-11 20:30:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.7967,
+                "type": "swing_high",
+                "time": "2025-09-12 23:30:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79687,
+                "type": "swing_high",
+                "time": "2025-09-15 05:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79695,
+                "type": "swing_high",
+                "time": "2025-09-12 07:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79724,
+                "type": "swing_high",
+                "time": "2025-09-15 09:30:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79861,
+                "type": "swing_high",
+                "time": "2025-09-12 15:30:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.8,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.80068,
+                "type": "swing_high",
+                "time": "2025-09-11 15:30:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.805,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              }
+            ],
+            "support": [
+              {
+                "price": 0.79624,
+                "type": "swing_low",
+                "time": "2025-09-12 14:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79605,
+                "type": "swing_low",
+                "time": "2025-09-15 07:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79548,
+                "type": "swing_low",
+                "time": "2025-09-12 10:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79511,
+                "type": "swing_low",
+                "time": "2025-09-15 00:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79478,
+                "type": "swing_low",
+                "time": "2025-09-11 17:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79467,
+                "type": "swing_low",
+                "time": "2025-09-12 00:00:00",
+                "recency": "historic"
+              },
+              {
+                "price": 0.79381,
+                "type": "swing_low",
+                "time": "2025-09-16 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79359,
+                "type": "swing_low",
+                "time": "2025-09-15 19:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.79197,
+                "type": "swing_low",
+                "time": "2025-09-19 07:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.79038,
+                "type": "swing_low",
+                "time": "2025-09-19 00:00:00",
+                "recency": "recent"
+              },
+              {
+                "price": 0.79,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.78711,
+                "type": "swing_low",
+                "time": "2025-09-18 12:30:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78626,
+                "type": "swing_low",
+                "time": "2025-09-17 12:30:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78583,
+                "type": "swing_low",
+                "time": "2025-09-17 17:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78574,
+                "type": "swing_low",
+                "time": "2025-09-17 03:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78553,
+                "type": "swing_low",
+                "time": "2025-09-16 20:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.785,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              },
+              {
+                "price": 0.78498,
+                "type": "swing_low",
+                "time": "2025-09-17 00:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78289,
+                "type": "swing_low",
+                "time": "2025-09-17 21:00:00",
+                "recency": "intermediate"
+              },
+              {
+                "price": 0.78,
+                "type": "round_number",
+                "time": null,
+                "recency": "historic"
+              }
+            ]
+          },
+          "price_patterns": {
+            "all_detected_on_last": [
+              "Bearish SPINNINGTOP"
+            ],
+            "last_single_candle_pattern": "Bearish SPINNINGTOP",
+            "last_multi_candle_pattern": "N/A"
+          },
+          "volume_context": {
+            "status": "Normal",
+            "interpretation": "Volume is at an average level."
+          },
+          "current_price_context": {
+            "price": 0.79442,
+            "position_relative_to_levels": "Price is approaching resistance at 0.79476.",
+            "nearest_resistance": {
+              "price": 0.79476,
+              "type": "swing_high",
+              "time": "2025-09-16 04:30:00",
+              "recency": "intermediate"
+            },
+            "nearest_support": {
+              "price": 0.79381,
+              "type": "swing_low",
+              "time": "2025-09-16 00:00:00",
+              "recency": "intermediate"
+            }
+          }
+        }
+      }
+    }
+  },
+  "response_data": {
+    "success": true,
+    "data": {
+      "symbol": "USDCHF",
+      "signal_type": "HOLD",
+      "order_type_proposed": null,
+      "entry_price_proposed": null,
+      "stop_loss_proposed": null,
+      "take_profit_proposed": null,
+      "estimate_win_probability": null,
+      "risk_reward_ratio": null,
+      "trailing_stop_loss": null,
+      "pips_to_take_profit": null,
+      "technical_reasoning": "Bearish bias due to D1 downtrend and H2 overbought RSI (80.6) with bearish patterns (BELTHOLD/LONGLINE). However, Scenario A failed minimum SL distance filter (14 pips < H2 ATR 16.5). Scenarios B/C had invalid R:R ratios (<1.5). No technically valid setups meeting quality filters."
+    }
+  },
+  "log_type": "signal_analysis"
+}

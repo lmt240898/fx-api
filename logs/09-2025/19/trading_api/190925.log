@@ -1,0 +1,28 @@
+2025-09-19 14:23:53,776 - trading_api - INFO - Signal request received for EURUSD H2
+2025-09-19 14:24:07,163 - trading_api - INFO - Signal request completed for EURUSD H2
+2025-09-19 14:24:08,488 - trading_api - INFO - Signal request received for GBPUSD H2
+2025-09-19 14:24:20,637 - trading_api - INFO - Signal request completed for GBPUSD H2
+2025-09-19 14:24:22,212 - trading_api - INFO - Signal request received for USDJPY H2
+2025-09-19 14:24:34,723 - trading_api - INFO - Signal request completed for USDJPY H2
+2025-09-19 14:24:36,486 - trading_api - INFO - Signal request received for USDCHF H2
+2025-09-19 14:24:49,728 - trading_api - INFO - Signal request completed for USDCHF H2
+2025-09-19 14:24:51,661 - trading_api - INFO - Signal request received for USDCAD H2
+2025-09-19 14:25:04,567 - trading_api - INFO - Signal request completed for USDCAD H2
+2025-09-19 14:25:05,231 - trading_api - INFO - Risk manager request received for USDCAD
+2025-09-19 14:25:05,411 - trading_api - INFO - Risk manager request completed for USDCAD
+2025-09-19 14:25:05,960 - trading_api - INFO - Tracking data request received for login: 96502956, ticket: 4669045562
+2025-09-19 14:25:06,117 - trading_api - INFO - Tracking data request completed for login: 96502956, ticket: 4669045562
+2025-09-19 14:25:07,513 - trading_api - INFO - Signal request received for AUDUSD H2
+2025-09-19 14:25:17,668 - trading_api - INFO - Signal request completed for AUDUSD H2
+2025-09-19 14:25:19,401 - trading_api - INFO - Signal request received for NZDUSD H2
+2025-09-19 14:25:32,820 - trading_api - INFO - Signal request completed for NZDUSD H2
+2025-09-19 14:25:34,915 - trading_api - INFO - Signal request received for GBPJPY H2
+2025-09-19 14:25:45,284 - trading_api - INFO - Signal request completed for GBPJPY H2
+2025-09-19 14:25:47,228 - trading_api - INFO - Signal request received for EURGBP H2
+2025-09-19 14:26:03,680 - trading_api - INFO - Signal request completed for EURGBP H2
+2025-09-19 14:26:04,826 - trading_api - INFO - Risk manager request received for EURGBP
+2025-09-19 14:26:04,961 - trading_api - INFO - Risk manager request completed for EURGBP
+2025-09-19 14:26:05,724 - trading_api - INFO - Tracking data request received for login: 96502956, ticket: 4669067050
+2025-09-19 14:26:05,953 - trading_api - INFO - Tracking data request completed for login: 96502956, ticket: 4669067050
+2025-09-19 14:26:07,765 - trading_api - INFO - Signal request received for EURJPY H2
+2025-09-19 14:26:20,244 - trading_api - INFO - Signal request completed for EURJPY H2

@@ -31,6 +31,7 @@ Tất cả response đều tuân theo format chuẩn:
   "success": true,
   "errorMsg": "",
   "errorCode": 0,
+  "tracking_path_signal": "09-2025/19/GMT_3.0_H2_GBPUSD/1",
   "data": {
     "symbol": "EURUSD",
     "signal_type": "BUY|SELL|HOLD",
@@ -66,6 +67,7 @@ Tất cả response đều tuân theo format chuẩn:
 | `technical_reasoning` | string | ✅ | Lý do kỹ thuật cho tín hiệu |
 | `cache_key` | string | ✅ | Cache key được sử dụng |
 | `timestamp` | string | ✅ | Thời gian phân tích (ISO format) |
+| `tracking_path_signal`| string | Đường dẫn lưu log
 
 ### Signal Type Values
 - **BUY**: Tín hiệu mua

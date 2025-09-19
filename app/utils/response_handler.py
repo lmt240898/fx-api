@@ -10,22 +10,29 @@ class ResponseHandler:
     """Standard response handler for all APIs"""
     
     @staticmethod
-    def success(data: Dict[str, Any]) -> Dict[str, Any]:
+    def success(data: Dict[str, Any], **kwargs) -> Dict[str, Any]:
         """
         Create success response
         
         Args:
             data: Response data
+            **kwargs: Additional fields (e.g., tracking_path_signal)
             
         Returns:
             Standard success response
         """
-        return {
+        response = {
             "success": True,
             "errorMsg": "",
             "errorCode": ErrorCodes.SUCCESS,
             "data": data
         }
+        
+        # Add additional fields if provided
+        for key, value in kwargs.items():
+            response[key] = value
+            
+        return response
     
     @staticmethod
     def error(error_code: int, **kwargs) -> Dict[str, Any]:

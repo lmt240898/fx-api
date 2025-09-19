@@ -1,0 +1,34 @@
+2025-09-19 14:24:07,119 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_EURUSD/1
+2025-09-19 14:24:07,147 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_EURUSD/1/prompt.log
+2025-09-19 14:24:07,153 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_EURUSD/1/result.log
+2025-09-19 14:24:20,553 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_GBPUSD/1
+2025-09-19 14:24:20,617 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_GBPUSD/1/prompt.log
+2025-09-19 14:24:20,618 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_GBPUSD/1/result.log
+2025-09-19 14:24:34,580 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_USDJPY/1
+2025-09-19 14:24:34,687 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_USDJPY/1/prompt.log
+2025-09-19 14:24:34,695 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_USDJPY/1/result.log
+2025-09-19 14:24:49,622 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_USDCHF/1
+2025-09-19 14:24:49,710 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_USDCHF/1/prompt.log
+2025-09-19 14:24:49,719 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_USDCHF/1/result.log
+2025-09-19 14:25:04,503 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_USDCAD/1
+2025-09-19 14:25:04,545 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_USDCAD/1/prompt.log
+2025-09-19 14:25:04,548 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_USDCAD/1/result.log
+2025-09-19 14:25:05,403 - response_logger - INFO - Created symbol folder: logs/09-2025/19/USDCAD_190925142505
+2025-09-19 14:25:05,410 - response_logger - INFO - Risk manager response logged to: logs/09-2025/19/USDCAD_190925142505/result.log
+2025-09-19 14:25:17,483 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_AUDUSD/1
+2025-09-19 14:25:17,634 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_AUDUSD/1/prompt.log
+2025-09-19 14:25:17,638 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_AUDUSD/1/result.log
+2025-09-19 14:25:32,794 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_NZDUSD/1
+2025-09-19 14:25:32,817 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_NZDUSD/1/prompt.log
+2025-09-19 14:25:32,817 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_NZDUSD/1/result.log
+2025-09-19 14:25:45,249 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_GBPJPY/1
+2025-09-19 14:25:45,276 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_GBPJPY/1/prompt.log
+2025-09-19 14:25:45,281 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_GBPJPY/1/result.log
+2025-09-19 14:26:03,627 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_EURGBP/1
+2025-09-19 14:26:03,674 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_EURGBP/1/prompt.log
+2025-09-19 14:26:03,675 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_EURGBP/1/result.log
+2025-09-19 14:26:04,952 - response_logger - INFO - Created symbol folder: logs/09-2025/19/EURGBP_190925142604
+2025-09-19 14:26:04,959 - response_logger - INFO - Risk manager response logged to: logs/09-2025/19/EURGBP_190925142604/result.log
+2025-09-19 14:26:20,193 - response_logger - INFO - Created cache key folder: logs/09-2025/19/GMT_3.0_H2_EURJPY/1
+2025-09-19 14:26:20,237 - response_logger - INFO - Prompt content logged to: logs/09-2025/19/GMT_3.0_H2_EURJPY/1/prompt.log
+2025-09-19 14:26:20,240 - response_logger - INFO - Signal response logged to: logs/09-2025/19/GMT_3.0_H2_EURJPY/1/result.log

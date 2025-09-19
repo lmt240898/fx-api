@@ -161,9 +161,9 @@ def prompt_signal_analyst(params):
                 
                 **RULE: The calculated Risk-to-Reward ratio MUST be greater than or equal to 1.5.**
                 
-                - **CRITICAL INSTRUCTION: You are FORBIDDEN from adjusting a technically sound Stop Loss or Take Profit simply to make the ratio fit the 1.5 standard.** The SL and TP must remain at their most logical positions. Their integrity is more important than the R:R number.
+                - **CRITICAL INSTRUCTION: You are FORBIDDEN from adjusting a technically sound Stop Loss or Take Profit simply to make the ratio fit the 1.2 standard.** The SL and TP must remain at their most logical positions. Their integrity is more important than the R:R number.
                 - There is NO upper limit for R:R. A trade with a natural R:R of 2.5:1 or 3.0:1 is an excellent trade and should not be modified.
-                - **If the natural R:R calculated from the most logical TP and SL is LESS THAN 1.5, the trade does not meet the minimum quality standard.** The trade setup is considered INVALID. You MUST discard this setup and move to evaluate the next scenario, or declare a final "HOLD" signal if no other valid scenarios exist.
+                - **If the natural R:R calculated from the most logical TP and SL is LESS THAN 1.2, the trade does not meet the minimum quality standard.** The trade setup is considered INVALID. You MUST discard this setup and move to evaluate the next scenario, or declare a final "HOLD" signal if no other valid scenarios exist.
 
             11. **TRAILING STOP LOSS CALCULATION (ATR-BASED METHOD)**:
                 This section applies ONLY if a valid BUY/SELL signal is generated.

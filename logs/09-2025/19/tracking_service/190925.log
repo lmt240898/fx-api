@@ -1,0 +1,16 @@
+2025-09-19 14:25:05,961 - tracking_service - INFO - === BẮT ĐẦU QUÁ TRÌNH LƯU TRACKING DATA ===
+2025-09-19 14:25:05,962 - tracking_service - INFO - 📊 Processing tracking data - Login: 96502956, Ticket: 4669045562
+2025-09-19 14:25:05,987 - tracking_service - INFO - 📁 Created tracking folder: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669045562
+2025-09-19 14:25:06,043 - tracking_service - INFO - 💾 Saved signal params data to: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669045562/synthetic_params_signal.log
+2025-09-19 14:25:06,068 - tracking_service - INFO - 💾 Saved signal response data to: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669045562/synthetic_response_signal.log
+2025-09-19 14:25:06,078 - tracking_service - INFO - 💾 Saved risk manager params data to: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669045562/synthetic_params_risk_manager.log
+2025-09-19 14:25:06,097 - tracking_service - INFO - 💾 Saved risk manager response data to: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669045562/synthetic_response_risk_manager.log
+2025-09-19 14:25:06,100 - tracking_service - INFO - === KẾT THÚC QUÁ TRÌNH LƯU TRACKING DATA ===
+2025-09-19 14:26:05,735 - tracking_service - INFO - === BẮT ĐẦU QUÁ TRÌNH LƯU TRACKING DATA ===
+2025-09-19 14:26:05,746 - tracking_service - INFO - 📊 Processing tracking data - Login: 96502956, Ticket: 4669067050
+2025-09-19 14:26:05,819 - tracking_service - INFO - 📁 Created tracking folder: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669067050
+2025-09-19 14:26:05,881 - tracking_service - INFO - 💾 Saved signal params data to: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669067050/synthetic_params_signal.log
+2025-09-19 14:26:05,920 - tracking_service - INFO - 💾 Saved signal response data to: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669067050/synthetic_response_signal.log
+2025-09-19 14:26:05,937 - tracking_service - INFO - 💾 Saved risk manager params data to: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669067050/synthetic_params_risk_manager.log
+2025-09-19 14:26:05,947 - tracking_service - INFO - 💾 Saved risk manager response data to: logs/09-2025/19/ORDERS/LOGINID_96502956/ticket_4669067050/synthetic_response_risk_manager.log
+2025-09-19 14:26:05,949 - tracking_service - INFO - === KẾT THÚC QUÁ TRÌNH LƯU TRACKING DATA ===

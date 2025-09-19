@@ -1,0 +1,21 @@
+{
+  "success": true,
+  "errorMsg": "",
+  "errorCode": 0,
+  "data": {
+    "symbol": "EURGBP",
+    "signal_type": "BUY",
+    "order_type_proposed": "LIMIT",
+    "entry_price_proposed": 0.8705,
+    "stop_loss_proposed": 0.8699,
+    "take_profit_proposed": 0.875,
+    "estimate_win_probability": 65,
+    "risk_reward_ratio": 7.56,
+    "trailing_stop_loss": 23.8,
+    "pips_to_take_profit": 45.0,
+    "technical_reasoning": "Bullish confluence across D1/H2 with strong SMAs/ADX support. Strategic LIMIT entry at 0.8705 (H2/M30 support cluster) with fortress SL below swing low + ATR buffer. TP targets D1 resistance at 0.875. Exceptional 7.56 R:R justifies moderate probability despite H2 overbought RSI.",
+    "cache_key": "signal:GMT+3.0:H2:EURGBP",
+    "timestamp": "2025-09-19T14:26:03.676583Z"
+  },
+  "tracking_path_signal": "09-2025/19/GMT+3.0_H2_EURGBP/1"
+}

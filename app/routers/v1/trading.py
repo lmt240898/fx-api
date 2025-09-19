@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from typing import Dict, Any
 from app.services.signal_service import SignalService
 from app.services.risk_manager_service import RiskManagerService
+from app.services.tracking_service import TrackingService
 from app.utils.response_handler import ResponseHandler
 from app.utils.logger import Logger
 
@@ -34,9 +35,18 @@ class RiskManagerRequest(BaseModel):
     symbol: Dict[str, str]
     lot_size_to_margin_map: Dict[str, float]
 
+class TrackingDataRequest(BaseModel):
+    login: str
+    ticket: str
+    synthetic_params_signal: Dict[str, Any]
+    synthetic_response_signal: Dict[str, Any]
+    synthetic_params_risk_manager: Dict[str, Any]
+    synthetic_response_risk_manager: Dict[str, Any]
+
 # Initialize services
 signal_service = SignalService()
 risk_manager_service = RiskManagerService()
+tracking_service = TrackingService()
 
 @router.post("/signal")
 async def get_signal(request: SignalRequest):
@@ -90,4 +100,31 @@ async def get_risk_manager(request: RiskManagerRequest):
         
     except Exception as e:
         logger.error(f"Risk manager endpoint error: {str(e)}")
+        return ResponseHandler.internal_server_error()
+
+@router.post("/tracking_data")
+async def save_tracking_data(request: TrackingDataRequest):
+    """
+    Tracking data endpoint - saves tracking data for audit and analysis
+    
+    Args:
+        request: Tracking data request containing login, ticket, and synthetic params
+        
+    Returns:
+        Tracking data save result
+    """
+    try:
+        logger.info(f"Tracking data request received for login: {request.login}, ticket: {request.ticket}")
+        
+        # Convert Pydantic model to dict
+        request_data = request.dict()
+        
+        # Process tracking data
+        result = tracking_service.save_tracking_data(request_data)
+        
+        logger.info(f"Tracking data request completed for login: {request.login}, ticket: {request.ticket}")
+        return result
+        
+    except Exception as e:
+        logger.error(f"Tracking data endpoint error: {str(e)}")
         return ResponseHandler.internal_server_error()

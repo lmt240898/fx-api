@@ -15,6 +15,7 @@
         },
         "deepseek-r1": {
             "model": "deepseek/deepseek-r1",
+            "price_technical_reasoning": "0.01$",
             "provider": {
                     "order": [
                         "deepinfra/base"
@@ -23,6 +24,7 @@
         },
         "gemini-2-5-pro": {
             "model": "google/gemini-2.5-pro",
+            "price_technical_reasoning": "0.05$",
             "provider": {
                 "order": [
                     "google-vertex/global"
@@ -39,6 +41,7 @@
         },
         "wizardlm-2-8x22b": {
             "model": "microsoft/wizardlm-2-8x22b",
+            "price_technical_reasoning": "0.007$",
             "provider": {
                 "order": [
                     "deepinfra/bf16"
@@ -54,5 +57,5 @@
             }
         }
     },
-    "use_model": "gemini-2-5-pro"
+    "use_model": "deepseek-r1"
 }

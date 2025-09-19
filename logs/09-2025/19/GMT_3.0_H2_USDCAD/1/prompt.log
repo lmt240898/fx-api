@@ -1,0 +1,246 @@
+
+            You are an expert AI specializing in forex trading signal analysis. The current analysis is for the trading symbol USDCAD.
+            Main trading timeframe: H2
+
+            **CURRENT MARKET CONTEXT & TIMING:**
+            - UTC Time: 02:24 PM UTC
+            - Day: Friday
+            - Current Session: European Session (London) (ACTIVE)
+            - Trading Recommendation: Best trading time - maximum liquidity and volatility
+            - Market Mood: Active - High volatility and opportunities
+            - Next Market Event: London Session Closing (16:00 UTC) (in 2h 36m)
+
+            **Your primary directive is to act as a STRATEGIST, not just an analyst. Your goal is to find the best possible trading plan, even if it's not for immediate execution.**
+
+            1. **PRE-ANALYZED DATA REVIEW (MANDATORY)**:
+                For EACH timeframe, YOU MUST use the pre-analyzed data provided in the `analyze_price_action` object. This data is your primary source for understanding market structure.
+                
+            2. **MARKET STRUCTURE SYNTHESIS**:
+                Based on the `analyze_price_action` data:
+                - Synthesize a complete market map by combining key levels from all provided timeframes. 
+                - Use the provided context (`current_price_context`, `price_patterns`, `volume_context`) and trend indicators to determine the current market phase: Trending (up/down), Ranging, or Transitioning.
+
+            3. **MULTI-TIMEFRAME CONFLUENCE**:
+                - Analyze D1, H2, and M30.
+                
+                TIMEFRAME ROLES:
+                - D1: Strategic Trend Context: Defines the dominant daily/weekly trend to establish a directional bias.
+                - H2: Tactical Setup Identification: Identifies pullback zones and patterns that align with the Daily trend.
+                - M30: Entry Trigger & Refinement: Pinpoints precise entry triggers on micro-patterns for optimal Risk/Reward.
+                
+                ALIGNMENT SCORING:
+                - Strong alignment: All timeframes point same direction (+3 points)
+                - Moderate alignment: 2 timeframes agree, 1 neutral (+2 points)
+                - Weak alignment: 2 timeframes agree, 1 opposes (+1 point)
+                - No alignment: Mixed or all neutral (0 points)
+
+            4. **ENHANCED INDICATOR CONFLUENCE ANALYSIS**:
+                You are provided with a comprehensive set of pre-calculated indicators. Your task is to synthesize them to find confluence supporting a single directional bias. Focus on how these groups of indicators interact:
+
+                - **Trend Indicators (sma_100, sma_200, adx):** What is the underlying trend strength and direction? Is the price above/below key SMAs? Is ADX showing a strong trend (>25) or a ranging market?
+                - **Momentum Indicators (rsi, macd):** Is momentum accelerating or decelerating? Are there signs of divergence between price and momentum? Is RSI in an overbought/oversold condition that aligns with the primary trend (e.g., oversold in an uptrend is a buy signal)?
+                - **Volatility Indicators (bollinger_bands, atr):** Is volatility expanding or contracting? Is the price testing the outer bands, suggesting a potential reversal or continuation? How does the ATR value inform the current market condition?
+                - **Volume Indicator (volume_sma_250):** Does trading volume confirm the price move? (e.g., a breakout on high volume is more reliable).
+            
+            5. **ADVANCED PRICE ACTION PATTERNS**:
+                Use the `price_patterns` provided in `analyze_price_action` to confirm candlestick or chart patterns.
+
+            6. **MARKET CONTEXT ANALYSIS**:
+                Consider session timing, market theme (risk-on/risk-off), and day of week factors.
+
+            7. **SIGNAL STRENGTH SCORING SYSTEM**:
+                Calculate a composite score (0-100) based on Technical Factors, Indicator Confluence, Timeframe Alignment, and Market Context.
+                - 80-100: Very strong
+                - 60-79: Strong
+                - 40-59: Moderate
+                - < 40: Weak / No signal
+
+            8. **WIN PROBABILITY CALCULATION**:
+                Start with a 50% base and adjust based on the signal score and other positive/negative factors. The final probability must be between 20% and 85%.
+            
+            9. **SCENARIO-BASED TRADE PLANNING (CRITICAL THINKING STEP)**:
+                Before generating a final signal, YOU MUST evaluate three potential scenarios. Your goal is to find the best possible trading plan by identifying the FIRST scenario that presents a high-quality, logical setup.
+
+                **Step 1: Determine Primary Bias**
+                - Based on your full analysis (especially D1 trend and market structure), what is the most logical direction for the next significant move? Answer: "Bullish" or "Bearish". This bias will guide your evaluation.
+
+                **Step 2: Evaluate Scenarios Sequentially**
+
+                ---
+                **Scenario A: Immediate Execution Analysis (MARKET Order)**
+
+                **A1. Check for High-Probability MARKET Entry Patterns:**
+                Your first task is to determine if a powerful, immediate entry opportunity exists RIGHT NOW. Check if the current price action and indicator readings match any of the following high-conviction patterns, which align with your **Primary Bias**:
+
+                *   **Pattern 1: The "Key Level Bounce & Confirmation"**
+                    *   **Condition:** The most recent price action shows a clear test and rejection of a major support level (for Bullish Bias) or resistance level (for Bearish Bias) from the `key_levels` data.
+                    *   **Confirmation:** This rejection is confirmed by a strong, recently closed candlestick pattern on the `H2` (e.g., Bullish/Bearish Engulfing, Pin Bar/Hammer).
+                    *   **Indicator Check:** RSI is moving out of an oversold/overbought zone, or MACD is showing a fresh crossover in the direction of the bias.
+
+                *   **Pattern 2: The "Momentum Shift"**
+                    *   **Condition:** The price has just broken a short-term counter-trend line on the `H2` or `M30`.
+                    *   **Confirmation:** The breakout is accompanied by a significant increase in volume (`volume_context`).
+                    *   **Indicator Check:** MACD histogram has just crossed the zero line, or the ADX is rising above 25, confirming new momentum.
+
+                *   **Pattern 3: The "Volatility Squeeze Breakout"**
+                    *   **Condition:** The Bollinger Bands on the `H2` were recently in a tight "squeeze" (narrow bands).
+                    *   **Confirmation:** The current price is decisively breaking out of the bands in the direction of the **Primary Bias**, with the bands now expanding.
+                    *   **Indicator Check:** This breakout is confirmed by high volume.
+
+                **A2. Decision for Scenario A:**
+                - **If the current market condition STRONGLY matches one of the patterns above, and it passes all viability filters (R:R >= 1.5, SL distance > 1x ATR), THEN you have found a valid MARKET order setup.** Proceed with generating the signal. This is your final decision.
+                - **If NO strong match is found, or if it fails the filters:** The condition for an immediate MARKET order is not met. **You MUST proceed to evaluate Scenario B.**
+
+                ---
+                **Scenario B: Pullback Entry (LIMIT Order)**
+                - **If Primary Bias is Bullish:** Is the price currently ABOVE a strong, recent support level (from `key_levels`)? A pullback to this level is a potential entry.
+                - **If Primary Bias is Bearish:** Is the price currently BELOW a strong, recent resistance level? A pullback to this level is a potential entry.
+                - **If a valid pullback opportunity exists:**
+                    - Generate a BUY/SELL signal with `order_type_proposed: "LIMIT"`.
+                    - Set `entry_price_proposed` to the price of that key S/R level (you can add a small buffer).
+                    - **Crucially, calculate the SL, TP, R:R, and `estimate_win_probability` based on THIS PLANNED entry price, not the current market price.**
+                - **If this scenario provides a logical, high-quality trade plan that passes all filters:** This is your final decision.
+                - **If NO:** Evaluate Scenario C.
+
+                ---
+                **Scenario C: Breakout Entry (STOP Order)**
+                - **If Primary Bias is Bullish:** Is the price consolidating BELOW a significant, recent resistance level? A break ABOVE this level would confirm momentum.
+                - **If Primary Bias is Bearish:** Is the price consolidating ABOVE a significant, recent support level? A break BELOW this level would confirm momentum.
+                - **If a valid breakout opportunity exists:**
+                    - Generate a BUY/SELL signal with `order_type_proposed: "STOP"`.
+                    - Set `entry_price_proposed` just above the resistance (for BUY) or below the support (for SELL).
+                    - **Crucially, calculate the SL, TP, R:R, and `estimate_win_probability` based on THIS PLANNED entry price.**
+                - **If this scenario provides a logical, high-quality trade plan that passes all filters:** This is your final decision.
+                
+                ---
+                **Final Conclusion**: If NONE of the three scenarios (A, B, C) result in a valid trading plan that passes all quality filters, THEN AND ONLY THEN, the final signal must be "HOLD".
+
+            10. **TARGET LEVEL IDENTIFICATION (FOR THE CHOSEN SCENARIO)**:
+                TAKE PROFIT (TP):
+                - Primary target: Next major resistance (for BUY) or support (for SELL) from the `key_levels` list.
+                - Consider Fibonacci extensions or round numbers.
+                
+                STOP LOSS (SL) PLACEMENT (CRITICAL RULE):
+                The Stop Loss is your most critical defense. Its placement must be based on technical logic and volatility, not on an arbitrary pip value or desired Risk-to-Reward ratio.
+
+                1.  **Identify the Technical Structure (The Fortress):**
+                    - First, identify the most recent and logical key swing high (for SELL signals) or swing low (for BUY signals) from the `key_levels` list on the `H2`. This structure is your primary defense line.
+                
+                2.  **Calculate the Volatility Buffer (The Moat):**
+                    - Next, calculate a "smart buffer" to place your SL beyond the reach of typical market noise and stop-hunting activities.
+                    - This buffer MUST be equal to **0.5 times the ATR value** on the `H2`. For example, if the `H2` ATR is 30 pips, the buffer is 15 pips.
+
+                3.  **Determine Final SL Price:**
+                    - The final `stop_loss_proposed` price MUST be the price of the technical structure level, with the calculated volatility buffer applied to push it further away.
+                    - **For a BUY signal:**
+                        `stop_loss_proposed = [Price of Key Swing Low] - (0.5 * ATR)`
+                    - **For a SELL signal:**
+                        `stop_loss_proposed = [Price of Key Swing High] + (0.5 * ATR)`
+
+                **CRITICAL INSTRUCTION: This is a non-negotiable, two-step rule.** You are FORBIDDEN from placing the Stop Loss directly at or just beyond the swing high/low. The calculated Volatility Buffer is a mandatory component of the final Stop Loss price. This ensures the trade has adequate "breathing room" and is protected from predictable liquidity sweeps.
+                
+                **RISK-TO-REWARD (R:R) QUALITY CHECK (Read Carefully)**:
+                This is the final quality filter for a trade. The process is sequential and must be followed exactly.
+                1.  First, determine the most logical Stop Loss and Take Profit levels based purely on technical analysis as described above (key levels, market structure, ATR).
+                2.  Second, using these technically-sound levels, calculate the resulting, "natural" Risk-to-Reward ratio.
+                3.  Third, compare this calculated ratio against the minimum quality standard.
+                
+                **RULE: The calculated Risk-to-Reward ratio MUST be greater than or equal to 1.5.**
+                
+                - **CRITICAL INSTRUCTION: You are FORBIDDEN from adjusting a technically sound Stop Loss or Take Profit simply to make the ratio fit the 1.2 standard.** The SL and TP must remain at their most logical positions. Their integrity is more important than the R:R number.
+                - There is NO upper limit for R:R. A trade with a natural R:R of 2.5:1 or 3.0:1 is an excellent trade and should not be modified.
+                - **If the natural R:R calculated from the most logical TP and SL is LESS THAN 1.2, the trade does not meet the minimum quality standard.** The trade setup is considered INVALID. You MUST discard this setup and move to evaluate the next scenario, or declare a final "HOLD" signal if no other valid scenarios exist.
+
+            11. **TRAILING STOP LOSS CALCULATION (ATR-BASED METHOD)**:
+                This section applies ONLY if a valid BUY/SELL signal is generated.
+
+                **A. Trailing Stop Loss Calculation (in Pips):**
+                This MUST be a universal, step-by-step calculation that works for ALL currency pairs.
+
+                1.  **Step 1: Get Raw Values from Input Data.**
+                    -   From `H2` indicator data, get the `Raw ATR Value`.
+                    -   From `symbol_info`, get the `Digits` value (the number of decimal places for the price).
+
+                2.  **Step 2: Define ATR Multiplier (N).**
+                    -   Use the default multiplier `N = 2.0`.
+
+                3.  **Step 3: Calculate the Raw Distance.**
+                    -   `Raw Distance = Raw ATR Value * N`
+
+                4.  **Step 4: Determine the Correct Pip Divisor (CRITICAL LOGIC).**
+                    -   You MUST determine the value of 1 pip based on the `Digits` value. This logic handles both JPY and non-JPY pairs.
+                    -   **IF `Digits` is 3 or 2 (typical for JPY pairs):**
+                        -   The `Pip Divisor` is `0.01`.
+                    -   **ELSE (meaning `Digits` is 5 or 4, for non-JPY pairs):**
+                        -   The `Pip Divisor` is `0.0001`.
+
+                5.  **Step 5: Calculate Final Value in Pips.**
+                    -   `Final TSL in Pips = Raw Distance / Pip Divisor`
+
+                6.  **Step 6: Final Formatting.**
+                    -   Round the `Final TSL in Pips` to one decimal place. This final number is the value to be placed in the `trailing_stop_loss` field.
+
+                ---
+                **INTERNAL VALIDATION EXAMPLES (Apply this logic):**
+
+                *   **Example 1 (Non-JPY Pair):**
+                    -   Symbol: EURUSD, `Digits` = 5
+                    -   `Raw ATR Value` = `0.00224`
+                    -   `Raw Distance` = `0.00224 * 2.0 = 0.00448`
+                    -   `Pip Divisor` (since Digits=5) = `0.0001`
+                    -   `Final TSL in Pips` = `0.00448 / 0.0001 = 44.8`
+
+                *   **Example 2 (JPY Pair):**
+                    -   Symbol: USDJPY, `Digits` = 3
+                    -   `Raw ATR Value` = `0.158`
+                    -   `Raw Distance` = `0.158 * 2.0 = 0.316`
+                    -   `Pip Divisor` (since Digits=3) = `0.01`
+                    -   `Final TSL in Pips` = `0.316 / 0.01 = 31.6`
+                ---
+
+            12. **QUALITY & VIABILITY FILTERS (MANDATORY PRE-CHECKS):**
+                Before generating any BUY/SELL signal, you MUST ensure it passes these viability filters. If a potential signal from any scenario (A, B, or C) fails ANY of these filters, you MUST reject that scenario and evaluate the next.
+
+                1. MINIMUM TRADE DISTANCE FILTER (ADAPTIVE VOLATILITY CHECK):
+                - To be viable, a trade's stop loss must be placed outside the typical market noise. The calculated distance to Stop Loss (in pips) MUST be greater than the current ATR value.
+                - **RULE: If the absolute difference in pips between `entry_price_proposed` and `stop_loss_proposed` is LESS THAN the 1x ATR value from the 'H2' data, the signal is non-viable.** This setup is too tight and likely to be stopped out by random fluctuations. REJECT THIS SCENARIO.
+
+            13. **SIGNAL GENERATION LOGIC**:
+                This logic applies most directly to Scenario A (Market Order). For Scenarios B and C, the decision is based on the quality of the planned setup as determined in the 'SCENARIO-BASED TRADE PLANNING' section and passing all quality filters.
+                
+                BUY SIGNAL REQUIRES: Score > 40, a valid scenario (A,B,C) was found, it passed all quality filters (R:R, Min Distance), majority indicators bullish, timeframes aligned, valid price action.
+                SELL SIGNAL REQUIRES: Score > 40, a valid scenario (A,B,C) was found, it passed all quality filters (R:R, Min Distance), majority indicators bearish, timeframes aligned, valid price action.
+                HOLD SIGNAL WHEN: No valid scenario found, or all found scenarios failed quality checks, or score < 40, or signals are conflicting.
+
+            14. **PRE-SIGNAL VALIDATION CHECKLIST**:
+            Before generating the final JSON, mentally confirm:
+            ✓ Reviewed `analyze_price_action` and indicator data for all 3 timeframes.
+            ✓ Determined a clear Primary Bias (Bullish/Bearish).
+            ✓ **Evaluated all three trading scenarios (Market, Limit, Stop) in order.**
+            ✓ For the chosen scenario, found clear entry, SL, and TP levels.
+            ✓ **Confirmed the calculated R:R meets the minimum quality standard of 1.5 or greater.**
+            ✓ **Confirmed the trade meets the MINIMUM TRADE DISTANCE FILTER.**
+            ✓ Calculated the final win probability for the chosen plan.
+            ✓ Validated all market context and timing rules.
+            
+            If any check fails, return a HOLD signal.
+
+            Input data (use this pre-analyzed data for your reasoning): {"symbol_info": {"ask": 1.37944, "bid": 1.3794, "spread": 4, "swap_long": -0.8, "swap_short": -0.4, "digits": 5, "point": 1e-05, "trade_tick_size": 1e-05, "trade_tick_value": 0.724931856405498, "volume_min": 0.01, "volume_max": 500.0, "volume_step": 0.01, "currency_profit": "CAD", "currency_base": "USD", "currency_margin": "USD", "current_usdjpy_rate": 147.827, "trade_contract_size": 100000.0}, "multi_timeframes": {"D1": {"indicators": {"rsi": 56.196285001386066, "macd": [0.00019021794603824027, 0.0007887457137085845, -0.0005985277676703442], "bollinger_bands": [1.379978, 1.3877924686320176, 1.3721635313679823], "atr": 0.005651428571428562, "adx": [9.72179418455577, 22.282608695652538, 16.531850353892825], "sma_100": 1.3759383, "sma_200": 1.4005015999999997, "volume_sma_250": 46470.856}, "analyze_price_action": {"time_context": {"start_time": "2024-10-04 00:00:00 UTC", "end_time": "2025-09-19 00:00:00 UTC", "total_candles": 250}, "key_levels": {"period_high": {"price": 1.47921, "time": "2025-02-03 00:00:00"}, "period_low": {"price": 1.3528, "time": "2024-10-04 00:00:00"}, "resistance": [{"price": 1.37733, "type": "swing_high", "time": "2025-07-17 00:00:00", "recency": "recent"}, {"price": 1.37969, "type": "swing_high", "time": "2025-06-23 00:00:00", "recency": "intermediate"}, {"price": 1.38, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.385, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.38781, "type": "swing_high", "time": "2025-08-01 00:00:00", "recency": "recent"}, {"price": 1.38911, "type": "swing_high", "time": "2025-09-11 00:00:00", "recency": "recent"}, {"price": 1.39, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.39237, "type": "swing_high", "time": "2025-08-22 00:00:00", "recency": "recent"}, {"price": 1.395, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.39588, "type": "swing_high", "time": "2024-11-01 00:00:00", "recency": "historic"}, {"price": 1.40151, "type": "swing_high", "time": "2025-05-13 00:00:00", "recency": "intermediate"}, {"price": 1.41052, "type": "swing_high", "time": "2024-11-15 00:00:00", "recency": "historic"}, {"price": 1.41777, "type": "swing_high", "time": "2024-11-26 00:00:00", "recency": "historic"}, {"price": 1.44141, "type": "swing_high", "time": "2025-04-01 00:00:00", "recency": "intermediate"}, {"price": 1.44633, "type": "swing_high", "time": "2025-01-03 00:00:00", "recency": "intermediate"}, {"price": 1.44668, "type": "swing_high", "time": "2024-12-19 00:00:00", "recency": "intermediate"}, {"price": 1.45157, "type": "swing_high", "time": "2025-01-21 00:00:00", "recency": "intermediate"}, {"price": 1.45429, "type": "swing_high", "time": "2025-03-04 00:00:00", "recency": "intermediate"}, {"price": 1.47921, "type": "swing_high", "time": "2025-02-03 00:00:00", "recency": "intermediate"}], "support": [{"price": 1.43337, "type": "swing_low", "time": "2024-12-26 00:00:00", "recency": "intermediate"}, {"price": 1.42798, "type": "swing_low", "time": "2025-01-06 00:00:00", "recency": "intermediate"}, {"price": 1.42629, "type": "swing_low", "time": "2025-03-18 00:00:00", "recency": "intermediate"}, {"price": 1.42611, "type": "swing_low", "time": "2025-01-20 00:00:00", "recency": "intermediate"}, {"price": 1.42384, "type": "swing_low", "time": "2025-03-06 00:00:00", "recency": "intermediate"}, {"price": 1.41509, "type": "swing_low", "time": "2025-02-14 00:00:00", "recency": "intermediate"}, {"price": 1.39274, "type": "swing_low", "time": "2024-11-25 00:00:00", "recency": "historic"}, {"price": 1.38151, "type": "swing_low", "time": "2024-11-06 00:00:00", "recency": "historic"}, {"price": 1.378, "type": "swing_low", "time": "2025-04-21 00:00:00", "recency": "intermediate"}, {"price": 1.375, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.37493, "type": "swing_low", "time": "2025-05-06 00:00:00", "recency": "intermediate"}, {"price": 1.37238, "type": "swing_low", "time": "2025-09-01 00:00:00", "recency": "recent"}, {"price": 1.37206, "type": "swing_low", "time": "2025-08-07 00:00:00", "recency": "recent"}, {"price": 1.37, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.365, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.36, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.35746, "type": "swing_low", "time": "2025-07-23 00:00:00", "recency": "recent"}, {"price": 1.35553, "type": "swing_low", "time": "2025-07-03 00:00:00", "recency": "intermediate"}, {"price": 1.3539, "type": "swing_low", "time": "2025-06-16 00:00:00", "recency": "intermediate"}]}, "price_patterns": {"all_detected_on_last": ["Bullish DOJI", "Bullish GRAVESTONEDOJI", "Bearish HIGHWAVE", "Bullish LONGLEGGEDDOJI", "Bearish SPINNINGTOP"], "last_single_candle_pattern": "Bullish DOJI", "last_multi_candle_pattern": "Bullish GRAVESTONEDOJI"}, "volume_context": {"status": "Below Average", "interpretation": "Low volume suggests lack of interest or conviction."}, "current_price_context": {"price": 1.3794, "position_relative_to_levels": "Price is approaching resistance at 1.37969.", "nearest_resistance": {"price": 1.37969, "type": "swing_high", "time": "2025-06-23 00:00:00", "recency": "intermediate"}, "nearest_support": {"price": 1.378, "type": "swing_low", "time": "2025-04-21 00:00:00", "recency": "intermediate"}}}}, "H2": {"indicators": {"rsi": 59.8859315589342, "macd": [0.0008379937197355858, 0.0007486639018389951, 8.93298178965907e-05], "bollinger_bands": [1.3794520000000001, 1.3821194774206094, 1.3767845225793909], "atr": 0.0015721428571428473, "adx": [22.670019559864247, 28.078146297136158, 13.221263062246392], "sma_100": 1.3811176, "sma_200": 1.3797850000000003, "volume_sma_250": 2598.344}, "analyze_price_action": {"time_context": {"start_time": "2025-08-21 22:00:00 UTC", "end_time": "2025-09-19 16:00:00 UTC", "total_candles": 250}, "key_levels": {"period_high": {"price": 1.39237, "time": "2025-08-22 16:00:00"}, "period_low": {"price": 1.37238, "time": "2025-09-01 00:00:00"}, "resistance": [{"price": 1.37608, "type": "swing_high", "time": "2025-09-01 18:00:00", "recency": "intermediate"}, {"price": 1.37781, "type": "swing_high", "time": "2025-08-29 16:00:00", "recency": "intermediate"}, {"price": 1.38, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.38066, "type": "swing_high", "time": "2025-09-03 10:00:00", "recency": "intermediate"}, {"price": 1.38099, "type": "swing_high", "time": "2025-09-18 18:00:00", "recency": "recent"}, {"price": 1.38138, "type": "swing_high", "time": "2025-09-02 14:00:00", "recency": "intermediate"}, {"price": 1.38421, "type": "swing_high", "time": "2025-09-15 16:00:00", "recency": "recent"}, {"price": 1.38453, "type": "swing_high", "time": "2025-09-04 18:00:00", "recency": "intermediate"}, {"price": 1.385, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.38542, "type": "swing_high", "time": "2025-09-05 22:00:00", "recency": "intermediate"}, {"price": 1.38567, "type": "swing_high", "time": "2025-08-27 16:00:00", "recency": "historic"}, {"price": 1.38635, "type": "swing_high", "time": "2025-09-12 18:00:00", "recency": "intermediate"}, {"price": 1.38636, "type": "swing_high", "time": "2025-09-10 04:00:00", "recency": "intermediate"}, {"price": 1.38669, "type": "swing_high", "time": "2025-08-26 10:00:00", "recency": "historic"}, {"price": 1.38911, "type": "swing_high", "time": "2025-09-11 14:00:00", "recency": "intermediate"}, {"price": 1.39, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.39237, "type": "swing_high", "time": "2025-08-22 16:00:00", "recency": "historic"}], "support": [{"price": 1.38305, "type": "swing_low", "time": "2025-09-10 16:00:00", "recency": "intermediate"}, {"price": 1.3826, "type": "swing_low", "time": "2025-09-11 18:00:00", "recency": "intermediate"}, {"price": 1.38213, "type": "swing_low", "time": "2025-08-26 18:00:00", "recency": "historic"}, {"price": 1.3816, "type": "swing_low", "time": "2025-08-25 16:00:00", "recency": "historic"}, {"price": 1.38134, "type": "swing_low", "time": "2025-08-22 20:00:00", "recency": "historic"}, {"price": 1.37935, "type": "swing_low", "time": "2025-09-09 08:00:00", "recency": "intermediate"}, {"price": 1.37882, "type": "swing_low", "time": "2025-09-08 16:00:00", "recency": "intermediate"}, {"price": 1.37819, "type": "swing_low", "time": "2025-09-03 16:00:00", "recency": "intermediate"}, {"price": 1.37582, "type": "swing_low", "time": "2025-09-05 14:00:00", "recency": "intermediate"}, {"price": 1.375, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.37403, "type": "swing_low", "time": "2025-08-28 20:00:00", "recency": "intermediate"}, {"price": 1.37341, "type": "swing_low", "time": "2025-09-16 22:00:00", "recency": "recent"}, {"price": 1.37268, "type": "swing_low", "time": "2025-09-17 20:00:00", "recency": "recent"}, {"price": 1.37238, "type": "swing_low", "time": "2025-09-01 00:00:00", "recency": "intermediate"}, {"price": 1.37, "type": "round_number", "time": null, "recency": "historic"}]}, "price_patterns": {"all_detected_on_last": ["Bearish BELTHOLD", "Bearish CLOSINGMARUBOZU", "Bearish ENGULFING", "Bearish LONGLINE", "Bearish MARUBOZU"], "last_single_candle_pattern": "Bearish MARUBOZU", "last_multi_candle_pattern": "Bearish BELTHOLD"}, "volume_context": {"status": "Normal", "interpretation": "Volume is at an average level."}, "current_price_context": {"price": 1.3794, "position_relative_to_levels": "Price is testing support at 1.37935.", "nearest_resistance": {"price": 1.38, "type": "round_number", "time": null, "recency": "historic"}, "nearest_support": {"price": 1.37935, "type": "swing_low", "time": "2025-09-09 08:00:00", "recency": "intermediate"}}}}, "M30": {"indicators": {"rsi": 41.56249999999989, "macd": [0.00022514932820549838, 0.00038462275169360487, -0.0001594734234881065], "bollinger_bands": [1.3809345, 1.3822281683866726, 1.3796408316133273], "atr": 0.0008357142857142888, "adx": [19.5222995470428, 20.42735042734943, 28.547008547009472], "sma_100": 1.378766, "sma_200": 1.37769575, "volume_sma_250": 544.076}, "analyze_price_action": {"time_context": {"start_time": "2025-09-11 11:30:00 UTC", "end_time": "2025-09-19 17:00:00 UTC", "total_candles": 300}, "key_levels": {"period_high": {"price": 1.38911, "time": "2025-09-11 15:30:00"}, "period_low": {"price": 1.37268, "time": "2025-09-17 21:00:00"}, "resistance": [{"price": 1.37547, "type": "swing_high", "time": "2025-09-16 22:30:00", "recency": "intermediate"}, {"price": 1.37619, "type": "swing_high", "time": "2025-09-17 11:00:00", "recency": "intermediate"}, {"price": 1.37693, "type": "swing_high", "time": "2025-09-17 17:00:00", "recency": "intermediate"}, {"price": 1.3777, "type": "swing_high", "time": "2025-09-16 11:30:00", "recency": "intermediate"}, {"price": 1.37844, "type": "swing_high", "time": "2025-09-16 01:00:00", "recency": "intermediate"}, {"price": 1.37847, "type": "swing_high", "time": "2025-09-18 04:30:00", "recency": "intermediate"}, {"price": 1.37871, "type": "swing_high", "time": "2025-09-17 21:30:00", "recency": "intermediate"}, {"price": 1.37999, "type": "swing_high", "time": "2025-09-18 09:00:00", "recency": "intermediate"}, {"price": 1.38, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.38025, "type": "swing_high", "time": "2025-09-18 23:30:00", "recency": "recent"}, {"price": 1.38047, "type": "swing_high", "time": "2025-09-19 04:30:00", "recency": "recent"}, {"price": 1.38099, "type": "swing_high", "time": "2025-09-18 19:00:00", "recency": "recent"}, {"price": 1.38201, "type": "swing_high", "time": "2025-09-19 10:00:00", "recency": "recent"}, {"price": 1.38416, "type": "swing_high", "time": "2025-09-15 09:00:00", "recency": "historic"}, {"price": 1.38421, "type": "swing_high", "time": "2025-09-15 17:00:00", "recency": "intermediate"}, {"price": 1.3843, "type": "swing_high", "time": "2025-09-11 22:30:00", "recency": "historic"}, {"price": 1.38457, "type": "swing_high", "time": "2025-09-15 05:30:00", "recency": "historic"}, {"price": 1.38484, "type": "swing_high", "time": "2025-09-12 04:30:00", "recency": "historic"}, {"price": 1.38493, "type": "swing_high", "time": "2025-09-12 11:30:00", "recency": "historic"}, {"price": 1.385, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.38537, "type": "swing_high", "time": "2025-09-12 23:30:00", "recency": "historic"}, {"price": 1.38609, "type": "swing_high", "time": "2025-09-12 15:30:00", "recency": "historic"}, {"price": 1.38635, "type": "swing_high", "time": "2025-09-12 19:00:00", "recency": "historic"}, {"price": 1.38911, "type": "swing_high", "time": "2025-09-11 15:30:00", "recency": "historic"}, {"price": 1.39, "type": "round_number", "time": null, "recency": "historic"}], "support": [{"price": 1.38348, "type": "swing_low", "time": "2025-09-12 14:00:00", "recency": "historic"}, {"price": 1.38347, "type": "swing_low", "time": "2025-09-12 17:00:00", "recency": "historic"}, {"price": 1.38345, "type": "swing_low", "time": "2025-09-15 07:00:00", "recency": "historic"}, {"price": 1.38327, "type": "swing_low", "time": "2025-09-12 10:00:00", "recency": "historic"}, {"price": 1.3832, "type": "swing_low", "time": "2025-09-15 00:00:00", "recency": "historic"}, {"price": 1.38266, "type": "swing_low", "time": "2025-09-12 00:00:00", "recency": "historic"}, {"price": 1.3826, "type": "swing_low", "time": "2025-09-11 19:30:00", "recency": "historic"}, {"price": 1.37902, "type": "swing_low", "time": "2025-09-19 03:00:00", "recency": "recent"}, {"price": 1.37885, "type": "swing_low", "time": "2025-09-19 07:00:00", "recency": "recent"}, {"price": 1.37871, "type": "swing_low", "time": "2025-09-18 22:30:00", "recency": "recent"}, {"price": 1.3767, "type": "swing_low", "time": "2025-09-18 13:30:00", "recency": "intermediate"}, {"price": 1.37669, "type": "swing_low", "time": "2025-09-15 23:00:00", "recency": "intermediate"}, {"price": 1.37653, "type": "swing_low", "time": "2025-09-18 04:00:00", "recency": "intermediate"}, {"price": 1.37635, "type": "swing_low", "time": "2025-09-16 06:30:00", "recency": "intermediate"}, {"price": 1.37622, "type": "swing_low", "time": "2025-09-16 10:00:00", "recency": "intermediate"}, {"price": 1.375, "type": "round_number", "time": null, "recency": "historic"}, {"price": 1.37486, "type": "swing_low", "time": "2025-09-17 14:30:00", "recency": "intermediate"}, {"price": 1.37369, "type": "swing_low", "time": "2025-09-16 16:30:00", "recency": "intermediate"}, {"price": 1.37341, "type": "swing_low", "time": "2025-09-16 23:30:00", "recency": "intermediate"}, {"price": 1.37268, "type": "swing_low", "time": "2025-09-17 21:00:00", "recency": "intermediate"}, {"price": 1.37, "type": "round_number", "time": null, "recency": "historic"}]}, "price_patterns": {"all_detected_on_last": ["Bearish LONGLINE"], "last_single_candle_pattern": "N/A", "last_multi_candle_pattern": "Bearish LONGLINE"}, "volume_context": {"status": "Above Average", "interpretation": "High volume suggests strong conviction behind the last move."}, "current_price_context": {"price": 1.3794, "position_relative_to_levels": "Price is testing support at 1.37902.", "nearest_resistance": {"price": 1.37999, "type": "swing_high", "time": "2025-09-18 09:00:00", "recency": "intermediate"}, "nearest_support": {"price": 1.37902, "type": "swing_low", "time": "2025-09-19 03:00:00", "recency": "recent"}}}}}}
+
+        **OUTPUT FORMAT (JSON only, no extra text):**
+        ```json
+        {
+            "symbol": "USDCAD",
+            "signal_type": "BUY/SELL/HOLD",
+            "order_type_proposed": "MARKET/LIMIT/STOP" or null,
+            "entry_price_proposed": float or null,
+            "stop_loss_proposed": float or null,
+            "take_profit_proposed": float or null,
+            "estimate_win_probability": integer (20-85) or null,
+            "risk_reward_ratio": float or null,
+            "trailing_stop_loss": float or null,
+            "pips_to_take_profit": float or null,
+            "technical_reasoning": "string"
+        }
+        ```
+    

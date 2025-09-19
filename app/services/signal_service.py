@@ -97,7 +97,19 @@ class SignalService:
             cached_result = self.redis_client.get(cache_key)
             if cached_result:
                 self.logger.info(f"Cache hit: {cache_key}")
-                return ResponseHandler.success(cached_result)
+                # For cached results, we need to find the actual log folder that was created
+                cache_key_data = request_data.get("cache_key", {})
+                timezone = cache_key_data.get("timezone", "UNKNOWN")
+                timeframe = cache_key_data.get("timeframe", "UNKNOWN")
+                symbol = cache_key_data.get("symbol", "UNKNOWN")
+                
+                # Try to find the actual log folder that was created
+                log_folder_path = self._find_actual_log_folder(timezone, timeframe, symbol)
+                
+                return ResponseHandler.success(
+                    data=cached_result,
+                    tracking_path_signal=log_folder_path
+                )
             
             self.logger.info(f"Cache miss: {cache_key}")
             
@@ -131,7 +143,19 @@ class SignalService:
                 
                 if cached_result:
                     self.logger.info(f"Cache populated by another process: {cache_key}")
-                    return ResponseHandler.success(cached_result)
+                    # For cache wait results, find the actual log folder that was created
+                    cache_key_data = request_data.get("cache_key", {})
+                    timezone = cache_key_data.get("timezone", "UNKNOWN")
+                    timeframe = cache_key_data.get("timeframe", "UNKNOWN")
+                    symbol = cache_key_data.get("symbol", "UNKNOWN")
+                    
+                    # Try to find the actual log folder that was created
+                    log_folder_path = self._find_actual_log_folder(timezone, timeframe, symbol)
+                    
+                    return ResponseHandler.success(
+                        data=cached_result,
+                        tracking_path_signal=log_folder_path
+                    )
                 else:
                     self.logger.error(f"Cache wait timeout: {cache_key}")
                     return ResponseHandler.redis_lock_timeout()
@@ -166,10 +190,8 @@ class SignalService:
             if not signal_data:
                 return ResponseHandler.ai_error("Failed to parse AI response")
             
-            # Create success response
-            success_response = ResponseHandler.success(signal_data)
-            
-            # Log response với prompt content
+            # Log response với prompt content và get log path
+            log_folder_path = None
             try:
                 # Extract cache key components
                 cache_key_data = request_data.get("cache_key", {})
@@ -177,16 +199,33 @@ class SignalService:
                 timeframe = cache_key_data.get("timeframe", "UNKNOWN")
                 symbol = cache_key_data.get("symbol", "UNKNOWN")
                 
-                response_logger.log_signal_response(
+                # Log response và lấy đường dẫn folder thực tế đã lưu
+                log_file_path = response_logger.log_signal_response(
                     timezone=timezone,
                     timeframe=timeframe,
                     symbol=symbol,
-                    response_data=success_response,
+                    response_data={"success": True, "data": signal_data},  # Temporary response for logging
                     request_data=request_data,
                     prompt_content=prompt  # Thêm prompt content để lưu vào prompt.log
                 )
+                
+                # Lấy đường dẫn folder thực tế đã lưu log
+                if log_file_path:
+                    import os
+                    log_folder_path = os.path.dirname(log_file_path)
+                    # Convert to relative path format (remove "logs/" prefix)
+                    log_folder_path = log_folder_path.replace("\\", "/")
+                    if log_folder_path.startswith("logs/"):
+                        log_folder_path = log_folder_path[5:]  # Remove "logs/" prefix
+                        
             except Exception as log_error:
                 self.logger.warning(f"Failed to log response: {log_error}")
+            
+            # Create success response with actual log folder path
+            success_response = ResponseHandler.success(
+                data=signal_data,
+                tracking_path_signal=log_folder_path  # Đường dẫn folder thực tế đã lưu log
+            )
             
             return success_response
             
@@ -313,3 +352,61 @@ class SignalService:
         """Get current timestamp in ISO format"""
         from datetime import datetime
         return datetime.utcnow().isoformat() + "Z"
+    
+    def _find_actual_log_folder(self, timezone: str, timeframe: str, symbol: str) -> str:
+        """
+        Tìm folder log thực tế đã được tạo
+        
+        Args:
+            timezone: Timezone (e.g., GMT+3.0)
+            timeframe: Timeframe (e.g., H2, H4)
+            symbol: Symbol (e.g., EURUSD)
+            
+        Returns:
+            str: Đường dẫn folder thực tế (relative path từ logs/)
+        """
+        try:
+            import os
+            from datetime import datetime
+            
+            # Clean timezone: GMT+3.0 → GMT_3.0
+            timezone_clean = timezone.replace("+", "_").replace(":", "_")
+            
+            # Create cache key folder name: GMT_3.0_H2_EURUSD
+            cache_key_folder = f"{timezone_clean}_{timeframe}_{symbol}"
+            
+            # Get current date for folder structure
+            now = datetime.now()
+            month_year = now.strftime("%m-%Y")
+            day = now.strftime("%d")
+            
+            # Construct base folder path: logs/09-2025/16/GMT_3.0_H2_EURUSD/
+            base_folder_path = os.path.join("logs", month_year, day, cache_key_folder)
+            
+            # Check if folder exists
+            if os.path.exists(base_folder_path):
+                # Find the highest numbered subfolder
+                subfolders = []
+                for item in os.listdir(base_folder_path):
+                    item_path = os.path.join(base_folder_path, item)
+                    if os.path.isdir(item_path) and item.isdigit():
+                        subfolders.append(int(item))
+                
+                if subfolders:
+                    # Get the highest number (most recent)
+                    highest_number = max(subfolders)
+                    actual_folder_path = os.path.join(base_folder_path, str(highest_number))
+                    
+                    # Convert to relative path format
+                    relative_path = actual_folder_path.replace("\\", "/")
+                    if relative_path.startswith("logs/"):
+                        relative_path = relative_path[5:]  # Remove "logs/" prefix
+                    
+                    return relative_path
+            
+            # If no folder found, return None
+            return None
+            
+        except Exception as e:
+            self.logger.error(f"Error finding actual log folder: {e}")
+            return None

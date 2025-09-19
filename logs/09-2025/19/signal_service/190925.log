@@ -1,0 +1,50 @@
+2025-09-19 14:23:53,783 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:EURUSD
+2025-09-19 14:23:53,803 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:EURUSD
+2025-09-19 14:23:53,813 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:EURUSD
+2025-09-19 14:24:07,093 - signal_service - INFO - Successfully parsed AI response: HOLD for EURUSD
+2025-09-19 14:24:07,155 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:EURUSD
+2025-09-19 14:24:08,528 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:GBPUSD
+2025-09-19 14:24:08,550 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:GBPUSD
+2025-09-19 14:24:08,580 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:GBPUSD
+2025-09-19 14:24:20,535 - signal_service - INFO - Successfully parsed AI response: HOLD for GBPUSD
+2025-09-19 14:24:20,620 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:GBPUSD
+2025-09-19 14:24:22,218 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:USDJPY
+2025-09-19 14:24:22,222 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:USDJPY
+2025-09-19 14:24:22,234 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:USDJPY
+2025-09-19 14:24:34,540 - signal_service - INFO - Successfully parsed AI response: HOLD for USDJPY
+2025-09-19 14:24:34,696 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:USDJPY
+2025-09-19 14:24:36,489 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:USDCHF
+2025-09-19 14:24:36,491 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:USDCHF
+2025-09-19 14:24:36,493 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:USDCHF
+2025-09-19 14:24:49,596 - signal_service - INFO - Successfully parsed AI response: HOLD for USDCHF
+2025-09-19 14:24:49,722 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:USDCHF
+2025-09-19 14:24:51,685 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:USDCAD
+2025-09-19 14:24:51,727 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:USDCAD
+2025-09-19 14:24:51,733 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:USDCAD
+2025-09-19 14:25:04,474 - signal_service - INFO - Successfully parsed AI response: SELL for USDCAD
+2025-09-19 14:25:04,559 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:USDCAD
+2025-09-19 14:25:07,515 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:AUDUSD
+2025-09-19 14:25:07,516 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:AUDUSD
+2025-09-19 14:25:07,521 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:AUDUSD
+2025-09-19 14:25:17,447 - signal_service - INFO - Successfully parsed AI response: HOLD for AUDUSD
+2025-09-19 14:25:17,649 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:AUDUSD
+2025-09-19 14:25:19,408 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:NZDUSD
+2025-09-19 14:25:19,415 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:NZDUSD
+2025-09-19 14:25:19,425 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:NZDUSD
+2025-09-19 14:25:32,746 - signal_service - INFO - Successfully parsed AI response: HOLD for NZDUSD
+2025-09-19 14:25:32,818 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:NZDUSD
+2025-09-19 14:25:34,930 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:GBPJPY
+2025-09-19 14:25:34,942 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:GBPJPY
+2025-09-19 14:25:34,945 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:GBPJPY
+2025-09-19 14:25:45,231 - signal_service - INFO - Successfully parsed AI response: HOLD for GBPJPY
+2025-09-19 14:25:45,283 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:GBPJPY
+2025-09-19 14:25:47,229 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:EURGBP
+2025-09-19 14:25:47,239 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:EURGBP
+2025-09-19 14:25:47,244 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:EURGBP
+2025-09-19 14:26:03,604 - signal_service - INFO - Successfully parsed AI response: BUY for EURGBP
+2025-09-19 14:26:03,677 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:EURGBP
+2025-09-19 14:26:07,774 - signal_service - INFO - Processing signal request: signal:GMT+3.0:H2:EURJPY
+2025-09-19 14:26:07,779 - signal_service - INFO - Cache miss: signal:GMT+3.0:H2:EURJPY
+2025-09-19 14:26:07,780 - signal_service - INFO - Lock acquired, processing signal: signal:GMT+3.0:H2:EURJPY
+2025-09-19 14:26:20,162 - signal_service - INFO - Successfully parsed AI response: HOLD for EURJPY
+2025-09-19 14:26:20,241 - signal_service - INFO - Result cached: signal:GMT+3.0:H2:EURJPY

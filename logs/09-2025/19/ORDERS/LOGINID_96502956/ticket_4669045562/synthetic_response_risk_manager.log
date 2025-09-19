@@ -1,0 +1,24 @@
+{
+  "success": true,
+  "errorMsg": "",
+  "errorCode": 0,
+  "data": {
+    "signal": "SELL",
+    "status": "CONTINUE",
+    "lot_size": 0.03,
+    "entry_price": 1.38,
+    "stop_loss": 1.381775,
+    "take_profit": 1.3773374999999999,
+    "trailing_stop_loss": 31.4,
+    "order_type": "LIMIT",
+    "estimate_win_probability": 60,
+    "symbol": "USDCAD",
+    "estimate_profit": 5.790393203038939,
+    "estimate_loss": -3.860262135359454,
+    "technical_reasoning": "Bearish confluence: H2 shows Bearish Marubozu/Belthold patterns near resistance with weakening momentum. Primary bearish bias supported by M30 Bearish Longline & MACD divergence. Strategic LIMIT entry at 1.38 (historic resistance) with SL above swing high + ATR buffer. TP targets 1.375 support with strong R:R 2.8:1. Volatility-adjusted SL passes quality filters.",
+    "risk_reward_before": 2.816901408450514,
+    "risk_reward_after": 1.4999999999999374,
+    "correlated_symbols": [],
+    "delete_pending_orders": null
+  }
+}
